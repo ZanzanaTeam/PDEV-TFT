@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>tn.edu.esprit.zanzana</groupId>
+    <artifactId>tft-project</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>tft-project-client</artifactId>
+  
+  <dependencies>
+  		<dependency>
+			<groupId>tn.edu.esprit.zanzana</groupId>
+			<artifactId>tft-project-ejb</artifactId>
+			<type>ejb</type>
+			<scope>provided</scope>
+		</dependency>
+				<!-- http://mvnrepository.com/artifact/com.github.insubstantial/flamingo -->
+		<dependency>
+		    <groupId>com.github.insubstantial</groupId>
+		    <artifactId>flamingo</artifactId>
+		    <version>6.2</version>
+		</dependency>
+  </dependencies>
+  
+</project>
