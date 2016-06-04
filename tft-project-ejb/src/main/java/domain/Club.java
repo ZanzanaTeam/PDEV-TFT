@@ -3,10 +3,13 @@ package domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Club implements Serializable {
 
 	/**
@@ -18,21 +21,20 @@ public class Club implements Serializable {
 	private String city;
 	private String address;
 	private List<Player> players;
-	
+
 	public Club() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Club(Integer id, String name, String city, String address) {
+	public Club(String name, String city, String address) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.city = city;
 		this.address = address;
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
 		return id;
 	}
@@ -65,6 +67,7 @@ public class Club implements Serializable {
 		this.address = address;
 	}
 
+	@OneToMany(mappedBy = "club")
 	public List<Player> getPlayers() {
 		return players;
 	}

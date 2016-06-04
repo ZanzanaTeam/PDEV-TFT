@@ -22,13 +22,13 @@ public class Referee implements Serializable {
 	private Integer age;
 	private CompetitionLevel competitionLevel;
 	private List<Match> matchs;
-	private Training training;
-	private Contest contest;
+	private Training training; //formation
+	private Contest contest; //concours
 
 	public Referee() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Referee(Integer id, String fullName, Integer age, CompetitionLevel competitionLevel) {
 		super();
 		this.id = id;
@@ -38,7 +38,7 @@ public class Referee implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
 		return id;
 	}
@@ -85,5 +85,13 @@ public class Referee implements Serializable {
 
 	public void setTraining(Training training) {
 		this.training = training;
+	}
+
+	public Contest getContest() {
+		return contest;
+	}
+
+	public void setContest(Contest contest) {
+		this.contest = contest;
 	}
 }
