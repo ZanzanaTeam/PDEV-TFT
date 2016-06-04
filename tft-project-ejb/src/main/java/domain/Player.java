@@ -2,10 +2,12 @@ package domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import enumeration.AgeRange;
 import enumeration.Gender;
@@ -82,6 +84,7 @@ public class Player implements Serializable {
 		this.ageRange = ageRange;
 	}
 
+	@ManyToOne(cascade=CascadeType.MERGE)
 	public Club getClub() {
 		return club;
 	}

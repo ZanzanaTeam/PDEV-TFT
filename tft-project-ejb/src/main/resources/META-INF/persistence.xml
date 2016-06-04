@@ -3,7 +3,7 @@
 	<persistence-unit name="tft-project-ejb">
 		<jta-data-source>java:/MySqlDS</jta-data-source>
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
 		</properties>
 	</persistence-unit>
 </persistence>
