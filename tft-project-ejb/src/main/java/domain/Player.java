@@ -1,40 +1,43 @@
 package domain;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import enumeration.CompetitionLevel;
+import enumeration.AgeRange;
+import enumeration.Gender;
 
 @Entity
-public class Referee implements Serializable {
+public class Player implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	private Integer id;
 	private String fullName;
+	private Gender gender;
 	private Integer age;
-	private CompetitionLevel competitionLevel;
-	private List<Match> matchs;
+	private AgeRange ageRange;
+	private Club club;
+	private Match match;
+	private Doctor doctor;
 	private Training training;
-	private Contest contest;
 
-	public Referee() {
+	public Player() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Referee(Integer id, String fullName, Integer age, CompetitionLevel competitionLevel) {
+
+	public Player(Integer id, String fullName, Gender gender, Integer age, AgeRange ageRange) {
 		super();
 		this.id = id;
 		this.fullName = fullName;
+		this.gender = gender;
 		this.age = age;
-		this.competitionLevel = competitionLevel;
+		this.ageRange = ageRange;
 	}
 
 	@Id
@@ -55,6 +58,14 @@ public class Referee implements Serializable {
 		this.fullName = fullName;
 	}
 
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
 	public Integer getAge() {
 		return age;
 	}
@@ -63,20 +74,36 @@ public class Referee implements Serializable {
 		this.age = age;
 	}
 
-	public CompetitionLevel getCompetitionLevel() {
-		return competitionLevel;
+	public AgeRange getAgeRange() {
+		return ageRange;
 	}
 
-	public void setCompetitionLevel(CompetitionLevel competitionLevel) {
-		this.competitionLevel = competitionLevel;
+	public void setAgeRange(AgeRange ageRange) {
+		this.ageRange = ageRange;
 	}
 
-	public List<Match> getMatchs() {
-		return matchs;
+	public Club getClub() {
+		return club;
 	}
 
-	public void setMatchs(List<Match> matchs) {
-		this.matchs = matchs;
+	public void setClub(Club club) {
+		this.club = club;
+	}
+
+	public Match getMatch() {
+		return match;
+	}
+
+	public void setMatch(Match match) {
+		this.match = match;
+	}
+
+	public Doctor getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
 
 	public Training getTraining() {
