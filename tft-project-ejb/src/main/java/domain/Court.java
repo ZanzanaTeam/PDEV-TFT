@@ -3,10 +3,13 @@ package domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Court implements Serializable{
 
 	/**
@@ -74,7 +77,7 @@ public class Court implements Serializable{
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-
+	@OneToMany(mappedBy="court")
 	public List<Match> getMatchs() {
 		return matchs;
 	}

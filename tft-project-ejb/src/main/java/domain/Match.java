@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Match implements Serializable {
@@ -37,7 +38,8 @@ public class Match implements Serializable {
 	public void setDateMatch(Date dateMatch) {
 		this.dateMatch = dateMatch;
 	}
-
+	
+	@ManyToOne
 	public Court getCourt() {
 		return court;
 	}
@@ -45,7 +47,7 @@ public class Match implements Serializable {
 	public void setCourt(Court court) {
 		this.court = court;
 	}
-
+	@ManyToOne
 	public Referee getReferee() {
 		return referee;
 	}
@@ -54,6 +56,7 @@ public class Match implements Serializable {
 		this.referee = referee;
 	}
 
+	@ManyToOne(optional=true)
 	public Competition getCompetition() {
 		return competition;
 	}

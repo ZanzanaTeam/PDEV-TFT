@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import enumeration.CompetitionLevel;
 
@@ -71,6 +72,7 @@ public class Referee implements Serializable {
 		this.competitionLevel = competitionLevel;
 	}
 
+	@OneToMany(mappedBy="referee")
 	public List<Match> getMatchs() {
 		return matchs;
 	}

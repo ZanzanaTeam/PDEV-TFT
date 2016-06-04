@@ -35,7 +35,7 @@ public class MatchDuel extends Match{
 	public PlayerDuel getPlayerDuel2() {
 		return playerDuel2;
 	}
-
+	
 	public void setPlayerDuel2(PlayerDuel playerDuel2) {
 		this.playerDuel2 = playerDuel2;
 	}	
