@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class AntiDopingTest implements Serializable{
@@ -54,6 +55,7 @@ public class AntiDopingTest implements Serializable{
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
+	@ManyToOne
 	public Player getPlayer() {
 		return player;
 	}

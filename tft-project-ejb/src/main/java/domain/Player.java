@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import enumeration.AgeRange;
 import enumeration.Gender;
@@ -29,6 +31,8 @@ public class Player implements Serializable {
 	private Doctor doctor;
 	private Training training;
 
+	private List<AntiDopingTest> antiDopingTests;
+
 	public Player() {
 		// TODO Auto-generated constructor stub
 	}
@@ -43,7 +47,7 @@ public class Player implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
 		return id;
 	}
@@ -84,7 +88,7 @@ public class Player implements Serializable {
 		this.ageRange = ageRange;
 	}
 
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	public Club getClub() {
 		return club;
 	}
@@ -115,5 +119,14 @@ public class Player implements Serializable {
 
 	public void setTraining(Training training) {
 		this.training = training;
+	}
+
+	@OneToMany(mappedBy = "player")
+	public List<AntiDopingTest> getAntiDopingTests() {
+		return antiDopingTests;
+	}
+
+	public void setAntiDopingTests(List<AntiDopingTest> antiDopingTests) {
+		this.antiDopingTests = antiDopingTests;
 	}
 }
