@@ -36,9 +36,8 @@ public class Player implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Player(Integer id, String fullName, Gender gender, Integer age, AgeRange ageRange) {
+	public Player(String fullName, Gender gender, Integer age, AgeRange ageRange) {
 		super();
-		this.id = id;
 		this.fullName = fullName;
 		this.gender = gender;
 		this.age = age;
