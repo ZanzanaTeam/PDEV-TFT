@@ -35,9 +35,9 @@ public class ServicesBasic<T> implements ServicesBasicRemote<T>, ServicesBasicLo
 	}
 
 	@Override
-	public Boolean delete(T t) {
+	public Boolean delete(Integer id, Class<T> type) {
 		try {
-			entityManager.remove(t);
+			entityManager.remove(entityManager.find(type, id));
 			return true;
 		} catch (Exception ee) {
 			return false;
@@ -53,7 +53,7 @@ public class ServicesBasic<T> implements ServicesBasicRemote<T>, ServicesBasicLo
 	public List<T> findAll(Class<T> type) {
 		List<T> lists = null;
 		try {
-			String jpql = "select e from '" + type.getSimpleName() + "' e";
+			String jpql = "select e from " + type.getSimpleName() + " e";
 
 			lists = entityManager.createQuery(jpql).getResultList();
 

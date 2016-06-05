@@ -13,7 +13,7 @@ public interface ICrud<T> {
 
 	Boolean update(T t);
 
-	Boolean delete(T t);
+	Boolean delete(Integer id, Class<T> type);
 
 	T findById(Integer id, Class<T> type);
 
