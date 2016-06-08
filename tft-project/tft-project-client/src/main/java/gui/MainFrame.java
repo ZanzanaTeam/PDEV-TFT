@@ -21,7 +21,7 @@ import org.pushingpixels.flamingo.api.ribbon.RibbonTask;
 import org.pushingpixels.flamingo.api.ribbon.resize.CoreRibbonResizePolicies;
 import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 
-import gui.javafx.TestController;
+import gui.javafx.PlayerAddController;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -29,9 +29,9 @@ import javafx.scene.layout.BorderPane;
 
 public class MainFrame extends JRibbonFrame {
 	private static final long serialVersionUID = 1L;
-	//Ribbon1;
+	// Ribbon1;
 	private JRibbonBand band1;
-	
+
 	public MainFrame() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
@@ -54,40 +54,39 @@ public class MainFrame extends JRibbonFrame {
 	}
 
 	private void initButton() {
-		//Creation des Bouttons
+		// Creation des Bouttons
 		JCommandButton player_btn = new JCommandButton("Player", getResizableIconFromResource("icon/player.png"));
 		JCommandButton button2 = new JCommandButton("Satde", getResizableIconFromResource("icon/stade.png"));
 		JCommandButton button3 = new JCommandButton("Competition", getResizableIconFromResource("icon/match.png"));
 		JCommandButton button4 = new JCommandButton("Referee", getResizableIconFromResource("icon/referee.png"));
-		
-		//Ajouter les boutton dans le ribbon1
+
+		// Ajouter les boutton dans le ribbon1
 		band1.addCommandButton(player_btn, RibbonElementPriority.TOP);
 		band1.addCommandButton(button2, RibbonElementPriority.MEDIUM);
 		band1.addCommandButton(button3, RibbonElementPriority.MEDIUM);
 		band1.addCommandButton(button4, RibbonElementPriority.MEDIUM);
-		
-		//Action pour les bouttons
+
+		// Action pour les bouttons
 		player_btn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				createContainer("exemple");
+				createContainer(PlayerAddController.class, "playerAdd");
 			}
 		});
-		
 	}
 
-	public void createContainer(String nameFileFXML) {
+	public void createContainer(Class t, String nameFileFXML) {
 		final JFXPanel fxPanel = new JFXPanel();
-		Scene scene = createScene(nameFileFXML);
+		Scene scene = createScene(t, nameFileFXML);
 		fxPanel.setScene(scene);
 		getContentPane().add(fxPanel, BorderLayout.CENTER);
 	}
 
-	private Scene createScene(String nameFileFXML) {
+	private Scene createScene(Class t, String nameFileFXML) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(TestController.class.getResource(nameFileFXML + ".fxml"));
+			loader.setLocation(t.getResource(nameFileFXML + ".fxml"));
 			BorderPane root = (BorderPane) loader.load();
 			Scene scene = new Scene(root);
 			return scene;

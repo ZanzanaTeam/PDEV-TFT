@@ -10,8 +10,7 @@ import enumeration.Gender;
 public class PlayerTest {
 
 	public static void main(String[] args) throws NamingException {
-		Player player = new Player("jendoubi med aymen", Gender.Male, 26, AgeRange.Adulte);
-		player.setClub(new Club("club1","tunis","adresse"));
+		Player player = new Player("MedAymen", Gender.Male, 26, AgeRange.Adulte);
 		
 		new ServicesBasicDelegate<Player>().doCrud()
 				.add(player);	
