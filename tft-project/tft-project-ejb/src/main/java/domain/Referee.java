@@ -27,8 +27,21 @@ public class Referee implements Serializable {
 	private Training training; // formation
 	private Contest contest; // concours
 
+
+
 	public Referee() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Referee(String fullName, Integer age, CompetitionLevel competitionLevel, List<Match> matchs,
+			Training training, Contest contest) {
+		super();
+		this.fullName = fullName;
+		this.age = age;
+		this.competitionLevel = competitionLevel;
+		this.matchs = matchs;
+		this.training = training;
+		this.contest = contest;
 	}
 
 	public Referee(String fullName, Integer age, CompetitionLevel competitionLevel) {

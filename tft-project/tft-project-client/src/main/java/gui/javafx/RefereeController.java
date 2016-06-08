@@ -9,6 +9,7 @@ import domain.Contest;
 import domain.Match;
 import domain.Referee;
 import domain.Training;
+import enumeration.CompetitionLevel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class RefereeController implements Initializable {
 
@@ -29,6 +31,10 @@ public class RefereeController implements Initializable {
 	ComboBox<Contest> cmbContests;
 	ObservableList<Referee> observableList ; 
 
+
+	public RefereeController() {
+		System.out.println("RefereeController");
+	}
 
 	@FXML
 	private TableView<Referee> tableReferee;
@@ -61,11 +67,13 @@ public class RefereeController implements Initializable {
 	}
 
 	private void initTable() {
-		Referee ref = new Referee();
+		Referee ref = new Referee("fullName", 30,CompetitionLevel.International, null,null,null);
 		new ServicesBasicDelegate<Referee>().doCrud().add(ref);
 		observableList = FXCollections.
 				 observableList(new ServicesBasicDelegate<Referee>()
 				 .doCrud().findAll(Referee.class));
-		
+		columnReferee.setCellValueFactory(new PropertyValueFactory<Referee, String>("fullName"));
+		tableReferee.setItems(observableList);
+
 	}
 }

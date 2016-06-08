@@ -22,9 +22,11 @@ import org.pushingpixels.flamingo.api.ribbon.resize.CoreRibbonResizePolicies;
 import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 
 import gui.javafx.PlayerAddController;
+import gui.javafx.RefereeController;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 public class MainFrame extends JRibbonFrame {
@@ -73,8 +75,18 @@ public class MainFrame extends JRibbonFrame {
 			public void actionPerformed(ActionEvent e) {
 				createContainer(PlayerAddController.class, "playerAdd");
 			}
+			
+		});
+		button4.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				createContainer(RefereeController.class, "Referee");
+			}
+			
 		});
 	}
+	
 
 	public void createContainer(Class t, String nameFileFXML) {
 		final JFXPanel fxPanel = new JFXPanel();

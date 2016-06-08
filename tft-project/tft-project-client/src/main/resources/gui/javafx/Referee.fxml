@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <SplitPane prefHeight="300.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+        <items>
+            <BorderPane prefHeight="300.0" prefWidth="600.0">
+               <center>
+                  <TableView fx:id="tableReferee" minWidth="300.0" prefWidth="300.0">
+                     <columns>
+                        <TableColumn id="listArbitres" fx:id="columnReferee" maxWidth="-Infinity" minWidth="500.0" prefWidth="-1.0" resizable="false" text="Liste des arbitres" />
+                     </columns>
+                  </TableView>
+               </center>
+            </BorderPane>
+        </items>
+      </SplitPane>
+   </center>
+   <right>
+      <BorderPane prefHeight="300.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <center>
+            <GridPane prefHeight="298.0" prefWidth="417.0" BorderPane.alignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="131.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="286.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label prefHeight="27.0" prefWidth="300.0" text="Full Name" />
+                  <Label prefHeight="27.0" prefWidth="131.0" text="Age" GridPane.rowIndex="1" />
+                  <Label prefHeight="27.0" prefWidth="131.0" text="Competiton Level" GridPane.rowIndex="2" />
+                  <Label prefHeight="17.0" prefWidth="130.0" text="Matchs" GridPane.rowIndex="3" />
+                  <Label prefHeight="17.0" prefWidth="135.0" text="Trainings" GridPane.rowIndex="4" />
+                  <Label prefHeight="17.0" prefWidth="171.0" text="Contests" GridPane.rowIndex="5" />
+                  <Label fx:id="lblFullName" prefHeight="17.0" prefWidth="300.0" GridPane.columnIndex="1" />
+                  <Label fx:id="lblAge" prefHeight="17.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+                  <Label fx:id="lblCompLevel" prefHeight="17.0" prefWidth="298.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="cmbMatchs" prefHeight="25.0" prefWidth="292.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="cmbTrainings" prefHeight="25.0" prefWidth="339.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <ComboBox prefHeight="25.0" prefWidth="324.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+               </children>
+            </GridPane>
+         </center>
+         <bottom>
+            <Pane prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <top>
+            <Pane prefHeight="26.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </top>
+      </BorderPane>
+   </right>
+</BorderPane>
