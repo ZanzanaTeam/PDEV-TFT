@@ -71,7 +71,7 @@ public class MainFrame extends JRibbonFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				createContainer(PlayerAddController.class, "playerAdd");
+				createContainer(PlayerAddController.class, "player");
 			}
 		});
 	}

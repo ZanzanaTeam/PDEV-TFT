@@ -43,6 +43,12 @@ public class Player implements Serializable {
 		this.age = age;
 		this.ageRange = ageRange;
 	}
+	
+	@Override
+	public String toString() {
+		return "Player [id=" + id + ", fullName=" + fullName + ", gender=" + gender + ", age=" + age + ", ageRange="
+				+ ageRange + "]";
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
