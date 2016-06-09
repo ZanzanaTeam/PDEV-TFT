@@ -73,4 +73,22 @@ public class ServicesBasic<T> implements ServicesBasicRemote<T>, ServicesBasicLo
 			return false;
 		}
 	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<T> findBy(Class<T> type, String param,String value){
+		List<T> list = null;
+		String jpql = "select c from " + type.getSimpleName() + 
+				" c where c."+param+" LIKE '%"+value+"%'";
+		 
+		
+		try {
+			list =entityManager.createQuery(jpql).getResultList();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("bad credentials!!!");
+		}
+
+		return list;
+	}
 }
