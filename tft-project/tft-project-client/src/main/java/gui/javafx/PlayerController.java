@@ -46,6 +46,9 @@ public class PlayerController {
 	private ComboBox<AgeRange> comboAgeRange;
 
 	@FXML
+	private ComboBox<Club> comboClub;
+
+	@FXML
 	private TextField textFullName;
 
 	@FXML
@@ -120,6 +123,9 @@ public class PlayerController {
 
 		});
 
+		List<Club> clubs = new ServicesBasicDelegate<Club>().doCrud().findAll(Club.class);
+		comboClub.setItems(FXCollections.observableArrayList(clubs));
+
 		comboGender.setItems(FXCollections.observableArrayList(Gender.values()));
 		comboGender.getItems().setAll(Gender.values());
 
@@ -140,6 +146,9 @@ public class PlayerController {
 		}
 		textAge.clear();
 		textFullName.clear();
+		comboClub.getSelectionModel().clearSelection();
+		comboAgeRange.getSelectionModel().clearSelection();
+		comboGender.getSelectionModel().clearSelection();
 	}
 
 	@FXML
@@ -147,6 +156,9 @@ public class PlayerController {
 		System.out.println("je suis dans save ");
 		Player player = new Player(textFullName.getText(), comboGender.getValue(), Integer.parseInt(textAge.getText()),
 				comboAgeRange.getValue());
+		if (comboClub.getValue() != null) {
+			player.setClub(comboClub.getValue());
+		}
 		if (isUpdate) {
 			player.setId(id);
 			new ServicesBasicDelegate<Player>().doCrud().update(player);
@@ -169,6 +181,7 @@ public class PlayerController {
 			textAge.setText(e.getAge() + "");
 			comboAgeRange.setValue(e.getAgeRange());
 			comboGender.setValue(e.getGender());
+			comboClub.setValue(e.getClub());
 			labelTitle.setText("Update player < " + e.getFullName() + " >");
 			isUpdate = true;
 		}
