@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PersistenceUnit;
 
 import enumeration.CompetitionLevel;
 
@@ -104,11 +106,21 @@ public class Competition implements Serializable {
 	}
 
 	@OneToMany(mappedBy="competition")
+	
 	public List<Match> getMatchs() {
 		return matchs;
 	}
 
 	public void setMatchs(List<Match> matchs) {
 		this.matchs = matchs;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "Competition [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", country=" + country + ", Site=" + Site + ", competitionLevel=" + competitionLevel + ", matchs="
+				+ matchs + "]";
+	}
+	
+	
 }

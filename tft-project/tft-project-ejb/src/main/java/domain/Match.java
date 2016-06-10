@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,8 @@ import javax.persistence.ManyToOne;
 
 @Entity(name="match_game")
 public class Match implements Serializable {
+	
+
 	/**
 	 * 
 	 */
@@ -68,12 +71,19 @@ public class Match implements Serializable {
 		this.referee = referee;
 	}
 
-	@ManyToOne(optional=true)
+	@ManyToOne(optional=true,cascade=CascadeType.ALL)
 	public Competition getCompetition() {
 		return competition;
 	}
 
 	public void setCompetition(Competition competition) {
 		this.competition = competition;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Match [id=" + id + ", dateMatch=" + dateMatch + ", court=" + court + ", referee=" + referee
+				+ ", competition=" + competition + "]";
 	}
 }
