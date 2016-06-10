@@ -33,6 +33,11 @@ public class Club implements Serializable {
 		this.address = address;
 	}
 
+	@Override
+	public String toString() {
+		return "Club [id=" + id + ", name=" + name + ", city=" + city + ", address=" + address + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
