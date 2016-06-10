@@ -179,7 +179,7 @@ public class PlayerAddController {
 		System.out.println("je suis dans delete ");
 		Player e = tablePlayer.getSelectionModel().getSelectedItem();
 		if (e != null) {
-			int result = JOptionPane.showConfirmDialog(null, "Are you sure you wish to delete this player?", null,
+			int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this player?", null,
 					JOptionPane.YES_NO_OPTION);
 			if (result == JOptionPane.YES_OPTION) {
 
