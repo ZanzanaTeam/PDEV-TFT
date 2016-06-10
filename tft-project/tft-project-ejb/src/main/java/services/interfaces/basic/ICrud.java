@@ -18,4 +18,6 @@ public interface ICrud<T> {
 	T findById(Integer id, Class<T> type);
 
 	List<T> findAll(Class<T> type);
+		
+	List<T> findBy(Class<T> type, String param,String value);
 }
