@@ -4,13 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.PersistenceUnit;
 
 import enumeration.CompetitionLevel;
 
@@ -23,14 +21,14 @@ public class Competition implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
-	private Date  startDate;
+	private Date startDate;
 	private Date endDate;
 	private String country;
 	private String Site;
 	private CompetitionLevel competitionLevel;
-	
+
 	private List<Match> matchs;
-	
+
 	public Competition() {
 		// TODO Auto-generated constructor stub
 	}
@@ -48,7 +46,7 @@ public class Competition implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
 		return id;
 	}
@@ -105,8 +103,8 @@ public class Competition implements Serializable {
 		this.competitionLevel = competitionLevel;
 	}
 
-	@OneToMany(mappedBy="competition")
-	
+	@OneToMany(mappedBy = "competition")
+
 	public List<Match> getMatchs() {
 		return matchs;
 	}
@@ -118,9 +116,7 @@ public class Competition implements Serializable {
 	@Override
 	public String toString() {
 		return "Competition [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", country=" + country + ", Site=" + Site + ", competitionLevel=" + competitionLevel + ", matchs="
-				+ matchs + "]";
+				+ ", country=" + country + ", Site=" + Site + ", competitionLevel=" + competitionLevel + "]";
 	}
-	
-	
+
 }
