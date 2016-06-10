@@ -59,6 +59,8 @@ public class ServicesBasic<T> implements ServicesBasicRemote<T>, ServicesBasicLo
 
 		} catch (Exception ee) {
 			System.out.println("Catch findAll");
+			System.out.println(ee.getMessage());
+			System.out.println(ee.getStackTrace());
 		}
 		return lists;
 	}

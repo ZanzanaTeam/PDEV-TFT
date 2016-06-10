@@ -60,24 +60,23 @@ public class MainFrame extends JRibbonFrame {
 		JCommandButton player_btn = new JCommandButton("Player", getResizableIconFromResource("icon/player.png"));
 		JCommandButton button2 = new JCommandButton("Satde", getResizableIconFromResource("icon/stade.png"));
 		JCommandButton button3 = new JCommandButton("Competition", getResizableIconFromResource("icon/match.png"));
-		JCommandButton button4 = new JCommandButton("Referee", getResizableIconFromResource("icon/referee.png"));
+		JCommandButton referee_btn = new JCommandButton("Referee", getResizableIconFromResource("icon/referee.png"));
 
 		// Ajouter les boutton dans le ribbon1
 		band1.addCommandButton(player_btn, RibbonElementPriority.TOP);
 		band1.addCommandButton(button2, RibbonElementPriority.MEDIUM);
 		band1.addCommandButton(button3, RibbonElementPriority.MEDIUM);
-		band1.addCommandButton(button4, RibbonElementPriority.MEDIUM);
+		band1.addCommandButton(referee_btn, RibbonElementPriority.TOP);
 
 		// Action pour les bouttons
 		player_btn.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				createContainer(PlayerAddController.class, "player");
 			}
 			
 		});
-		button4.addActionListener(new ActionListener() {
+		referee_btn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -87,12 +86,16 @@ public class MainFrame extends JRibbonFrame {
 		});
 	}
 	
-
+	private JFXPanel fxPanel;
 	public void createContainer(Class t, String nameFileFXML) {
-		final JFXPanel fxPanel = new JFXPanel();
+		if(fxPanel != null)fxPanel.setVisible(false);
+		fxPanel = new JFXPanel();
 		Scene scene = createScene(t, nameFileFXML);
 		fxPanel.setScene(scene);
+		
 		getContentPane().add(fxPanel, BorderLayout.CENTER);
+		getContentPane().revalidate(); 
+		getContentPane().repaint();
 	}
 
 	private Scene createScene(Class t, String nameFileFXML) {
