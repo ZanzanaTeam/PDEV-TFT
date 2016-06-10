@@ -24,7 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Callback;
 
-public class PlayerAddController {
+public class PlayerController {
 
 	@FXML
 	TableView<Player> tablePlayer;
@@ -59,7 +59,7 @@ public class PlayerAddController {
 
 	private Integer id;
 
-	public PlayerAddController() {
+	public PlayerController() {
 		System.out.println("Constructeur");
 		isUpdate = false;
 	}
@@ -193,7 +193,7 @@ public class PlayerAddController {
 	void actionKeyReleasedFilter(KeyEvent event) {
 		System.out.println("Search => " + textFilter.getText());
 		List<Player> players = new PlayerServicesDelegate().getProxy().findPlayerByWord(textFilter.getText());
-		System.out.println("result => "+players);
+		System.out.println("result => " + players);
 		refresh(players);
 	}
 }
