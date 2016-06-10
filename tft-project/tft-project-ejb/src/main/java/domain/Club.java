@@ -35,7 +35,7 @@ public class Club implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Club [id=" + id + ", name=" + name + ", city=" + city + ", address=" + address + "]";
+		return this.name;
 	}
 
 	@Id

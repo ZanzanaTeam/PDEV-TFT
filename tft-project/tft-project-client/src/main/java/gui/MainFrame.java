@@ -21,12 +21,12 @@ import org.pushingpixels.flamingo.api.ribbon.RibbonTask;
 import org.pushingpixels.flamingo.api.ribbon.resize.CoreRibbonResizePolicies;
 import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 
-import gui.javafx.PlayerAddController;
+import gui.javafx.ClubController;
+import gui.javafx.PlayerController;
 import gui.javafx.RefereeController;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 public class MainFrame extends JRibbonFrame {
@@ -58,12 +58,17 @@ public class MainFrame extends JRibbonFrame {
 	private void initButton() {
 		// Creation des Bouttons
 		JCommandButton player_btn = new JCommandButton("Player", getResizableIconFromResource("icon/player.png"));
+		JCommandButton club_btn = new JCommandButton("Club", getResizableIconFromResource("icon/match.png"));
+		JCommandButton match_btn = new JCommandButton("Match", getResizableIconFromResource("icon/stade.png"));
+
 		JCommandButton button2 = new JCommandButton("Satde", getResizableIconFromResource("icon/stade.png"));
 		JCommandButton button3 = new JCommandButton("Competition", getResizableIconFromResource("icon/match.png"));
 		JCommandButton referee_btn = new JCommandButton("Referee", getResizableIconFromResource("icon/referee.png"));
 
 		// Ajouter les boutton dans le ribbon1
 		band1.addCommandButton(player_btn, RibbonElementPriority.TOP);
+		band1.addCommandButton(club_btn, RibbonElementPriority.TOP);
+		band1.addCommandButton(match_btn, RibbonElementPriority.TOP);
 		band1.addCommandButton(button2, RibbonElementPriority.MEDIUM);
 		band1.addCommandButton(button3, RibbonElementPriority.MEDIUM);
 		band1.addCommandButton(referee_btn, RibbonElementPriority.TOP);
@@ -72,7 +77,24 @@ public class MainFrame extends JRibbonFrame {
 		player_btn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				createContainer(PlayerAddController.class, "player");
+				createContainer(PlayerController.class, "player");
+			}
+		});
+
+		club_btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				createContainer(ClubController.class, "club");
+			}
+		});
+
+		match_btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+				// createContainer(nomdu controleur .class, "Nom fichier xml");
 			}
 			
 		});
