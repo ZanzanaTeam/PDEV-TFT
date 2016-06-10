@@ -34,8 +34,6 @@ public class RefereeController {
 	private TableColumn<Referee, Gender> colGender;
 	@FXML
 	private TableColumn<Referee, CompetitionLevel> colLevel;
-	@FXML
-	private TableColumn<Referee, Club> colClub;
 
 	@FXML
 	private ComboBox<Gender> comboGender;
@@ -71,7 +69,7 @@ public class RefereeController {
 		colFullName.setCellValueFactory(new PropertyValueFactory<Referee, String>("fullName"));
 		colGender.setCellValueFactory(new PropertyValueFactory<Referee, Gender>("gender"));
 		colAge.setCellValueFactory(new PropertyValueFactory<Referee, Integer>("age"));
-		colLevel.setCellValueFactory(new PropertyValueFactory<Referee, CompetitionLevel>("compLevel"));
+		colLevel.setCellValueFactory(new PropertyValueFactory<Referee, CompetitionLevel>("competitionLevel"));
 
 		comboGender.setItems(FXCollections.observableArrayList(Gender.values()));
 		comboGender.getItems().setAll(Gender.values());

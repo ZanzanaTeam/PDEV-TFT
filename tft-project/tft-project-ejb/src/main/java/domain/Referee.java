@@ -24,28 +24,15 @@ public class Referee implements Serializable {
 	private String fullName;
 	private Integer age;
 	private Gender gender;
-	public Gender getGender() {
-		return gender;
-	}
-
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
 
 	private CompetitionLevel competitionLevel;
 	private List<Match> matchs;
 	private Training training; // formation
 	private Contest contest; // concours
 
-
-
 	public Referee() {
 		// TODO Auto-generated constructor stub
 	}
-
-	
-
-
 
 	public Referee(String fullName, Integer age, Gender gender, CompetitionLevel competitionLevel) {
 		super();
@@ -96,6 +83,14 @@ public class Referee implements Serializable {
 		this.competitionLevel = competitionLevel;
 	}
 
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
 	@OneToMany(mappedBy = "referee")
 	public List<Match> getMatchs() {
 		return matchs;
@@ -128,5 +123,5 @@ public class Referee implements Serializable {
 		return "Referee [id=" + id + ", fullName=" + fullName + ", age=" + age + ", gender=" + gender
 				+ ", competitionLevel=" + competitionLevel + "]";
 	}
-	
+
 }
