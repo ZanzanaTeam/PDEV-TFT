@@ -71,7 +71,7 @@ public class Match implements Serializable {
 		this.referee = referee;
 	}
 
-	@ManyToOne(optional=true,cascade=CascadeType.ALL)
+	@ManyToOne(optional=true,cascade=CascadeType.PERSIST)
 	public Competition getCompetition() {
 		return competition;
 	}
