@@ -1,79 +1,152 @@
 package gui.javafx;
 
-import java.awt.Label;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import delegate.RefereeServicesDelegate;
 import delegate.ServicesBasicDelegate;
-import domain.Contest;
-import domain.Match;
+import domain.Club;
 import domain.Referee;
-import domain.Training;
 import enumeration.CompetitionLevel;
+import enumeration.Gender;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 
-public class RefereeController implements Initializable {
+public class RefereeController {
 
 	@FXML
+	TableView<Referee> tableReferee;
+	@FXML
+	private TableColumn<Referee, String> colFullName;
+	@FXML
+	private TableColumn<Referee, Integer> colAge;
+	@FXML
+	private TableColumn<Referee, Gender> colGender;
+	@FXML
+	private TableColumn<Referee, CompetitionLevel> colLevel;
+	@FXML
+	private TableColumn<Referee, Club> colClub;
 
-	Label lblFullName;
-	Label lblAge;
-	Label lblCompLevel;
-	ComboBox<Match> cmbMatchs;
-	ComboBox<Training> cmbTrainings;
-	ComboBox<Contest> cmbContests;
-	ObservableList<Referee> observableList ; 
+	@FXML
+	private ComboBox<Gender> comboGender;
 
+	@FXML
+	private ComboBox<CompetitionLevel> comboCompLevel;
+
+	@FXML
+	private TextField textFullName;
+
+	@FXML
+	private TextField textAge;
+	@FXML
+	private Label labelTitle;
+	@FXML
+	private TextField textFilter;
+
+	private Boolean isUpdate;
+
+	private Integer id;
 
 	public RefereeController() {
-		System.out.println("RefereeController");
+		System.out.println("Constructeur");
+		isUpdate = false;
 	}
 
 	@FXML
-	private TableView<Referee> tableReferee;
+	/**
+	 * va être executer automatiquement aprés le construteur
+	 */
+	void initialize() {
+
+		colFullName.setCellValueFactory(new PropertyValueFactory<Referee, String>("fullName"));
+		colGender.setCellValueFactory(new PropertyValueFactory<Referee, Gender>("gender"));
+		colAge.setCellValueFactory(new PropertyValueFactory<Referee, Integer>("age"));
+		colLevel.setCellValueFactory(new PropertyValueFactory<Referee, CompetitionLevel>("compLevel"));
+
+		comboGender.setItems(FXCollections.observableArrayList(Gender.values()));
+		comboGender.getItems().setAll(Gender.values());
+
+		comboCompLevel.setItems(FXCollections.observableArrayList(CompetitionLevel.values()));
+		comboCompLevel.getItems().setAll(CompetitionLevel.values());
+
+		refresh(null);
+
+	}
+
+	private void refresh(List<Referee> referees) {
+		tableReferee.getItems().clear();
+		if (referees == null)
+			referees = new ServicesBasicDelegate<Referee>().doCrud().findAll(Referee.class);
+		if (referees != null) {
+			ObservableList<Referee> data = FXCollections.observableArrayList(referees);
+			tableReferee.setItems(data);
+		}
+		textAge.clear();
+		textFullName.clear();
+	}
+
 	@FXML
-	private TableColumn<Referee, String> columnReferee;
-	ObservableList<Training> listTrainings = FXCollections.observableArrayList();
-	ObservableList<Match> listMatchs = FXCollections.observableArrayList();
-	ObservableList<Contest> listContests = FXCollections.observableArrayList();
-	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		initTable();
-		tableReferee.getSelectionModel().selectedItemProperty()
-				.addListener((observable, oldValue, newValue) -> showRefereeDetails(newValue));
-
+	void actionClickSave(ActionEvent event) {
+		System.out.println("je suis dans save ");
+		Referee referee = new Referee(textFullName.getText(), Integer.parseInt(textAge.getText()),
+				comboGender.getValue(), comboCompLevel.getValue());
+		if (isUpdate) {
+			referee.setId(id);
+			new ServicesBasicDelegate<Referee>().doCrud().update(referee);
+			System.out.println("je suis dans update id => " + referee.getId());
+			isUpdate = false;
+			labelTitle.setText("Add Referee");
+		} else {
+			new ServicesBasicDelegate<Referee>().doCrud().add(referee);
+		}
+		refresh(null);
 	}
 
-	private void showRefereeDetails(Referee newValue) {
-		System.out.println(newValue.getFullName());
-		lblFullName.setText(newValue.getFullName());
-		lblAge.setText(newValue.getAge().toString());
-		lblCompLevel.setText(newValue.getCompetitionLevel().toString());
-		cmbMatchs.setItems(listMatchs);
-		cmbMatchs.getSelectionModel().selectFirst();
-		cmbTrainings.setItems(listTrainings);
-		cmbTrainings.getSelectionModel().selectFirst();
-		cmbContests.setItems(listContests);
-		cmbContests.getSelectionModel().selectFirst();
-		
+	@FXML
+	void actionClickUpdate(ActionEvent event) {
+		System.out.println("je suis dans update ");
+		Referee e = tableReferee.getSelectionModel().getSelectedItem();
+		if (e != null) {
+			id = e.getId();
+			textFullName.setText(e.getFullName());
+			textAge.setText(e.getAge() + "");
+			comboCompLevel.setValue(e.getCompetitionLevel());
+			comboGender.setValue(e.getGender());
+			labelTitle.setText("Update Referee < " + e.getFullName() + " >");
+			isUpdate = true;
+		}
 	}
 
-	private void initTable() {
-		Referee ref = new Referee("fullName", 30,CompetitionLevel.International, null,null,null);
-		new ServicesBasicDelegate<Referee>().doCrud().add(ref);
-		observableList = FXCollections.
-				 observableList(new ServicesBasicDelegate<Referee>()
-				 .doCrud().findAll(Referee.class));
-		columnReferee.setCellValueFactory(new PropertyValueFactory<Referee, String>("fullName"));
-		tableReferee.setItems(observableList);
+	@FXML
+	void actionClickDelete(ActionEvent event) {
+		System.out.println("je suis dans delete ");
+		Referee e = tableReferee.getSelectionModel().getSelectedItem();
+		if (e != null) {
+			int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this Referee?", null,
+					JOptionPane.YES_NO_OPTION);
+			if (result == JOptionPane.YES_OPTION) {
 
+				new ServicesBasicDelegate<Referee>().doCrud().delete(e.getId(), Referee.class);
+				refresh(null);
+			}
+		}
+	}
+
+	@FXML
+	void actionKeyReleasedFilter(KeyEvent event) {
+		System.out.println("Search => " + textFilter.getText());
+		List<Referee> referees = new RefereeServicesDelegate().getProxy().findRefereeByWord(textFilter.getText());
+		System.out.println("result => " + referees);
+		refresh(referees);
 	}
 }

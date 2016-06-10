@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import enumeration.CompetitionLevel;
+import enumeration.Gender;
 
 @Entity
 public class Referee implements Serializable {
@@ -22,6 +23,15 @@ public class Referee implements Serializable {
 	private Integer id;
 	private String fullName;
 	private Integer age;
+	private Gender gender;
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
 	private CompetitionLevel competitionLevel;
 	private List<Match> matchs;
 	private Training training; // formation
@@ -33,15 +43,16 @@ public class Referee implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Referee(String fullName, Integer age, CompetitionLevel competitionLevel, List<Match> matchs,
-			Training training, Contest contest) {
+	
+
+
+
+	public Referee(String fullName, Integer age, Gender gender, CompetitionLevel competitionLevel) {
 		super();
 		this.fullName = fullName;
 		this.age = age;
+		this.gender = gender;
 		this.competitionLevel = competitionLevel;
-		this.matchs = matchs;
-		this.training = training;
-		this.contest = contest;
 	}
 
 	public Referee(String fullName, Integer age, CompetitionLevel competitionLevel) {
@@ -111,4 +122,11 @@ public class Referee implements Serializable {
 	public void setContest(Contest contest) {
 		this.contest = contest;
 	}
+
+	@Override
+	public String toString() {
+		return "Referee [id=" + id + ", fullName=" + fullName + ", age=" + age + ", gender=" + gender
+				+ ", competitionLevel=" + competitionLevel + "]";
+	}
+	
 }
