@@ -23,6 +23,7 @@ import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 
 import gui.javafx.ClubController;
 import gui.javafx.CompetitionController;
+import gui.javafx.CourtController;
 import gui.javafx.PlayerController;
 import gui.javafx.RefereeController;
 import gui.javafx.TicketController;
@@ -63,7 +64,7 @@ public class MainFrame extends JRibbonFrame {
 		JCommandButton club_btn = new JCommandButton("Club", getResizableIconFromResource("icon/match.png"));
 		JCommandButton match_btn = new JCommandButton("Match", getResizableIconFromResource("icon/stade.png"));
 
-		JCommandButton button2 = new JCommandButton("Satde", getResizableIconFromResource("icon/stade.png"));
+		JCommandButton court_btn = new JCommandButton("Satde", getResizableIconFromResource("icon/stade.png"));
 		JCommandButton competition_btn = new JCommandButton("Competition",
 				getResizableIconFromResource("icon/match.png"));
 		JCommandButton referee_btn = new JCommandButton("Referee", getResizableIconFromResource("icon/referee.png"));
@@ -73,7 +74,7 @@ public class MainFrame extends JRibbonFrame {
 		band1.addCommandButton(player_btn, RibbonElementPriority.TOP);
 		band1.addCommandButton(club_btn, RibbonElementPriority.TOP);
 		band1.addCommandButton(match_btn, RibbonElementPriority.TOP);
-		band1.addCommandButton(button2, RibbonElementPriority.MEDIUM);
+		band1.addCommandButton(court_btn, RibbonElementPriority.MEDIUM);
 		band1.addCommandButton(competition_btn, RibbonElementPriority.MEDIUM);
 		band1.addCommandButton(referee_btn, RibbonElementPriority.TOP);
 		band1.addCommandButton(ticket_btn, RibbonElementPriority.TOP);
@@ -125,6 +126,14 @@ public class MainFrame extends JRibbonFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				createContainer(TicketController.class, "ticket");
+			}
+		});
+		
+		court_btn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				createContainer(CourtController.class, "court");
 			}
 		});
 	}

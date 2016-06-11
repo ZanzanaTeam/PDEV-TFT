@@ -1,4 +1,4 @@
-package main.controller;
+package gui.javafx;
 
 import java.net.URL;
 import java.util.List;

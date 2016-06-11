@@ -27,9 +27,7 @@ public class Ticket implements Serializable {
 		super();
 	}
 
-	public Ticket(Integer id, String title, Match match, Integer quantity, Float price) {
-		super();
-		this.id = id;
+	public Ticket( String title, Match match, Integer quantity, Float price) {
 		this.title = title;
 		this.match = match;
 		this.quantity = quantity;

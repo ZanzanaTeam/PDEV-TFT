@@ -40,9 +40,9 @@ public class TicketServices implements TicketServicesLocal, TicketServicesRemote
 	public List<Match> findNextMatchs() {
 		List<Match> lists = null;
 		try {
-			String jpql = "select m from Match m where m.dateMatch = :dateMatch";
+			String jpql = "select m from match_game m where m.dateMatch = :dateMatch";
 			Query query = entityManager.createQuery(jpql);
-			query.setParameter("dateMatch", new Date());
+			query.setParameter("dateMatch", new Date().toString());
 			lists = query.getResultList();
 
 		} catch (Exception ee) {
