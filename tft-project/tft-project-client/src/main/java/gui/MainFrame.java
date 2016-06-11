@@ -25,6 +25,7 @@ import gui.javafx.ClubController;
 import gui.javafx.CompetitionController;
 import gui.javafx.PlayerController;
 import gui.javafx.RefereeController;
+import gui.javafx.TicketController;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -66,6 +67,7 @@ public class MainFrame extends JRibbonFrame {
 		JCommandButton competition_btn = new JCommandButton("Competition",
 				getResizableIconFromResource("icon/match.png"));
 		JCommandButton referee_btn = new JCommandButton("Referee", getResizableIconFromResource("icon/referee.png"));
+		JCommandButton ticket_btn = new JCommandButton("Ticket", getResizableIconFromResource("icon/ticket.png"));
 
 		// Ajouter les boutton dans le ribbon1
 		band1.addCommandButton(player_btn, RibbonElementPriority.TOP);
@@ -74,6 +76,7 @@ public class MainFrame extends JRibbonFrame {
 		band1.addCommandButton(button2, RibbonElementPriority.MEDIUM);
 		band1.addCommandButton(competition_btn, RibbonElementPriority.MEDIUM);
 		band1.addCommandButton(referee_btn, RibbonElementPriority.TOP);
+		band1.addCommandButton(ticket_btn, RibbonElementPriority.TOP);
 
 		// Action pour les bouttons
 		player_btn.addActionListener(new ActionListener() {
@@ -114,6 +117,14 @@ public class MainFrame extends JRibbonFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				createContainer(CompetitionController.class, "competition");
+			}
+		});
+
+		ticket_btn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				createContainer(TicketController.class, "ticket");
 			}
 		});
 	}
