@@ -60,12 +60,12 @@
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="479.0" prefWidth="174.0">
          <children>
-            <TableView layoutX="3.0" layoutY="47.0" prefHeight="485.0" prefWidth="421.0">
+            <TableView fx:id="tableMatch" layoutX="3.0" layoutY="47.0" prefHeight="485.0" prefWidth="421.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Date" />
-                <TableColumn prefWidth="75.0" text="Court" />
-                  <TableColumn prefWidth="75.0" text="Referee" />
-                  <TableColumn prefWidth="75.0" text="Type" />
+                <TableColumn fx:id="columnDate" prefWidth="75.0" text="Date" />
+                <TableColumn fx:id="columnCourt" prefWidth="75.0" text="Court" />
+                  <TableColumn fx:id="columnReferee" prefWidth="75.0" text="Referee" />
+                  
               </columns>
             </TableView>
          </children></AnchorPane>

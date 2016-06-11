@@ -21,6 +21,7 @@ import org.pushingpixels.flamingo.api.ribbon.RibbonTask;
 import org.pushingpixels.flamingo.api.ribbon.resize.CoreRibbonResizePolicies;
 import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 
+import gui.javafx.CompetitionController;
 import gui.javafx.PlayerAddController;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
@@ -57,13 +58,13 @@ public class MainFrame extends JRibbonFrame {
 		// Creation des Bouttons
 		JCommandButton player_btn = new JCommandButton("Player", getResizableIconFromResource("icon/player.png"));
 		JCommandButton button2 = new JCommandButton("Satde", getResizableIconFromResource("icon/stade.png"));
-		JCommandButton button3 = new JCommandButton("Competition", getResizableIconFromResource("icon/match.png"));
+		JCommandButton competition_btn = new JCommandButton("Competition", getResizableIconFromResource("icon/match.png"));
 		JCommandButton button4 = new JCommandButton("Referee", getResizableIconFromResource("icon/referee.png"));
 
 		// Ajouter les boutton dans le ribbon1
 		band1.addCommandButton(player_btn, RibbonElementPriority.TOP);
 		band1.addCommandButton(button2, RibbonElementPriority.MEDIUM);
-		band1.addCommandButton(button3, RibbonElementPriority.MEDIUM);
+		band1.addCommandButton(competition_btn, RibbonElementPriority.MEDIUM);
 		band1.addCommandButton(button4, RibbonElementPriority.MEDIUM);
 
 		// Action pour les bouttons
@@ -72,6 +73,14 @@ public class MainFrame extends JRibbonFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				createContainer(PlayerAddController.class, "player");
+			}
+		});
+		
+		competition_btn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				createContainer(CompetitionController.class, "competition");				
 			}
 		});
 	}

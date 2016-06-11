@@ -137,6 +137,8 @@ public class PlayerAddController {
 		if (players != null) {
 			ObservableList<Player> data = FXCollections.observableArrayList(players);
 			tablePlayer.setItems(data);
+		}else{
+			System.out.println("Liste Vide");
 		}
 		textAge.clear();
 		textFullName.clear();

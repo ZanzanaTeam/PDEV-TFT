@@ -20,15 +20,13 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 		
-//		List<Competition> clubs = new ServicesBasicDelegate<Competition>().doCrud().findAll(Competition.class);
-//		System.out.println("count => "+clubs.size());
-//		System.out.println(clubs);
+
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Stage stage = primaryStage ; 
-		SplitPane root = FXMLLoader.load(getClass().getResource("/gui/javafx/ListCompetitionView.fxml"));
+		AnchorPane root = FXMLLoader.load(getClass().getResource("/gui/javafx/competition.fxml"));
 	    
         Scene scene = new Scene(root, 800, 800);
     
