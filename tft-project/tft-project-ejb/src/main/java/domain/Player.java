@@ -35,6 +35,7 @@ public class Player implements Serializable {
 	public Player() {
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	public Player(String fullName, Gender gender, Integer age, AgeRange ageRange) {
 		super();
@@ -46,8 +47,7 @@ public class Player implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Player [id=" + id + ", fullName=" + fullName + ", gender=" + gender + ", age=" + age + ", ageRange="
-				+ ageRange + "]";
+		return fullName;
 	}
 
 	@Id
@@ -92,7 +92,7 @@ public class Player implements Serializable {
 		this.ageRange = ageRange;
 	}
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.ALL)
 	public Club getClub() {
 		return club;
 	}
@@ -101,7 +101,7 @@ public class Player implements Serializable {
 		this.club = club;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	public Doctor getDoctor() {
 		return doctor;
 	}
@@ -110,7 +110,7 @@ public class Player implements Serializable {
 		this.doctor = doctor;
 	}
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	public Training getTraining() {
 		return training;
 	}
@@ -119,7 +119,7 @@ public class Player implements Serializable {
 		this.training = training;
 	}
 
-	@OneToMany(mappedBy = "player")
+	@OneToMany(mappedBy = "player",cascade=CascadeType.ALL)
 	public List<AntiDopingTest> getAntiDopingTests() {
 		return antiDopingTests;
 	}
@@ -128,7 +128,7 @@ public class Player implements Serializable {
 		this.antiDopingTests = antiDopingTests;
 	}
 
-	@OneToMany(mappedBy = "player")
+	@OneToMany(mappedBy = "player",cascade=CascadeType.ALL)
 	public List<MatchSingle> getMatchSingles() {
 		return matchSingles;
 	}

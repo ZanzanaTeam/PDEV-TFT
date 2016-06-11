@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,6 +30,11 @@ public class Referee implements Serializable {
 
 	public Referee() {
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return fullName;
 	}
 
 	public Referee(String fullName, Integer age, CompetitionLevel competitionLevel) {
@@ -72,7 +78,7 @@ public class Referee implements Serializable {
 		this.competitionLevel = competitionLevel;
 	}
 
-	@OneToMany(mappedBy = "referee")
+	@OneToMany(mappedBy = "referee",cascade=CascadeType.ALL)
 	public List<Match> getMatchs() {
 		return matchs;
 	}
@@ -81,7 +87,7 @@ public class Referee implements Serializable {
 		this.matchs = matchs;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	public Training getTraining() {
 		return training;
 	}
@@ -90,7 +96,7 @@ public class Referee implements Serializable {
 		this.training = training;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	public Contest getContest() {
 		return contest;
 	}

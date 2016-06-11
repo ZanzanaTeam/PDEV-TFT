@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +23,11 @@ public class Competition implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
+	@Override
+	public String toString() {
+		return name;
+	}
+
 	private Date  startDate;
 	private Date endDate;
 	private String country;
@@ -103,7 +110,7 @@ public class Competition implements Serializable {
 		this.competitionLevel = competitionLevel;
 	}
 
-	@OneToMany(mappedBy="competition")
+	@OneToMany(mappedBy="competition",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	public List<Match> getMatchs() {
 		return matchs;
 	}

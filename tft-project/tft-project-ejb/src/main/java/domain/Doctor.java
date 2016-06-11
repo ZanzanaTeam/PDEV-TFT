@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -47,7 +48,7 @@ public class Doctor implements Serializable {
 		this.fullName = fullName;
 	}
 
-	@OneToMany(mappedBy="doctor")
+	@OneToMany(mappedBy="doctor",cascade=CascadeType.ALL)
 	public List<Player> getPlayers() {
 		return players;
 	}

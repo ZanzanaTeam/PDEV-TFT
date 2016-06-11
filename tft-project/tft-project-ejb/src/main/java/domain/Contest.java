@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -69,7 +70,7 @@ public class Contest implements Serializable {
 		this.endDate = endDate;
 	}
 
-	@OneToMany(mappedBy="contest")
+	@OneToMany(mappedBy="contest",cascade=CascadeType.ALL)
 	public List<Referee> getReferees() {
 		return referees;
 	}

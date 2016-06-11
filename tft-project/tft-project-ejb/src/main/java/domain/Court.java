@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,11 @@ public class Court implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
+	@Override
+	public String toString() {
+		return name;
+	}
+
 	private String name;
 	private String address;
 	private Double latitude;
@@ -76,7 +82,7 @@ public class Court implements Serializable{
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-	@OneToMany(mappedBy="court")
+	@OneToMany(mappedBy="court",cascade=CascadeType.ALL)
 	public List<Match> getMatchs() {
 		return matchs;
 	}

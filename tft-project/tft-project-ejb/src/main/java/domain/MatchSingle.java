@@ -1,5 +1,6 @@
 package domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -23,7 +24,7 @@ public class MatchSingle extends Match {
 		this.player2 = player2;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	public Player getPlayer() {
 		return player;
 	}
@@ -32,7 +33,7 @@ public class MatchSingle extends Match {
 		this.player = player;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	public Player getPlayer2() {
 		return player2;
 	}

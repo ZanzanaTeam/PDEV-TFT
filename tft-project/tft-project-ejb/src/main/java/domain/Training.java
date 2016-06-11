@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -72,7 +73,7 @@ public class Training implements Serializable {
 		this.endDate = endDate;
 	}
 
-	@OneToMany(mappedBy = "training")
+	@OneToMany(mappedBy = "training",cascade=CascadeType.ALL)
 	public List<Referee> getReferees() {
 		return referees;
 	}
@@ -81,7 +82,7 @@ public class Training implements Serializable {
 		this.referees = referees;
 	}
 
-	@OneToMany(mappedBy = "training")
+	@OneToMany(mappedBy = "training",cascade=CascadeType.ALL)
 	public List<Player> getPlayers() {
 		return players;
 	}

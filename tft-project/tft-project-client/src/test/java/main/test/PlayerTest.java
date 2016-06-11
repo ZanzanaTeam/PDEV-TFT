@@ -2,7 +2,6 @@ package main.test;
 import javax.naming.NamingException;
 
 import delegate.ServicesBasicDelegate;
-import domain.Club;
 import domain.Player;
 import enumeration.AgeRange;
 import enumeration.Gender;

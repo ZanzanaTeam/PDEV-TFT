@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<SplitPane dividerPositions="0.8417085427135679" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.CourtController">
+	<items>
+		<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+			<children>
+				<SplitPane dividerPositions="0.13636363636363635" layoutY="1.0" orientation="VERTICAL" prefHeight="332.0" prefWidth="598.0">
+					<items>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+							<children>
+								<SplitPane dividerPositions="0.5067114093959731" layoutX="-1.0" layoutY="-3.0" prefHeight="50.0" prefWidth="598.0">
+									<items>
+										<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+											<children>
+												<TextField fx:id="tfSearch" layoutX="99.0" layoutY="12.0" onKeyReleased="#Action" />
+												<Label layoutX="38.0" layoutY="15.0" text="Search    :" />
+											</children>
+										</AnchorPane>
+										<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+											<children>
+												<RadioButton fx:id="rbName" layoutX="28.0" layoutY="16.0" mnemonicParsing="false" onAction="#Action" selected="true" text="by Name">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="by" />
+                                       </toggleGroup></RadioButton>
+												<RadioButton fx:id="rbAddress" layoutX="153.0" layoutY="16.0" mnemonicParsing="false" onAction="#Action" text="by Adress" toggleGroup="$by" />
+											</children>
+										</AnchorPane>
+									</items>
+								</SplitPane>
+							</children>
+						</AnchorPane>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+							<children>
+								<TableView fx:id="tabCourt" layoutX="7.0" layoutY="7.0">
+									<columns>
+										<TableColumn fx:id="colName" prefWidth="146.0" text="Name" />
+										<TableColumn fx:id="colAddress" prefWidth="146.0" text="Address" />
+										<TableColumn fx:id="colLatitude" prefWidth="146.0" text="Latitude" />
+										<TableColumn fx:id="colLongitude" prefWidth="146.0" text="Longitude" />
+									</columns>
+								</TableView>
+							</children>
+						</AnchorPane>
+					</items>
+				</SplitPane>
+			</children>
+		</AnchorPane>
+		<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+			<children>
+				<TextField fx:id="tfName" layoutX="7.0" prefWidth="146.0" promptText="new entry" />
+				<TextField fx:id="tfAddress" layoutX="153.0" prefWidth="146.0" promptText="new entry" />
+				<TextField fx:id="tfLatitude" layoutX="299.0" prefWidth="146.0" promptText="new entry" />
+				<TextField fx:id="tfLongitude" layoutX="446.0" prefWidth="146.0" promptText="new entry" />
+				<Button fx:id="btnAdd" layoutX="13.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnAddAction" prefHeight="25.0" prefWidth="164.0" text="Add" />
+				<Button fx:id="btnRemove" layoutX="238.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnRemoveAction" prefHeight="25.0" prefWidth="60.0" text="Remove" />
+				<Hyperlink fx:id="linkMatches" layoutX="423.0" layoutY="31.0" onAction="#linkMatchesAction" prefHeight="23.0" prefWidth="146.0" text="go to related matchs" />
+			</children>
+		</AnchorPane>
+	</items>
+</SplitPane>

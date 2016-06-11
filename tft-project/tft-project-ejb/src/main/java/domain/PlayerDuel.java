@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -64,7 +65,7 @@ public class PlayerDuel implements Serializable{
 	}
 
 
-	@OneToMany(mappedBy="playerDuel")
+	@OneToMany(mappedBy="playerDuel",cascade=CascadeType.ALL)
 	public List<MatchDuel> getMatchDuels() {
 		return matchDuels;
 	}

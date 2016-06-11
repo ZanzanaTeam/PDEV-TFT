@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -72,7 +73,7 @@ public class AntiDopingTest implements Serializable {
 		this.antiDopingManager = antiDopingManager;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	public Employee getEmployee() {
 		return employee;
 	}
@@ -81,7 +82,7 @@ public class AntiDopingTest implements Serializable {
 		this.employee = employee;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	public Player getPlayer() {
 		return player;
 	}

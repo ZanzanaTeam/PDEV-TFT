@@ -3,7 +3,9 @@ package domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,7 +53,7 @@ public class Match implements Serializable {
 		this.dateMatch = dateMatch;
 	}
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	public Court getCourt() {
 		return court;
 	}
@@ -59,7 +61,7 @@ public class Match implements Serializable {
 	public void setCourt(Court court) {
 		this.court = court;
 	}
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	public Referee getReferee() {
 		return referee;
 	}
@@ -68,7 +70,7 @@ public class Match implements Serializable {
 		this.referee = referee;
 	}
 
-	@ManyToOne(optional=true)
+	@ManyToOne(optional=true, fetch= FetchType.EAGER,cascade=CascadeType.ALL)
 	public Competition getCompetition() {
 		return competition;
 	}
