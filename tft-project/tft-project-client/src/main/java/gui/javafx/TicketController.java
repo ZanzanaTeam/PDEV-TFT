@@ -1,5 +1,6 @@
 package gui.javafx;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -40,7 +41,7 @@ public class TicketController {
 	@FXML
 	private ComboBox<Match> comboMatch;
 	@FXML
-	private ComboBox<Competition> comboCompetition;
+	private ComboBox<Match> comboByMatch;
 	@FXML
 	private TextField textQuantity;
 	@FXML
@@ -67,13 +68,13 @@ public class TicketController {
 		colQuantity.setCellValueFactory(new PropertyValueFactory<Ticket, Integer>("Quantity"));
 		colPrice.setCellValueFactory(new PropertyValueFactory<Ticket, Float>("Price"));
 
-		List<Match> matchs = new TicketServicesDelegate().getProxy().findNextMatchs();
+		List<Match> matchs = new ServicesBasicDelegate<Match>().doCrud().findAll(Match.class);
 		if (matchs != null) {
 			comboMatch.setItems(FXCollections.observableArrayList(matchs));
 		}
-		List<Competition> competitions = new ServicesBasicDelegate<Competition>().doCrud().findAll(Competition.class);
-		if (competitions != null) {
-			comboCompetition.setItems(FXCollections.observableArrayList(competitions));
+		List<Match> listMatchs = new ServicesBasicDelegate<Match>().doCrud().findAll(Match.class);
+		if (listMatchs != null) {
+			comboByMatch.setItems(FXCollections.observableArrayList(matchs));
 		}
 		refresh(null);
 	}
@@ -144,4 +145,14 @@ public class TicketController {
 		}
 	}
 
+	@FXML
+	void actionClickFilterCometition(ActionEvent event) {
+		System.out.println("je suis dans filter ");
+		Match match = comboByMatch.getSelectionModel().getSelectedItem();
+		if (match != null) {
+			List<Ticket> tickets = new TicketServicesDelegate().getProxy().findTicketByMatch(match);
+			System.out.println("result => " + tickets);
+			refresh(tickets);
+		}
+	}
 }

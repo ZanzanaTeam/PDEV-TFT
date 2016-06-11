@@ -18,7 +18,7 @@
          <top>
             <Pane fx:id="paneTicket" prefHeight="42.0" prefWidth="311.0" BorderPane.alignment="CENTER">
                <children>
-                  <ComboBox fx:id="comboCompetition" layoutX="11.0" layoutY="9.0" prefHeight="26.0" prefWidth="137.0" promptText="Competition" />
+                  <ComboBox fx:id="comboByMatch" layoutX="11.0" layoutY="9.0" prefHeight="26.0" prefWidth="137.0" promptText="Match" onAction="#actionClickFilterCometition"/>
                </children>
             </Pane>
          </top>
