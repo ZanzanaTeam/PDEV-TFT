@@ -24,7 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Callback;
 
-public class PlayerAddController {
+public class PlayerController {
 
 	@FXML
 	TableView<Player> tablePlayer;
@@ -46,6 +46,9 @@ public class PlayerAddController {
 	private ComboBox<AgeRange> comboAgeRange;
 
 	@FXML
+	private ComboBox<Club> comboClub;
+
+	@FXML
 	private TextField textFullName;
 
 	@FXML
@@ -59,7 +62,7 @@ public class PlayerAddController {
 
 	private Integer id;
 
-	public PlayerAddController() {
+	public PlayerController() {
 		System.out.println("Constructeur");
 		isUpdate = false;
 	}
@@ -120,6 +123,9 @@ public class PlayerAddController {
 
 		});
 
+		List<Club> clubs = new ServicesBasicDelegate<Club>().doCrud().findAll(Club.class);
+		comboClub.setItems(FXCollections.observableArrayList(clubs));
+
 		comboGender.setItems(FXCollections.observableArrayList(Gender.values()));
 		comboGender.getItems().setAll(Gender.values());
 
@@ -137,11 +143,12 @@ public class PlayerAddController {
 		if (players != null) {
 			ObservableList<Player> data = FXCollections.observableArrayList(players);
 			tablePlayer.setItems(data);
-		}else{
-			System.out.println("Liste Vide");
 		}
 		textAge.clear();
 		textFullName.clear();
+		comboClub.getSelectionModel().clearSelection();
+		comboAgeRange.getSelectionModel().clearSelection();
+		comboGender.getSelectionModel().clearSelection();
 	}
 
 	@FXML
@@ -149,6 +156,9 @@ public class PlayerAddController {
 		System.out.println("je suis dans save ");
 		Player player = new Player(textFullName.getText(), comboGender.getValue(), Integer.parseInt(textAge.getText()),
 				comboAgeRange.getValue());
+		if (comboClub.getValue() != null) {
+			player.setClub(comboClub.getValue());
+		}
 		if (isUpdate) {
 			player.setId(id);
 			new ServicesBasicDelegate<Player>().doCrud().update(player);
@@ -171,6 +181,7 @@ public class PlayerAddController {
 			textAge.setText(e.getAge() + "");
 			comboAgeRange.setValue(e.getAgeRange());
 			comboGender.setValue(e.getGender());
+			comboClub.setValue(e.getClub());
 			labelTitle.setText("Update player < " + e.getFullName() + " >");
 			isUpdate = true;
 		}
@@ -195,7 +206,7 @@ public class PlayerAddController {
 	void actionKeyReleasedFilter(KeyEvent event) {
 		System.out.println("Search => " + textFilter.getText());
 		List<Player> players = new PlayerServicesDelegate().getProxy().findPlayerByWord(textFilter.getText());
-		System.out.println("result => "+players);
+		System.out.println("result => " + players);
 		refresh(players);
 	}
 }

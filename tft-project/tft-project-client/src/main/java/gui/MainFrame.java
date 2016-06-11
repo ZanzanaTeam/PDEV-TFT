@@ -21,7 +21,11 @@ import org.pushingpixels.flamingo.api.ribbon.RibbonTask;
 import org.pushingpixels.flamingo.api.ribbon.resize.CoreRibbonResizePolicies;
 import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 
-import gui.javafx.PlayerAddController;
+import gui.javafx.ClubController;
+import gui.javafx.CompetitionController;
+import gui.javafx.PlayerController;
+import gui.javafx.RefereeController;
+import gui.javafx.TicketController;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -56,31 +60,87 @@ public class MainFrame extends JRibbonFrame {
 	private void initButton() {
 		// Creation des Bouttons
 		JCommandButton player_btn = new JCommandButton("Player", getResizableIconFromResource("icon/player.png"));
+		JCommandButton club_btn = new JCommandButton("Club", getResizableIconFromResource("icon/match.png"));
+		JCommandButton match_btn = new JCommandButton("Match", getResizableIconFromResource("icon/stade.png"));
+
 		JCommandButton button2 = new JCommandButton("Satde", getResizableIconFromResource("icon/stade.png"));
-		JCommandButton button3 = new JCommandButton("Competition", getResizableIconFromResource("icon/match.png"));
-		JCommandButton button4 = new JCommandButton("Referee", getResizableIconFromResource("icon/referee.png"));
+		JCommandButton competition_btn = new JCommandButton("Competition",
+				getResizableIconFromResource("icon/match.png"));
+		JCommandButton referee_btn = new JCommandButton("Referee", getResizableIconFromResource("icon/referee.png"));
+		JCommandButton ticket_btn = new JCommandButton("Ticket", getResizableIconFromResource("icon/ticket.png"));
 
 		// Ajouter les boutton dans le ribbon1
 		band1.addCommandButton(player_btn, RibbonElementPriority.TOP);
+		band1.addCommandButton(club_btn, RibbonElementPriority.TOP);
+		band1.addCommandButton(match_btn, RibbonElementPriority.TOP);
 		band1.addCommandButton(button2, RibbonElementPriority.MEDIUM);
-		band1.addCommandButton(button3, RibbonElementPriority.MEDIUM);
-		band1.addCommandButton(button4, RibbonElementPriority.MEDIUM);
+		band1.addCommandButton(competition_btn, RibbonElementPriority.MEDIUM);
+		band1.addCommandButton(referee_btn, RibbonElementPriority.TOP);
+		band1.addCommandButton(ticket_btn, RibbonElementPriority.TOP);
 
 		// Action pour les bouttons
 		player_btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				createContainer(PlayerController.class, "player");
+			}
+		});
+
+		club_btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				createContainer(ClubController.class, "club");
+			}
+		});
+
+		match_btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+				// createContainer(nomdu controleur .class, "Nom fichier xml");
+			}
+
+		});
+		referee_btn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				createContainer(PlayerAddController.class, "player");
+				createContainer(RefereeController.class, "Referee");
+			}
+
+		});
+
+		competition_btn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				createContainer(CompetitionController.class, "competition");
+			}
+		});
+
+		ticket_btn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				createContainer(TicketController.class, "ticket");
 			}
 		});
 	}
 
+	private JFXPanel fxPanel;
+
 	public void createContainer(Class t, String nameFileFXML) {
-		final JFXPanel fxPanel = new JFXPanel();
+		if (fxPanel != null)
+			fxPanel.setVisible(false);
+		fxPanel = new JFXPanel();
 		Scene scene = createScene(t, nameFileFXML);
 		fxPanel.setScene(scene);
+
 		getContentPane().add(fxPanel, BorderLayout.CENTER);
+		getContentPane().revalidate();
+		getContentPane().repaint();
 	}
 
 	private Scene createScene(Class t, String nameFileFXML) {

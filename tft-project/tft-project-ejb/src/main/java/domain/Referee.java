@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import enumeration.CompetitionLevel;
+import enumeration.Gender;
 
 @Entity
 public class Referee implements Serializable {
@@ -23,6 +24,8 @@ public class Referee implements Serializable {
 	private Integer id;
 	private String fullName;
 	private Integer age;
+	private Gender gender;
+
 	private CompetitionLevel competitionLevel;
 	private List<Match> matchs;
 	private Training training; // formation
@@ -32,15 +35,11 @@ public class Referee implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public String toString() {
-		return fullName;
-	}
-
-	public Referee(String fullName, Integer age, CompetitionLevel competitionLevel) {
+	public Referee(String fullName, Integer age, Gender gender, CompetitionLevel competitionLevel) {
 		super();
 		this.fullName = fullName;
 		this.age = age;
+		this.gender = gender;
 		this.competitionLevel = competitionLevel;
 	}
 
@@ -78,7 +77,15 @@ public class Referee implements Serializable {
 		this.competitionLevel = competitionLevel;
 	}
 
-	@OneToMany(mappedBy = "referee",cascade=CascadeType.ALL)
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	@OneToMany(mappedBy = "referee")
 	public List<Match> getMatchs() {
 		return matchs;
 	}
@@ -87,7 +94,7 @@ public class Referee implements Serializable {
 		this.matchs = matchs;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	public Training getTraining() {
 		return training;
 	}
@@ -96,7 +103,7 @@ public class Referee implements Serializable {
 		this.training = training;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	public Contest getContest() {
 		return contest;
 	}
@@ -104,4 +111,10 @@ public class Referee implements Serializable {
 	public void setContest(Contest contest) {
 		this.contest = contest;
 	}
+
+	@Override
+	public String toString() {
+		return fullName;
+	}
+
 }

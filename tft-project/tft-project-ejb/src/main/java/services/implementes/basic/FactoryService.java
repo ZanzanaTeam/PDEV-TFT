@@ -4,6 +4,8 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import domain.Player;
+import domain.Referee;
+import domain.Ticket;
 import services.interfaces.basic.FactoryServiceLocal;
 import services.interfaces.basic.ServicesBasicLocal;
 
@@ -25,6 +27,17 @@ public class FactoryService implements FactoryServiceLocal {
 	@Override
 	public ServicesBasicLocal<Player> getSimplePlayerEjb() {
 		return player;
+	}
+
+	@Override
+	public ServicesBasicLocal<Referee> getRefereeEjb() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ServicesBasicLocal<Ticket> getTicketEjb() {
+		return null;
 	}
 
 }

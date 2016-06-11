@@ -23,10 +23,10 @@ public class MatchTest {
 	public void setUp() throws Exception {
 		
 		proxy = new ServicesBasicDelegate<Match>();
-		
-		match = new Match(new Date(), new Court("CourtName", "CourtAddress", 95.3, 65.7),
-				new Referee("RefreeName", 45, CompetitionLevel.National),new Competition("competitionName", new Date(), new Date(), "countryName", "siteName", CompetitionLevel.Amateur, new ArrayList<>()) );
-	
+//		
+//		match = new Match(new Date(), new Court("CourtName", "CourtAddress", 95.3, 65.7),
+//				new Referee("RefreeName", 45, CompetitionLevel.National),new Competition("competitionName", new Date(), new Date(), "countryName", "siteName", CompetitionLevel.Amateur, new ArrayList<>()) );
+//	
 	}
 
 	@Test

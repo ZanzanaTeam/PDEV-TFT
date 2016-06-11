@@ -34,6 +34,11 @@ public class Club implements Serializable {
 		this.address = address;
 	}
 
+	@Override
+	public String toString() {
+		return this.name;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
