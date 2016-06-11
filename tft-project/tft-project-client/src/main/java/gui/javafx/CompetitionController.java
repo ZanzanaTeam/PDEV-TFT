@@ -154,9 +154,9 @@ public class CompetitionController implements Initializable {
 			@Override
 			public void handle(KeyEvent event) {
 				System.out.println("Search => " + textFilter.getText());
-				List<Competition> players = new PlayerServicesDelegate().getProxy().));
-				System.out.println("result => "+players);
-				refresh(players);
+//				List<Competition> players = new PlayerServicesDelegate().getProxy().));
+//				System.out.println("result => "+players);
+//				refresh(players);
 				
 			}
 		});
