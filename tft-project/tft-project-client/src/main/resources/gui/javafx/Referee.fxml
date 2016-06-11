@@ -70,7 +70,7 @@
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
-      		<TableView fx:id="tableReferee" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      		<TableView fx:id="tableReferee" onMouseReleased="#actionMouseClickedTableReferee" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
       			<columns>
       				<TableColumn prefWidth="75.0" text="id" visible="false" />
       				<TableColumn fx:id="colFullName" prefWidth="75.0" text="Full Name" />

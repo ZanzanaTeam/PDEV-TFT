@@ -42,13 +42,8 @@ public class Referee implements Serializable {
 		this.competitionLevel = competitionLevel;
 	}
 
-	public Referee(String fullName, Integer age, CompetitionLevel competitionLevel) {
-		super();
-		this.fullName = fullName;
-		this.age = age;
-		this.competitionLevel = competitionLevel;
-	}
-
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -120,8 +115,7 @@ public class Referee implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Referee [id=" + id + ", fullName=" + fullName + ", age=" + age + ", gender=" + gender
-				+ ", competitionLevel=" + competitionLevel + "]";
+		return fullName;
 	}
 
 }

@@ -2,7 +2,9 @@ package gui.javafx;
 
 import java.util.Date;
 import java.util.List;
+
 import javax.swing.JOptionPane;
+
 import delegate.RefereeServicesDelegate;
 import delegate.ServicesBasicDelegate;
 import domain.Court;
@@ -21,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 public class RefereeController {
 	/**
@@ -62,16 +65,16 @@ public class RefereeController {
 	 * Match List
 	 * 
 	 */
-	
+
 	@FXML
 	private TableView<Match> tableMatch;
-	
+
 	@FXML
 	private TableColumn<Match, Date> colDateTableMatch;
-	
+
 	@FXML
 	private TableColumn<Match, Court> colCourtTableMatch;
-	
+
 	public RefereeController() {
 		System.out.println("Constructeur");
 		isUpdate = false;
@@ -163,5 +166,11 @@ public class RefereeController {
 		List<Referee> referees = new RefereeServicesDelegate().getProxy().findRefereeByWord(textFilter.getText());
 		System.out.println("result => " + referees);
 		refresh(referees);
+	}
+	
+	@FXML
+	void actionMouseClickedTableReferee(MouseEvent event){
+		Referee e = tableReferee.getSelectionModel().getSelectedItem();
+		System.out.println(e);
 	}
 }
