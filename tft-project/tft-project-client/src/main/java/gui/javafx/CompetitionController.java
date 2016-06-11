@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import delegate.CompetitionServicesDelegate;
 import delegate.PlayerServicesDelegate;
 import delegate.ServicesBasicDelegate;
 import domain.Competition;
@@ -154,9 +155,10 @@ public class CompetitionController implements Initializable {
 			@Override
 			public void handle(KeyEvent event) {
 				System.out.println("Search => " + textFilter.getText());
-//				List<Competition> players = new PlayerServicesDelegate().getProxy().));
-//				System.out.println("result => "+players);
-//				refresh(players);
+				List<Competition> competitions = new CompetitionServicesDelegate
+						().getProxy().findCompetitionByWord(textFilter.getText());
+				System.out.println("result => "+competitions);
+				refresh(competitions);
 				
 			}
 		});
