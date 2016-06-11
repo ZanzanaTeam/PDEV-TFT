@@ -1,12 +1,12 @@
 package gui.javafx;
 
+import java.util.Date;
 import java.util.List;
-
 import javax.swing.JOptionPane;
-
 import delegate.RefereeServicesDelegate;
 import delegate.ServicesBasicDelegate;
-import domain.Club;
+import domain.Court;
+import domain.Match;
 import domain.Referee;
 import enumeration.CompetitionLevel;
 import enumeration.Gender;
@@ -23,7 +23,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
 public class RefereeController {
-
+	/**
+	 * Crud Referee
+	 * 
+	 */
 	@FXML
 	TableView<Referee> tableReferee;
 	@FXML
@@ -55,6 +58,20 @@ public class RefereeController {
 
 	private Integer id;
 
+	/**
+	 * Match List
+	 * 
+	 */
+	
+	@FXML
+	private TableView<Match> tableMatch;
+	
+	@FXML
+	private TableColumn<Match, Date> colDateTableMatch;
+	
+	@FXML
+	private TableColumn<Match, Court> colCourtTableMatch;
+	
 	public RefereeController() {
 		System.out.println("Constructeur");
 		isUpdate = false;
