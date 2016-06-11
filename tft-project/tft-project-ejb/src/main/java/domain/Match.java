@@ -79,11 +79,13 @@ public class Match implements Serializable {
 	public void setCompetition(Competition competition) {
 		this.competition = competition;
 	}
-	
-	
+
 	@Override
 	public String toString() {
-		return "Match [id=" + id + ", dateMatch=" + dateMatch + ", court=" + court + ", referee=" + referee
-				+ ", competition=" + competition + "]";
+		return "Match [id=" + id + ", dateMatch=" + dateMatch +  "]";
 	}
+	
+	
+	
+
 }

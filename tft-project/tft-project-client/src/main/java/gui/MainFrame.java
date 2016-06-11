@@ -22,6 +22,7 @@ import org.pushingpixels.flamingo.api.ribbon.resize.CoreRibbonResizePolicies;
 import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 
 import gui.javafx.ClubController;
+import gui.javafx.CompetitionController;
 import gui.javafx.PlayerController;
 import gui.javafx.RefereeController;
 import javafx.embed.swing.JFXPanel;
@@ -62,7 +63,8 @@ public class MainFrame extends JRibbonFrame {
 		JCommandButton match_btn = new JCommandButton("Match", getResizableIconFromResource("icon/stade.png"));
 
 		JCommandButton button2 = new JCommandButton("Satde", getResizableIconFromResource("icon/stade.png"));
-		JCommandButton button3 = new JCommandButton("Competition", getResizableIconFromResource("icon/match.png"));
+		JCommandButton competition_btn = new JCommandButton("Competition",
+				getResizableIconFromResource("icon/match.png"));
 		JCommandButton referee_btn = new JCommandButton("Referee", getResizableIconFromResource("icon/referee.png"));
 
 		// Ajouter les boutton dans le ribbon1
@@ -70,7 +72,7 @@ public class MainFrame extends JRibbonFrame {
 		band1.addCommandButton(club_btn, RibbonElementPriority.TOP);
 		band1.addCommandButton(match_btn, RibbonElementPriority.TOP);
 		band1.addCommandButton(button2, RibbonElementPriority.MEDIUM);
-		band1.addCommandButton(button3, RibbonElementPriority.MEDIUM);
+		band1.addCommandButton(competition_btn, RibbonElementPriority.MEDIUM);
 		band1.addCommandButton(referee_btn, RibbonElementPriority.TOP);
 
 		// Action pour les bouttons
@@ -96,7 +98,7 @@ public class MainFrame extends JRibbonFrame {
 
 				// createContainer(nomdu controleur .class, "Nom fichier xml");
 			}
-			
+
 		});
 		referee_btn.addActionListener(new ActionListener() {
 
@@ -104,19 +106,29 @@ public class MainFrame extends JRibbonFrame {
 			public void actionPerformed(ActionEvent e) {
 				createContainer(RefereeController.class, "Referee");
 			}
-			
+
+		});
+
+		competition_btn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				createContainer(CompetitionController.class, "competition");
+			}
 		});
 	}
-	
+
 	private JFXPanel fxPanel;
+
 	public void createContainer(Class t, String nameFileFXML) {
-		if(fxPanel != null)fxPanel.setVisible(false);
+		if (fxPanel != null)
+			fxPanel.setVisible(false);
 		fxPanel = new JFXPanel();
 		Scene scene = createScene(t, nameFileFXML);
 		fxPanel.setScene(scene);
-		
+
 		getContentPane().add(fxPanel, BorderLayout.CENTER);
-		getContentPane().revalidate(); 
+		getContentPane().revalidate();
 		getContentPane().repaint();
 	}
 
