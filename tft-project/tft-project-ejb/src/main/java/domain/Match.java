@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity(name = "match_game")
 public class Match implements Serializable {
@@ -107,6 +108,7 @@ public class Match implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "match", fetch = FetchType.EAGER)
+	@XmlTransient
 	public List<Ticket> getTickets() {
 		return tickets;
 	}
@@ -124,6 +126,7 @@ public class Match implements Serializable {
 	}
 	
 	@OneToMany(mappedBy = "match", fetch = FetchType.EAGER , cascade=CascadeType.ALL)
+	@XmlTransient
 	public List<SetMatch> getSets() {
 		return sets;
 	}
