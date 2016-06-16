@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 import enumeration.CompetitionLevel;
 import enumeration.Gender;
@@ -32,7 +34,6 @@ public class Referee implements Serializable {
 	private Contest contest; // concours
 
 	public Referee() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Referee(String fullName, Integer age, Gender gender, CompetitionLevel competitionLevel) {
@@ -85,6 +86,7 @@ public class Referee implements Serializable {
 		this.gender = gender;
 	}
 
+	@XmlTransient
 	@OneToMany(mappedBy = "referee")
 	public List<Match> getMatchs() {
 		return matchs;

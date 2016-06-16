@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class Court implements Serializable{
@@ -30,7 +32,6 @@ public class Court implements Serializable{
 	private List<Match> matchs;
 
 	public Court() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Court(String name, String address, Double latitude, Double longitude) {
@@ -82,6 +83,8 @@ public class Court implements Serializable{
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
+
+	@XmlTransient
 	@OneToMany(mappedBy="court",cascade=CascadeType.ALL)
 	public List<Match> getMatchs() {
 		return matchs;

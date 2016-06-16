@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 import enumeration.AgeRange;
 import enumeration.Gender;
@@ -29,13 +31,50 @@ public class Player implements Serializable {
 	private Club club;
 	private Doctor doctor;
 	private Training training;
-	private List<MatchSingle> matchSingles;
+	private List<MatchSingle> matchSingles1;
+	private List<MatchSingle> matchSingles2;
 	private List<AntiDopingTest> antiDopingTests;
 
+	/**
+	 * By Aymen EL Ghoul
+	 */
+
+	private Date birthDate;
+	private String birthPlace;
+	private String country;
+	private Float height;
+	private Float weight;
+	private String plays;
+	private String coach;
+	
+	private int classement;//
+	
 	public Player() {
 		// TODO Auto-generated constructor stub
 	}
 	
+
+	public Player(String fullName, Gender gender, Integer age, AgeRange ageRange, Club club, Doctor doctor,
+			Training training, List<MatchSingle> matchSingles, List<AntiDopingTest> antiDopingTests, Date birthDate,
+			String birthPlace, String country, Float height, Float weight, String plays, String coach) {
+		super();
+		this.fullName = fullName;
+		this.gender = gender;
+		this.age = age;
+		this.ageRange = ageRange;
+		this.club = club;
+		this.doctor = doctor;
+		this.training = training;
+		this.matchSingles1 = matchSingles1;
+		this.antiDopingTests = antiDopingTests;
+		this.birthDate = birthDate;
+		this.birthPlace = birthPlace;
+		this.country = country;
+		this.height = height;
+		this.weight = weight;
+		this.plays = plays;
+		this.coach = coach;
+	}
 
 	public Player(String fullName, Gender gender, Integer age, AgeRange ageRange) {
 		super();
@@ -110,6 +149,7 @@ public class Player implements Serializable {
 		this.doctor = doctor;
 	}
 	
+	@XmlTransient
 	@ManyToOne(cascade=CascadeType.ALL)
 	public Training getTraining() {
 		return training;
@@ -119,6 +159,7 @@ public class Player implements Serializable {
 		this.training = training;
 	}
 
+	@XmlTransient
 	@OneToMany(mappedBy = "player",cascade=CascadeType.ALL)
 	public List<AntiDopingTest> getAntiDopingTests() {
 		return antiDopingTests;
@@ -128,12 +169,106 @@ public class Player implements Serializable {
 		this.antiDopingTests = antiDopingTests;
 	}
 
+	@XmlTransient
 	@OneToMany(mappedBy = "player",cascade=CascadeType.ALL)
-	public List<MatchSingle> getMatchSingles() {
-		return matchSingles;
+	public List<MatchSingle> getMatchSingles1() {
+		return matchSingles1;
 	}
 
-	public void setMatchSingles(List<MatchSingle> matchSingles) {
-		this.matchSingles = matchSingles;
+	public void setMatchSingles1(List<MatchSingle> matchSingles) {
+		this.matchSingles1 = matchSingles;
 	}
+	
+	@XmlTransient
+	@OneToMany(mappedBy = "player2",cascade=CascadeType.ALL)
+	public List<MatchSingle> getMatchSingles2() {
+		return matchSingles2;
+	}
+
+	public void setMatchSingles2(List<MatchSingle> matchSingles) {
+		this.matchSingles2 = matchSingles;
+	}
+	
+
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+
+	public String getBirthPlace() {
+		return birthPlace;
+	}
+
+
+	public void setBirthPlace(String birthPlace) {
+		this.birthPlace = birthPlace;
+	}
+
+
+	public String getCountry() {
+		return country;
+	}
+
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+
+	public Float getHeight() {
+		return height;
+	}
+
+
+	public void setHeight(Float height) {
+		this.height = height;
+	}
+
+
+	public Float getWeight() {
+		return weight;
+	}
+
+
+	public void setWeight(Float weight) {
+		this.weight = weight;
+	}
+
+
+	public String getPlays() {
+		return plays;
+	}
+
+
+	public void setPlays(String plays) {
+		this.plays = plays;
+	}
+
+
+	public String getCoach() {
+		return coach;
+	}
+
+
+	public void setCoach(String coach) {
+		this.coach = coach;
+	}
+
+
+	public int getClassement() {
+		return classement;
+	}
+
+
+	public void setClassement(int classement) {
+		this.classement = classement;
+	}
+	
+	
 }

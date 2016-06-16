@@ -12,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
+
+import enumeration.Meteo;
 
 @Entity(name = "match_game")
 public class Match implements Serializable {
@@ -21,22 +24,35 @@ public class Match implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
+
 	private Date dateMatch;
+	private int[] score;//
+	private int duration;//
+	private Tour tour;
+	
+	
+	private Competition competition;
 	private Court court;
 	private Referee referee;
-	private Competition competition;
+	private Meteo meteo; 
+	private List<SetMatch> sets; 
+	
 	private List<Ticket> tickets;
-
+	
+	
+private String liveScore;
 	public Match() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Match(Date dateMatch, Court court, Referee referee, Competition competition, List<Ticket> tickets) {
+	public Match(Date dateMatch, Court court, Referee referee, Competition competition, Tour tour,
+			List<Ticket> tickets) {
 		super();
 		this.dateMatch = dateMatch;
 		this.court = court;
 		this.referee = referee;
 		this.competition = competition;
+		this.tour = tour;
 		this.tickets = tickets;
 	}
 
@@ -66,6 +82,7 @@ public class Match implements Serializable {
 	public void setCourt(Court court) {
 		this.court = court;
 	}
+
 	@ManyToOne
 	public Referee getReferee() {
 		return referee;
@@ -75,7 +92,7 @@ public class Match implements Serializable {
 		this.referee = referee;
 	}
 
-	@ManyToOne(optional=true, fetch= FetchType.EAGER)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	public Competition getCompetition() {
 		return competition;
 	}
@@ -84,12 +101,22 @@ public class Match implements Serializable {
 		this.competition = competition;
 	}
 
+	@ManyToOne(optional = false)
+	public Tour getTour() {
+		return tour;
+	}
+
+	public void setTour(Tour tour) {
+		this.tour = tour;
+	}
+
 	@Override
 	public String toString() {
 		return "Match [id=" + id + ", dateMatch=" + dateMatch + "]";
 	}
 
 	@OneToMany(mappedBy = "match", fetch = FetchType.EAGER)
+	@XmlTransient
 	public List<Ticket> getTickets() {
 		return tickets;
 	}
@@ -98,4 +125,47 @@ public class Match implements Serializable {
 		this.tickets = tickets;
 	}
 
+	public String getLiveScore() {
+		return liveScore;
+	}
+
+	public void setLiveScore(String liveScore) {
+		this.liveScore = liveScore;
+	}
+	
+	@OneToMany(mappedBy = "match", fetch = FetchType.EAGER , cascade=CascadeType.ALL)
+	@XmlTransient
+	public List<SetMatch> getSets() {
+		return sets;
+	}
+
+	public void setSets(List<SetMatch> sets) {
+		this.sets = sets;
+	}
+
+	public int[] getScore() {
+		return score;
+	}
+
+	public void setScore(int[] score) {
+		this.score = score;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public Meteo getMeteo() {
+		return meteo;
+	}
+
+	public void setMeteo(Meteo meteo) {
+		this.meteo = meteo;
+	}
+
+	
 }
