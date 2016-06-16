@@ -1,9 +1,12 @@
 package gui.javafx;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+
+import com.itextpdf.text.DocumentException;
 
 import delegate.RefereeServicesDelegate;
 import delegate.ServicesBasicDelegate;
@@ -96,9 +99,7 @@ public class RefereeController {
 
 		comboCompLevel.setItems(FXCollections.observableArrayList(CompetitionLevel.values()));
 		comboCompLevel.getItems().setAll(CompetitionLevel.values());
-
 		refresh(null);
-
 	}
 
 	private void refresh(List<Referee> referees) {
@@ -147,16 +148,27 @@ public class RefereeController {
 
 	@FXML
 	void actionClickDelete(ActionEvent event) {
-		System.out.println("je suis dans delete ");
-		Referee e = tableReferee.getSelectionModel().getSelectedItem();
-		if (e != null) {
-			int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this Referee?", null,
-					JOptionPane.YES_NO_OPTION);
-			if (result == JOptionPane.YES_OPTION) {
-
-				new ServicesBasicDelegate<Referee>().doCrud().delete(e.getId(), Referee.class);
-				refresh(null);
-			}
+//		System.out.println("je suis dans delete ");
+//		Referee e = tableReferee.getSelectionModel().getSelectedItem();
+//		if (e != null) {
+//			int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this Referee?", null,
+//					JOptionPane.YES_NO_OPTION);
+//			if (result == JOptionPane.YES_OPTION) {
+//
+//				new ServicesBasicDelegate<Referee>().doCrud().delete(e.getId(), Referee.class);
+//				refresh(null);
+//			}
+//		}
+		try {
+			
+			new Pdf().createPdf("file1.pdf");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
