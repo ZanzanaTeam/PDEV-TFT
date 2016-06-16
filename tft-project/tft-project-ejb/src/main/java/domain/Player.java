@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 import enumeration.AgeRange;
 import enumeration.Gender;
@@ -110,6 +111,7 @@ public class Player implements Serializable {
 		this.doctor = doctor;
 	}
 	
+	@XmlTransient
 	@ManyToOne(cascade=CascadeType.ALL)
 	public Training getTraining() {
 		return training;
@@ -119,6 +121,7 @@ public class Player implements Serializable {
 		this.training = training;
 	}
 
+	@XmlTransient
 	@OneToMany(mappedBy = "player",cascade=CascadeType.ALL)
 	public List<AntiDopingTest> getAntiDopingTests() {
 		return antiDopingTests;
@@ -128,6 +131,7 @@ public class Player implements Serializable {
 		this.antiDopingTests = antiDopingTests;
 	}
 
+	@XmlTransient
 	@OneToMany(mappedBy = "player",cascade=CascadeType.ALL)
 	public List<MatchSingle> getMatchSingles() {
 		return matchSingles;

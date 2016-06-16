@@ -1,0 +1,7 @@
+
+.table-view .table-cell{
+    -fx-text-fill: black;
+	-fx-padding : 10px;
+	-fx-font-size : 14px;
+	-fx-alignment : center center;
+}

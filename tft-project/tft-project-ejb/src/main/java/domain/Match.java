@@ -21,11 +21,15 @@ public class Match implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
+
 	private Date dateMatch;
-	private Court court;
+	private String liveScore;
 	private Referee referee;
 	private Competition competition;
+	private Court court;
 	private List<Ticket> tickets;
+	private List<SetMatch> sets; 
+	
 
 	public Match() {
 		// TODO Auto-generated constructor stub
@@ -66,6 +70,7 @@ public class Match implements Serializable {
 	public void setCourt(Court court) {
 		this.court = court;
 	}
+
 	@ManyToOne
 	public Referee getReferee() {
 		return referee;
@@ -75,7 +80,7 @@ public class Match implements Serializable {
 		this.referee = referee;
 	}
 
-	@ManyToOne(optional=true, fetch= FetchType.EAGER)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	public Competition getCompetition() {
 		return competition;
 	}
@@ -98,4 +103,22 @@ public class Match implements Serializable {
 		this.tickets = tickets;
 	}
 
+	public String getLiveScore() {
+		return liveScore;
+	}
+
+	public void setLiveScore(String liveScore) {
+		this.liveScore = liveScore;
+	}
+	
+	@OneToMany(mappedBy = "match", fetch = FetchType.EAGER , cascade=CascadeType.ALL)
+	public List<SetMatch> getSets() {
+		return sets;
+	}
+
+	public void setSets(List<SetMatch> sets) {
+		this.sets = sets;
+	}
+
+	
 }

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class Doctor implements Serializable {
@@ -19,8 +20,9 @@ public class Doctor implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String fullName;
+
 	private List<Player> players;
-	
+
 	public Doctor() {
 		// TODO Auto-generated constructor stub
 	}
@@ -48,7 +50,8 @@ public class Doctor implements Serializable {
 		this.fullName = fullName;
 	}
 
-	@OneToMany(mappedBy="doctor",cascade=CascadeType.ALL)
+	@XmlTransient
+	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
 	public List<Player> getPlayers() {
 		return players;
 	}
