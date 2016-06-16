@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,18 +24,21 @@ public class Match implements Serializable {
 	private Court court;
 	private Referee referee;
 	private Competition competition;
+	private Tour tour;
 	private List<Ticket> tickets;
 
 	public Match() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Match(Date dateMatch, Court court, Referee referee, Competition competition, List<Ticket> tickets) {
+	public Match(Date dateMatch, Court court, Referee referee, Competition competition, Tour tour,
+			List<Ticket> tickets) {
 		super();
 		this.dateMatch = dateMatch;
 		this.court = court;
 		this.referee = referee;
 		this.competition = competition;
+		this.tour = tour;
 		this.tickets = tickets;
 	}
 
@@ -66,6 +68,7 @@ public class Match implements Serializable {
 	public void setCourt(Court court) {
 		this.court = court;
 	}
+
 	@ManyToOne
 	public Referee getReferee() {
 		return referee;
@@ -75,13 +78,22 @@ public class Match implements Serializable {
 		this.referee = referee;
 	}
 
-	@ManyToOne(optional=true, fetch= FetchType.EAGER)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	public Competition getCompetition() {
 		return competition;
 	}
 
 	public void setCompetition(Competition competition) {
 		this.competition = competition;
+	}
+
+	@ManyToOne(optional = false)
+	public Tour getTour() {
+		return tour;
+	}
+
+	public void setTour(Tour tour) {
+		this.tour = tour;
 	}
 
 	@Override

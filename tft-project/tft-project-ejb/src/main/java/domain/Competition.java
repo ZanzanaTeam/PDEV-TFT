@@ -30,6 +30,7 @@ public class Competition implements Serializable {
 	private CompetitionLevel competitionLevel;
 
 	private List<Match> matchs;
+	private List<Season> seasons;
 
 	public Competition() {
 		// TODO Auto-generated constructor stub
@@ -45,6 +46,18 @@ public class Competition implements Serializable {
 		Site = site;
 		this.competitionLevel = competitionLevel;
 		this.matchs = matchs;
+	}
+	public Competition(String name, Date startDate, Date endDate, String country, String site,
+			CompetitionLevel competitionLevel, List<Match> matchs, List<Season> seasons) {
+		super();
+		this.name = name;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.country = country;
+		Site = site;
+		this.competitionLevel = competitionLevel;
+		this.matchs = matchs;
+		this.seasons = seasons;
 	}
 
 	@Id
@@ -113,6 +126,16 @@ public class Competition implements Serializable {
 
 	public void setMatchs(List<Match> matchs) {
 		this.matchs = matchs;
+	}
+	
+	
+	@OneToMany(mappedBy = "competition", fetch =FetchType.EAGER )
+	public List<Season> getSeasons() {
+		return seasons;
+	}
+
+	public void setSeasons(List<Season> seasons) {
+		this.seasons = seasons;
 	}
 
 	@Override
