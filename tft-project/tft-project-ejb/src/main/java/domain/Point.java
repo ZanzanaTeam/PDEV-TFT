@@ -3,8 +3,12 @@ package domain;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import enumeration.PointType;
 
 @Entity
 public class Point implements Serializable {
@@ -15,6 +19,7 @@ public class Point implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String value;
+	private PointType pointType;
 	private Player player;
 	private Jeu jeu;
 
@@ -22,11 +27,10 @@ public class Point implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Point(Integer id, String value, Player player) {
+	public Point(String value, PointType pointType) {
 		super();
-		this.id = id;
 		this.value = value;
-		this.player = player;
+		this.setPointType(pointType);
 	}
 
 	public String getValue() {
@@ -56,6 +60,7 @@ public class Point implements Serializable {
 	}
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
 		return id;
 	}
@@ -69,4 +74,11 @@ public class Point implements Serializable {
 		return "Point [id=" + id + ", value=" + value + ", player=" + player + ", jeu=" + jeu + "]";
 	}
 
+	public PointType getPointType() {
+		return pointType;
+	}
+
+	public void setPointType(PointType pointType) {
+		this.pointType = pointType;
+	}
 }
