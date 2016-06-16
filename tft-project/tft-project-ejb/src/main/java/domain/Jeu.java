@@ -4,16 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import embedded.Resultat;
 
 @Entity
 public class Jeu implements Serializable {
@@ -23,27 +18,30 @@ public class Jeu implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private Resultat resultat;
+	
 	private SetMatch set;
 	private List<Point> points;
+	
+	private int[] score;//
+	private boolean serve;//
+	private boolean lostServe;//
 
 	public Jeu() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Jeu(Integer id, Resultat resultat) {
+	public Jeu(Integer id, int[] score) {
 		super();
 		this.setId(id);
-		this.resultat = resultat;
+		this.score = score;
 	}
 
-	@Embedded
-	public Resultat getResultat() {
-		return resultat;
+	public int[] getScore() {
+		return score;
 	}
 
-	public void setResultat(Resultat resultat) {
-		this.resultat = resultat;
+	public void setScore(int[] score) {
+		this.score = score;
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -71,6 +69,22 @@ public class Jeu implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public boolean isServe() {
+		return serve;
+	}
+
+	public void setServe(boolean serve) {
+		this.serve = serve;
+	}
+
+	public boolean isLostServe() {
+		return lostServe;
+	}
+
+	public void setLostServe(boolean lostServe) {
+		this.lostServe = lostServe;
 	}
 
 }

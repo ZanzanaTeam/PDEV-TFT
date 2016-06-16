@@ -4,14 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import embedded.Resultat;
 
 @Entity(name = "set_match")
 public class SetMatch implements Serializable {
@@ -21,7 +17,8 @@ public class SetMatch implements Serializable {
 	 */
 
 	private Integer id;
-	private Resultat resultat;
+	private int[] score;
+	private int[] duration;
 	private Match match;
 
 	private List<Jeu> jeus;
@@ -32,19 +29,11 @@ public class SetMatch implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SetMatch(Integer id, Resultat resultat) {
+	public SetMatch(Integer id, int[] score, int[] duration) {
 		super();
 		this.setId(id);
-		this.resultat = resultat;
-	}
-
-	@Embedded
-	public Resultat getResultat() {
-		return resultat;
-	}
-
-	public void setResultat(Resultat resultat) {
-		this.resultat = resultat;
+		this.setscore(score);
+		this.setDuration(duration);
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -72,5 +61,21 @@ public class SetMatch implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public int[] getscore() {
+		return score;
+	}
+
+	public void setscore(int[] score) {
+		this.score = score;
+	}
+
+	public int[] getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int[] duration) {
+		this.duration = duration;
 	}
 }

@@ -31,7 +31,8 @@ public class Player implements Serializable {
 	private Club club;
 	private Doctor doctor;
 	private Training training;
-	private List<MatchSingle> matchSingles;
+	private List<MatchSingle> matchSingles1;
+	private List<MatchSingle> matchSingles2;
 	private List<AntiDopingTest> antiDopingTests;
 
 	/**
@@ -45,6 +46,8 @@ public class Player implements Serializable {
 	private Float weight;
 	private String plays;
 	private String coach;
+	
+	private int classement;//
 	
 	public Player() {
 		// TODO Auto-generated constructor stub
@@ -62,7 +65,7 @@ public class Player implements Serializable {
 		this.club = club;
 		this.doctor = doctor;
 		this.training = training;
-		this.matchSingles = matchSingles;
+		this.matchSingles1 = matchSingles1;
 		this.antiDopingTests = antiDopingTests;
 		this.birthDate = birthDate;
 		this.birthPlace = birthPlace;
@@ -168,13 +171,24 @@ public class Player implements Serializable {
 
 	@XmlTransient
 	@OneToMany(mappedBy = "player",cascade=CascadeType.ALL)
-	public List<MatchSingle> getMatchSingles() {
-		return matchSingles;
+	public List<MatchSingle> getMatchSingles1() {
+		return matchSingles1;
 	}
 
-	public void setMatchSingles(List<MatchSingle> matchSingles) {
-		this.matchSingles = matchSingles;
+	public void setMatchSingles1(List<MatchSingle> matchSingles) {
+		this.matchSingles1 = matchSingles;
 	}
+	
+	@XmlTransient
+	@OneToMany(mappedBy = "player2",cascade=CascadeType.ALL)
+	public List<MatchSingle> getMatchSingles2() {
+		return matchSingles2;
+	}
+
+	public void setMatchSingles2(List<MatchSingle> matchSingles) {
+		this.matchSingles2 = matchSingles;
+	}
+	
 
 
 	public Date getBirthDate() {
@@ -244,6 +258,16 @@ public class Player implements Serializable {
 
 	public void setCoach(String coach) {
 		this.coach = coach;
+	}
+
+
+	public int getClassement() {
+		return classement;
+	}
+
+
+	public void setClassement(int classement) {
+		this.classement = classement;
 	}
 	
 	

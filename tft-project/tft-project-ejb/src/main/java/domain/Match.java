@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlTransient;
 
+import enumeration.Meteo;
+
 @Entity(name = "match_game")
 public class Match implements Serializable {
 
@@ -24,15 +26,21 @@ public class Match implements Serializable {
 	private Integer id;
 
 	private Date dateMatch;
-	private String liveScore;
-	private Referee referee;
-	private Competition competition;
+	private int[] score;//
+	private int duration;//
 	private Tour tour;
+	
+	
+	private Competition competition;
 	private Court court;
-	private List<Ticket> tickets;
+	private Referee referee;
+	private Meteo meteo; 
 	private List<SetMatch> sets; 
 	
-
+	private List<Ticket> tickets;
+	
+	
+private String liveScore;
 	public Match() {
 		// TODO Auto-generated constructor stub
 	}
@@ -133,6 +141,30 @@ public class Match implements Serializable {
 
 	public void setSets(List<SetMatch> sets) {
 		this.sets = sets;
+	}
+
+	public int[] getScore() {
+		return score;
+	}
+
+	public void setScore(int[] score) {
+		this.score = score;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public Meteo getMeteo() {
+		return meteo;
+	}
+
+	public void setMeteo(Meteo meteo) {
+		this.meteo = meteo;
 	}
 
 	

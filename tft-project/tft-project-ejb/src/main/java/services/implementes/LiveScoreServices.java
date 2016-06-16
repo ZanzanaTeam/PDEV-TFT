@@ -74,7 +74,7 @@ public class LiveScoreServices implements LiveScoreServicesRemote, LiveScoreServ
 	public void addPointToJeu(Point point, Integer jeu_id, Integer player_id) {
 
 		point.setJeu(entityManager.find(Jeu.class, jeu_id));
-		point.setPlayer(entityManager.find(Player.class, player_id));
+		
 		entityManager.merge(point);
 	}
 
