@@ -2,6 +2,7 @@ package services.implementes.basic;
 
 import java.util.List;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,6 +16,7 @@ import services.interfaces.basic.ServicesBasicRemote;
  */
 
 @Stateless
+@LocalBean
 public class ServicesBasic<T> implements ServicesBasicRemote<T>, ServicesBasicLocal<T> {
 
 	@PersistenceContext
@@ -75,16 +77,15 @@ public class ServicesBasic<T> implements ServicesBasicRemote<T>, ServicesBasicLo
 			return false;
 		}
 	}
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> findBy(Class<T> type, String param,String value){
+	public List<T> findBy(Class<T> type, String param, String value) {
 		List<T> list = null;
-		String jpql = "select c from " + type.getSimpleName() + 
-				" c where c."+param+" LIKE '%"+value+"%'";
-		 
-		
+		String jpql = "select c from " + type.getSimpleName() + " c where c." + param + " LIKE '%" + value + "%'";
+
 		try {
-			list =entityManager.createQuery(jpql).getResultList();
+			list = entityManager.createQuery(jpql).getResultList();
 
 		} catch (Exception e) {
 			// TODO: handle exception

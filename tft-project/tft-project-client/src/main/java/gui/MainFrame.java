@@ -24,7 +24,9 @@ import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 import gui.javafx.ClubController;
 import gui.javafx.CompetitionController;
 import gui.javafx.CourtController;
+import gui.javafx.LiveScore;
 import gui.javafx.PlayerController;
+import gui.javafx.PlayerRanksController;
 import gui.javafx.RefereeController;
 import gui.javafx.TicketController;
 import javafx.embed.swing.JFXPanel;
@@ -36,7 +38,7 @@ public class MainFrame extends JRibbonFrame {
 	private static final long serialVersionUID = 1L;
 	// Ribbon1;
 	private JRibbonBand band1;
-
+	private JRibbonBand band2;
 	public MainFrame() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
@@ -44,15 +46,21 @@ public class MainFrame extends JRibbonFrame {
 		setVisible(true);
 		setExtendedState(MAXIMIZED_BOTH);
 		band1 = new JRibbonBand("", null);
-
+		band2 = new JRibbonBand("Player", getResizableIconFromResource("icon/player.png"));
+		
 		initButton();
 
 		band1.setResizePolicies((List) Arrays.asList(new CoreRibbonResizePolicies.None(band1.getControlPanel()),
 				new IconRibbonBandResizePolicy(band1.getControlPanel())));
+		band2.setResizePolicies((List) Arrays.asList(new CoreRibbonResizePolicies.None(band1.getControlPanel()),
+				new IconRibbonBandResizePolicy(band1.getControlPanel())));
 
 		RibbonTask task1 = new RibbonTask("Gestion TFT", band1);
-
+		RibbonTask task2 = new RibbonTask("Player", band2);
+		
 		getRibbon().addTask(task1);
+		getRibbon().addTask(task2);
+
 		setApplicationIcon(getResizableIconFromResource("icon/ball2.png"));
 		getRibbon().configureHelp(getResizableIconFromResource("icon/ball2.png"), null);
 		getRibbon().setApplicationMenu(new RibbonApplicationMenu());
@@ -136,6 +144,34 @@ public class MainFrame extends JRibbonFrame {
 				createContainer(CourtController.class, "court");
 			}
 		});
+		
+		JCommandButton playerRankInternational_btn = new JCommandButton("Rankings International", getResizableIconFromResource("icon/ranks.png"));
+		JCommandButton playerRankNational_btn = new JCommandButton("Rankings National", getResizableIconFromResource("icon/ranks.png"));
+		JCommandButton liveScore_btn = new JCommandButton("Live Score", getResizableIconFromResource("icon/ranks.png"));
+
+		band2.addCommandButton(playerRankInternational_btn, RibbonElementPriority.TOP);
+		band2.addCommandButton(playerRankNational_btn, RibbonElementPriority.TOP);
+		band2.addCommandButton(liveScore_btn, RibbonElementPriority.TOP);
+
+		playerRankInternational_btn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				createContainer(PlayerRanksController.class, "playerRanks");
+			}
+		});
+		
+		liveScore_btn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				createContainer(LiveScore.class, "liveScore");
+
+			}
+		});
+		
 	}
 
 	private JFXPanel fxPanel;

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class Club implements Serializable {
@@ -73,6 +74,7 @@ public class Club implements Serializable {
 		this.address = address;
 	}
 
+	@XmlTransient
 	@OneToMany(mappedBy = "club",cascade=CascadeType.ALL)
 	public List<Player> getPlayers() {
 		return players;
