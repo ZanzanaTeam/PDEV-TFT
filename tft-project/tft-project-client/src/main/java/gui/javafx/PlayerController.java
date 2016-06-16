@@ -131,7 +131,7 @@ public class PlayerController {
 
 		comboAgeRange.setItems(FXCollections.observableArrayList(AgeRange.values()));
 		comboAgeRange.getItems().setAll(AgeRange.values());
-
+		
 		refresh(null);
 
 	}
