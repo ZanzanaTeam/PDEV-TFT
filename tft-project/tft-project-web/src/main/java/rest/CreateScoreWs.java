@@ -9,9 +9,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import domain.Jeu;
 import domain.Match;
+import domain.MatchSingle;
+import domain.Player;
+import domain.Point;
 import domain.SetMatch;
-import embedded.Resultat;
+import enumeration.PointType;
+import services.implementes.LiveScoreServices;
 import services.implementes.basic.ServicesBasic;
 
 @Path("score")
@@ -25,33 +30,42 @@ public class CreateScoreWs {
 	@EJB
 	ServicesBasic<SetMatch> setServices;
 
+	@EJB
+	ServicesBasic<Jeu> jeuServices;
+
+	@EJB
+	ServicesBasic<Point> pointServices;
+
+	@EJB
+	LiveScoreServices liveSocreServices;
+
 	@GET
-	@Path("{match}/{player}/{set}/{jeu}/{point}")
+	@Path("{match}/{player}/{set}/{jeu}/{point}/{type}")
 	@Produces(value = MediaType.TEXT_PLAIN)
 	public String addPoint(@PathParam("match") Integer match_id, @PathParam("player") Integer player_id,
-			@PathParam("set") Integer set, @PathParam("jeu") Integer jeu, @PathParam("point") Integer point) {
-		
-		return "addScore";
+			@PathParam("set") Integer set_id, @PathParam("jeu") Integer jeu_id, @PathParam("point") String point_value,
+			@PathParam("type") String point_type) {
+
+		MatchSingle match = (MatchSingle) matchServices.findById(match_id, Match.class);
+		if (match == null)
+			return "not found match";
+		else {
+			Player player = (player_id == 1) ? match.getPlayer() : match.getPlayer2();
+			set_id = match_id * 10 + set_id;
+			jeu_id = set_id * 100 + jeu_id;
+			SetMatch setMatch = setServices.findById(set_id, SetMatch.class);
+			if (setMatch == null)
+				liveSocreServices.addSetToMatch(new SetMatch(set_id, null), match_id);
+
+			Jeu jeu = jeuServices.findById(jeu_id, Jeu.class);
+			if (jeu == null)
+				liveSocreServices.addJeuToSet(new Jeu(jeu_id, null), set_id);
+
+			liveSocreServices.addPointToJeu(new Point(point_value, PointType.valueOf(point_type)), jeu_id,
+					player.getId());
+
+			return "add point to " + player.getFullName();
+		}
+
 	}
-
-	@GET
-	@Path("{match}/{set}")
-	@Produces(value = MediaType.TEXT_PLAIN)
-	public String addSet(@PathParam("match") Integer match_id,
-						@PathParam("set") Integer set_id) {
-		Match match = matchServices.findById(match_id, Match.class);
-		SetMatch set = new SetMatch(1, new Resultat(2, 3));
-		set.setMatch(match);
-		setServices.add(set);
-		return "addSet";
-	}
-
-	@GET
-	@Path("{match}/{set}")
-	@Produces(value = MediaType.TEXT_PLAIN)
-	public String addJeu(@PathParam("match") Integer match_id, @PathParam("set") Integer set) {
-
-		return "addJeu";
-	}
-
 }

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class Tour implements Serializable {
@@ -96,6 +97,7 @@ public class Tour implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "tour")
+	@XmlTransient
 	public List<Match> getMatchs() {
 		return matchs;
 	}

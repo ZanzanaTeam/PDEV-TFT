@@ -18,37 +18,23 @@ public class Point implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private String value;
+	private boolean pointValue;
 	private PointType pointType;
-	private Player player;
+	
 	private Jeu jeu;
 
 	public Point() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Point(String value, PointType pointType) {
+	public Point(Boolean value, PointType pointType) {
 		super();
-		this.value = value;
+		this.pointValue = value;
 		this.setPointType(pointType);
 	}
 
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
-	@ManyToOne
-	public Player getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
+	
+	
 
 	@ManyToOne
 	public Jeu getJeu() {
@@ -71,7 +57,7 @@ public class Point implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Point [id=" + id + ", value=" + value + ", player=" + player + ", jeu=" + jeu + "]";
+		return "Point [id=" + id +  ", jeu=" + jeu + "]";
 	}
 
 	public PointType getPointType() {
@@ -80,5 +66,13 @@ public class Point implements Serializable {
 
 	public void setPointType(PointType pointType) {
 		this.pointType = pointType;
+	}
+
+	public boolean isPointvalue() {
+		return pointValue;
+	}
+
+	public void setPointvalue(boolean pointvalue) {
+		this.pointValue = pointvalue;
 	}
 }

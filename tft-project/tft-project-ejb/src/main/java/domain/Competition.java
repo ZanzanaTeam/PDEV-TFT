@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 import enumeration.CompetitionLevel;
 
@@ -119,7 +120,7 @@ public class Competition implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "competition", fetch = FetchType.EAGER)
-
+	@XmlTransient
 	public List<Match> getMatchs() {
 		return matchs;
 	}
@@ -130,6 +131,7 @@ public class Competition implements Serializable {
 	
 	
 	@OneToMany(mappedBy = "competition", fetch =FetchType.EAGER )
+	@XmlTransient
 	public List<Season> getSeasons() {
 		return seasons;
 	}
