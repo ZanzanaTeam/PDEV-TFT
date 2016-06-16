@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -33,10 +34,44 @@ public class Player implements Serializable {
 	private List<MatchSingle> matchSingles;
 	private List<AntiDopingTest> antiDopingTests;
 
+	/**
+	 * By Aymen EL Ghoul
+	 */
+
+	private Date birthDate;
+	private String birthPlace;
+	private String country;
+	private Float height;
+	private Float weight;
+	private String plays;
+	private String coach;
+	
 	public Player() {
 		// TODO Auto-generated constructor stub
 	}
 	
+
+	public Player(String fullName, Gender gender, Integer age, AgeRange ageRange, Club club, Doctor doctor,
+			Training training, List<MatchSingle> matchSingles, List<AntiDopingTest> antiDopingTests, Date birthDate,
+			String birthPlace, String country, Float height, Float weight, String plays, String coach) {
+		super();
+		this.fullName = fullName;
+		this.gender = gender;
+		this.age = age;
+		this.ageRange = ageRange;
+		this.club = club;
+		this.doctor = doctor;
+		this.training = training;
+		this.matchSingles = matchSingles;
+		this.antiDopingTests = antiDopingTests;
+		this.birthDate = birthDate;
+		this.birthPlace = birthPlace;
+		this.country = country;
+		this.height = height;
+		this.weight = weight;
+		this.plays = plays;
+		this.coach = coach;
+	}
 
 	public Player(String fullName, Gender gender, Integer age, AgeRange ageRange) {
 		super();
@@ -140,4 +175,76 @@ public class Player implements Serializable {
 	public void setMatchSingles(List<MatchSingle> matchSingles) {
 		this.matchSingles = matchSingles;
 	}
+
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+
+	public String getBirthPlace() {
+		return birthPlace;
+	}
+
+
+	public void setBirthPlace(String birthPlace) {
+		this.birthPlace = birthPlace;
+	}
+
+
+	public String getCountry() {
+		return country;
+	}
+
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+
+	public Float getHeight() {
+		return height;
+	}
+
+
+	public void setHeight(Float height) {
+		this.height = height;
+	}
+
+
+	public Float getWeight() {
+		return weight;
+	}
+
+
+	public void setWeight(Float weight) {
+		this.weight = weight;
+	}
+
+
+	public String getPlays() {
+		return plays;
+	}
+
+
+	public void setPlays(String plays) {
+		this.plays = plays;
+	}
+
+
+	public String getCoach() {
+		return coach;
+	}
+
+
+	public void setCoach(String coach) {
+		this.coach = coach;
+	}
+	
+	
 }
