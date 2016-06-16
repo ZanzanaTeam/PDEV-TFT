@@ -10,7 +10,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import domain.Jeu;
+import domain.Match;
 import domain.MatchSingle;
+import domain.Player;
+import domain.Point;
+import domain.SetMatch;
 import services.interfaces.LiveScoreServicesLocal;
 import services.interfaces.LiveScoreServicesRemote;
 
@@ -54,6 +59,23 @@ public class LiveScoreServices implements LiveScoreServicesRemote, LiveScoreServ
 		MatchSingle match = entityManager.find(MatchSingle.class, id);
 		match.setLiveScore(liveScore);
 		entityManager.merge(match);
+	}
+
+	public void addSetToMatch(SetMatch setMatch, Integer match_id) {
+		setMatch.setMatch(entityManager.find(Match.class, match_id));
+		entityManager.merge(setMatch);
+	}
+
+	public void addJeuToSet(Jeu jeu, Integer set_id) {
+		jeu.setSet(entityManager.find(SetMatch.class, set_id));
+		entityManager.merge(jeu);
+	}
+
+	public void addPointToJeu(Point point, Integer jeu_id, Integer player_id) {
+
+		point.setJeu(entityManager.find(Jeu.class, jeu_id));
+		point.setPlayer(entityManager.find(Player.class, player_id));
+		entityManager.merge(point);
 	}
 
 }
