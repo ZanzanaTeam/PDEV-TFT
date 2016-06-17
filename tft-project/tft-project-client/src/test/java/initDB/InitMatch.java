@@ -34,6 +34,7 @@ public class InitMatch {
 				Player player2 = players.get(index);
 				players.remove(index);
 				MatchSingle match = new MatchSingle();
+				match.setCompetition(tour.getSeason().getCompetition());
 				match.setTour(tour);
 				match.setPlayer(player1);
 				match.setPlayer2(player2);
@@ -42,7 +43,7 @@ public class InitMatch {
 				System.out.println("--------Match° " + i);
 				System.out.println("--------" + player1.getFullName() + " VS " + player2.getFullName());
 				new ServicesBasicDelegate<MatchSingle>().doCrud().add(match);
-				generateMatch(match);
+				//generateMatch(match);
 			}
 
 		}
