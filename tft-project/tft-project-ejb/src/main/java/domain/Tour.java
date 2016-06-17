@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlTransient;
+import enumeration.Order;
 
 @Entity
 public class Tour implements Serializable {
@@ -21,7 +22,7 @@ public class Tour implements Serializable {
 
 	private Integer id;
 	private String title;
-	private Integer position;
+	private Order position;
 	private Season season;
 	private List<Match> matchs;
 
@@ -30,7 +31,7 @@ public class Tour implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Tour(Integer id, String title, Integer position, Season season , List<Match> matchs) {
+	public Tour(Integer id, String title, Order position, Season season , List<Match> matchs) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -74,7 +75,7 @@ public class Tour implements Serializable {
 	/**
 	 * @return the position
 	 */
-	public Integer getPosition() {
+	public Order getPosition() {
 		return position;
 	}
 
@@ -82,7 +83,7 @@ public class Tour implements Serializable {
 	 * @param position
 	 *            the position to set
 	 */
-	public void setPosition(Integer position) {
+	public void setPosition(Order position) {
 		this.position = position;
 	}
 
