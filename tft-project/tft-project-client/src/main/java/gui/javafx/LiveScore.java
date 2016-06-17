@@ -2,7 +2,6 @@ package gui.javafx;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +9,9 @@ import delegate.LiveScoreDelegate;
 import domain.MatchSingle;
 import domain.Player;
 import gui.modele.Score;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,6 +25,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import javafx.util.Duration;
 
 public class LiveScore {
 
@@ -53,10 +56,7 @@ public class LiveScore {
 		// matchSingle.setDateMatch(new Date());
 		// matchSingle.setLiveScore("0:0#0:0#40:Av#1:0");
 		// matchSingles.add(matchSingle);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date =  sdf.parse("2016-06-18");
-		matchSingles = new LiveScoreDelegate().getProxy().getMatchByDate(date);
-		System.out.println(matchSingles);
+
 	}
 
 	@FXML
@@ -64,9 +64,26 @@ public class LiveScore {
 		flowContainer.setVgap(8);
 		flowContainer.setHgap(4);
 
-		for (MatchSingle matchSingle : matchSingles) {
-			addTableScore(matchSingle);
-		}
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date date;
+			try {
+				date = sdf.parse("2016-06-18");
+				matchSingles = new LiveScoreDelegate().getProxy().getMatchByDate(date);
+				System.out.println(matchSingles);
+				flowContainer.getChildren().clear();
+				for (MatchSingle matchSingle : matchSingles) {
+					addTableScore(matchSingle);
+				}
+
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}));
+		timeline.setCycleCount(Animation.INDEFINITE);
+		timeline.play();
+
 	}
 
 	private void addTableScore(MatchSingle matchSingle) {
