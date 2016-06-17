@@ -93,7 +93,7 @@ public class Match implements Serializable {
 		this.competition = competition;
 	}
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Tour getTour() {
 		return tour;
 	}

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -83,7 +84,7 @@ public class Season implements Serializable {
 		this.competition = competition;
 	}
 
-	@OneToMany(mappedBy = "season", fetch = FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL,mappedBy = "season", fetch = FetchType.EAGER)
 	public List<Tour> getTours() {
 		return tours;
 	}

@@ -1,37 +1,42 @@
 package gui.javafx;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import com.sun.prism.impl.Disposer.Record;
+
 import delegate.CompetitionServicesDelegate;
-import delegate.PlayerServicesDelegate;
 import delegate.ServicesBasicDelegate;
 import domain.Competition;
-import domain.Player;
 import enumeration.CompetitionLevel;
-import enumeration.Gender;
 import formatDate.FormatDate;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.util.Callback;
+
 
 public class CompetitionController implements Initializable {
 
@@ -50,16 +55,16 @@ public class CompetitionController implements Initializable {
 	@FXML
 	private TextField comboSite;
 	@FXML
-	private TextField  comboCountry;
+	private TextField comboCountry;
 
 	@FXML
 	private TableView<Competition> tableCompetition;
 	@FXML
 	private Button btnSave1;
-	@FXML 
-	private Button btnUpdate ; 
 	@FXML
-	private Button btnDelete  ; 
+	private Button btnUpdate;
+	@FXML
+	private Button btnDelete;
 	@FXML
 	private TableColumn<Competition, String> nameCompetition;
 	@FXML
@@ -83,7 +88,7 @@ public class CompetitionController implements Initializable {
 
 		isUpdate = false;
 		initTable();
-		
+
 		comboLevel.getItems().setAll(CompetitionLevel.values());
 
 		btnSave1.setOnAction(new EventHandler<ActionEvent>() {
@@ -94,8 +99,8 @@ public class CompetitionController implements Initializable {
 
 				Competition Competition = new Competition(txtName.getText(),
 						FormatDate.ToUtilDate(txtStartDate.getValue()), FormatDate.ToUtilDate(txtEndDate.getValue()),
-						comboCountry.getText(), comboSite.getText(),
-						comboLevel.getSelectionModel().getSelectedItem(), null);
+						comboCountry.getText(), comboSite.getText(), comboLevel.getSelectionModel().getSelectedItem(),
+						null);
 				if (isUpdate) {
 					Competition.setId(id);
 					new ServicesBasicDelegate<Competition>().doCrud().update(Competition);
@@ -119,19 +124,19 @@ public class CompetitionController implements Initializable {
 				if (e != null) {
 					id = e.getId();
 					txtName.setText(e.getName());
-					
+
 					comboCountry.setText(e.getCountry());
-					comboSite.setText(e.getSite());			
+					comboSite.setText(e.getSite());
 					txtStartDate.setValue(FormatDate.asLocalDate(e.getStartDate()));
 					txtEndDate.setValue(FormatDate.asLocalDate(e.getEndDate()));
 					comboLevel.setValue(e.getCompetitionLevel());
 					labelTitle.setText("Update player < " + e.getName() + " >");
 					isUpdate = true;
 				}
-				
+
 			}
 		});
-		
+
 		btnDelete.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -139,15 +144,15 @@ public class CompetitionController implements Initializable {
 				System.out.println("je suis dans delete ");
 				Competition cp = tableCompetition.getSelectionModel().getSelectedItem();
 				if (cp != null) {
-					int result = JOptionPane.showConfirmDialog(null, "Are you sure you wish to delete this player?", null,
-							JOptionPane.YES_NO_OPTION);
+					int result = JOptionPane.showConfirmDialog(null, "Are you sure you wish to delete this player?",
+							null, JOptionPane.YES_NO_OPTION);
 					if (result == JOptionPane.YES_OPTION) {
 
 						new ServicesBasicDelegate<Competition>().doCrud().delete(cp.getId(), Competition.class);
 						refresh(null);
 					}
 				}
-				
+
 			}
 		});
 		textFilter.setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -155,18 +160,39 @@ public class CompetitionController implements Initializable {
 			@Override
 			public void handle(KeyEvent event) {
 				System.out.println("Search => " + textFilter.getText());
-				List<Competition> competitions = new CompetitionServicesDelegate
-						().getProxy().findCompetitionByWord(textFilter.getText());
-				System.out.println("result => "+competitions);
+				List<Competition> competitions = new CompetitionServicesDelegate().getProxy()
+						.findCompetitionByWord(textFilter.getText());
+				System.out.println("result => " + competitions);
 				refresh(competitions);
-				
+
 			}
 		});
 	}
 
 	void initTable() {
 
-	
+		TableColumn col_action = new TableColumn<>("Action");
+		tableCompetition.getColumns().add(col_action);
+
+		col_action.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Record, Boolean>, ObservableValue<Boolean>>() {
+
+					@Override
+					public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Record, Boolean> p) {
+						return new SimpleBooleanProperty(p.getValue() != null);
+					}
+				});
+
+		// Adding the Button to the cell
+		col_action.setCellFactory(new Callback<TableColumn<Record, Boolean>, TableCell<Record, Boolean>>() {
+
+			@Override
+			public TableCell<Record, Boolean> call(TableColumn<Record, Boolean> p) {
+				return new ButtonCell();
+			}
+
+		});
+
 		observableList = FXCollections
 				.observableList(new ServicesBasicDelegate<Competition>().doCrud().findAll(Competition.class));
 
@@ -193,7 +219,47 @@ public class CompetitionController implements Initializable {
 		txtName.clear();
 		comboCountry.clear();
 		comboSite.clear();
-		
+
 	}
 
+}
+
+class ButtonCell extends TableCell<Record, Boolean> {
+	final Button cellButton = new Button("Matchs");
+
+	ButtonCell(){
+        
+    	//Action when the button is pressed
+        cellButton.setOnAction(new EventHandler<ActionEvent>(){
+
+            @Override
+            public void handle(ActionEvent t) {
+            	Stage primaryStage =null ; 
+            	try {
+					Scene scene =
+			new Scene(FXMLLoader.load(CompetitionController.class.getResource("CompetitionMatchs.fxml")));
+				primaryStage=new Stage();
+					primaryStage.setScene(scene);
+					primaryStage.show();
+            	
+            	} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            
+            
+            
+            
+            }
+        });
+    }
+
+	// Display button if the row is not empty
+	@Override
+	protected void updateItem(Boolean t, boolean empty) {
+		super.updateItem(t, empty);
+		if (!empty) {
+			setGraphic(cellButton);
+		}
+	}
 }

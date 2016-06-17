@@ -1,4 +1,6 @@
-package main.controller;
+package gui.javafx;
+
+
 
 import java.net.URL;
 import java.text.ParseException;
@@ -7,14 +9,20 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.sun.prism.impl.Disposer.Record;
+
 import delegate.ServicesBasicDelegate;
 import domain.Competition;
 import domain.Court;
 import domain.Match;
+import domain.MatchSingle;
 import domain.Player;
 import domain.Referee;
+import domain.Tour;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -23,13 +31,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.Main;
 
-public class CompetitionController implements Initializable {
+public class CompetitionMatchsController implements Initializable {
 	private ServicesBasicDelegate<Match> proxy;
 	@FXML
 	TableView<Match> tabMatch;
@@ -63,17 +72,26 @@ public class CompetitionController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+	
+		//add column Button to TableView 
+		
+		
+		
+		
+		
+		
+		
 		competitionSelected = null;
 		cbCompettion.setItems(FXCollections
 				.observableArrayList(new ServicesBasicDelegate<Competition>().doCrud().findAll(Competition.class)));
 		cbCompettion.getSelectionModel().selectedItemProperty()
 				.addListener((ChangeListener<Competition>) (observableValue, oldValue, newValue) -> {
 					System.out.println("there");
-					if(cbCompettion.getValue()!=(null)){
-					competitionSelected = cbCompettion.getSelectionModel().getSelectedItem();
-					System.out.println("here");
-					refreshTable();
-					
+					if (cbCompettion.getValue() != (null)) {
+						competitionSelected = cbCompettion.getSelectionModel().getSelectedItem();
+						System.out.println("here");
+						refreshTable();
+
 					}
 				});
 		cbCourt.setItems(
@@ -91,27 +109,37 @@ public class CompetitionController implements Initializable {
 					update(matchSelected);
 				});
 
-refreshTable();
+		cb11.setItems(
+				FXCollections.observableArrayList(new ServicesBasicDelegate<Player>().doCrud().findAll(Player.class)));
+		cb12.setItems(
+				FXCollections.observableArrayList(new ServicesBasicDelegate<Player>().doCrud().findAll(Player.class)));
+
+		refreshTable();
 		tabMatch.getSelectionModel().selectedItemProperty()
 				.addListener((ChangeListener<Match>) (observableValue, oldValue, newValue) -> {
-			
-					if (tabMatch.getSelectionModel().getSelectedItem()!= null){
+
+					if (tabMatch.getSelectionModel().getSelectedItem() != null) {
 						matchSelected = tabMatch.getSelectionModel().getSelectedItem();
-						if(matchSelected.getReferee()!= null) {
-						System.out.println(matchSelected.getId());
-						for (Referee referee : cbRefree.getItems()) {
-							if (referee.getId().equals(matchSelected.getReferee().getId())) {
-								cbRefree.setValue(referee);
+						if (matchSelected.getReferee() != null) {
+							System.out.println(matchSelected.getId());
+							for (Referee referee : cbRefree.getItems()) {
+								if (referee.getId().equals(matchSelected.getReferee().getId())) {
+									cbRefree.setValue(referee);
+								}
 							}
+
+						} else {
+							cbRefree.setValue(null);
 						}
-						
-						}else {	cbRefree.setValue(null);}
-						if(matchSelected.getReferee()!= null) {
-						for (Court court : cbCourt.getItems()) {
-							if (court.getId().equals(matchSelected.getCourt().getId())) {
-								cbCourt.setValue(court);
-							}}
-						}else {	cbCourt.setValue(null);}
+						if (matchSelected.getReferee() != null) {
+							for (Court court : cbCourt.getItems()) {
+								if (court.getId().equals(matchSelected.getCourt().getId())) {
+									cbCourt.setValue(court);
+								}
+							}
+						} else {
+							cbCourt.setValue(null);
+						}
 					}
 				});
 		colDate.setCellValueFactory(new PropertyValueFactory<Match, Date>("dateMatch"));
@@ -140,7 +168,7 @@ refreshTable();
 	private void Insert(Match match) {
 		if (getProxy().doCrud().add(match)) {
 			refreshCB();
-			/////////////////************************************************************////////////////////////////////////////
+			///////////////// ************************************************************////////////////////////////////////////
 			tfDate.setText("");
 			tfDate.setPromptText("New Match");
 		}
@@ -150,32 +178,43 @@ refreshTable();
 	private void refreshCB() {
 		cbCompettion.setItems(FXCollections
 				.observableArrayList(new ServicesBasicDelegate<Competition>().doCrud().findAll(Competition.class)));
-		/////////////////////////////999999999999999999999999999999//////////////////////////////////
+		///////////////////////////// 999999999999999999999999999999//////////////////////////////////
 		if (competitionSelected != null) {
 			for (Competition compettion : cbCompettion.getItems()) {
-				if (compettion.getId()==(competitionSelected.getId())) {
+				if (compettion.getId() == (competitionSelected.getId())) {
 					cbCompettion.setValue(compettion);
 				}
 			}
-competitionSelected=cbCompettion.getValue();
-refreshTable();
+			competitionSelected = cbCompettion.getValue();
+			refreshTable();
 		}
-		
-//		Competition competitionUpdated=new ServicesBasicDelegate<Competition>().doCrud().findById(competitionSelected.getId(), Competition.class);
-		
+
+		// Competition competitionUpdated=new
+		// ServicesBasicDelegate<Competition>().doCrud().findById(competitionSelected.getId(),
+		// Competition.class);
+
 	}
 
 	@FXML
 	void btnAddAction() {
-		Match lmatch;
+		MatchSingle lmatch;
 
 		if (!tfDate.getText().isEmpty()) {
-			lmatch = new Match();
+			lmatch = new MatchSingle();
 			lmatch.setDateMatch(stringToDate(tfDate.getText()));
-			if (!(lmatch.getDateMatch()==null)) {
+			if (!(lmatch.getDateMatch() == null)) {
+				
 				lmatch.setCompetition(competitionSelected);
+				lmatch.setReferee(cbRefree.getSelectionModel().getSelectedItem());
+				lmatch.setCourt(cbCourt.getSelectionModel().getSelectedItem());
+				
+				lmatch.setPlayer(cb11.getSelectionModel().getSelectedItem());
+				lmatch.setPlayer2(cb12.getSelectionModel().getSelectedItem());
+//				competitionSelected.setSeasons();
+				lmatch.setTour(new ServicesBasicDelegate<Tour>().doCrud().findById(1, Tour.class));
+			
 				Insert(lmatch);
-			} 
+			}
 
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -202,7 +241,7 @@ refreshTable();
 
 				getProxy().doCrud().delete(matchSelected.getId(), Match.class);
 				refreshCB();
-//				tabMatch.getItems().remove(matchSelected);
+				// tabMatch.getItems().remove(matchSelected);
 			} else {
 
 			}
@@ -245,13 +284,15 @@ refreshTable();
 		return date;
 	}
 
-	void refreshTable(){
+	void refreshTable() {
 		if (competitionSelected != null) {
-System.out.println("refresh table");
+			System.out.println("refresh table");
 			tabMatch.setItems(FXCollections.observableArrayList(competitionSelected.getMatchs()));
-		}
-		else {
+		} else {
 			tabMatch.setItems(FXCollections.observableArrayList());
 		}
 	}
 }
+
+
+

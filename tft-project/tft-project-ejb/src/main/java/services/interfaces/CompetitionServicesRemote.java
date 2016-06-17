@@ -8,4 +8,5 @@ import domain.Competition;
 @Remote
 public interface CompetitionServicesRemote {
 public List<Competition>findCompetitionByWord(String word); 
+
 }
