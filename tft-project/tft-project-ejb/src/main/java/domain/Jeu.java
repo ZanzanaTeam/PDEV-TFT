@@ -23,7 +23,7 @@ public class Jeu implements Serializable {
 	private List<Point> points;
 	
 	private int[] score;//
-	private boolean serve;//
+	private Player serve;//
 	private boolean lostServe;//
 
 	public Jeu() {
@@ -70,12 +70,12 @@ public class Jeu implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public boolean isServe() {
+	@ManyToOne()
+	public Player getServe() {
 		return serve;
 	}
 
-	public void setServe(boolean serve) {
+	public void setServe(Player serve) {
 		this.serve = serve;
 	}
 

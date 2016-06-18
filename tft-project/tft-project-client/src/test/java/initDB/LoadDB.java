@@ -1,5 +1,7 @@
 package initDB;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -32,7 +34,12 @@ public class LoadDB {
 
 	public static void main(String[] args) {
 		List<Player> players = db.generatePlayers();
-		List<Competition> competitions = db.generateCompetition();
+		try {
+			List<Competition> competitions = db.generateCompetition();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -57,27 +64,31 @@ public class LoadDB {
 		return list;
 	}
 
-	public List<Competition> generateCompetition() {
+	public List<Competition> generateCompetition() throws ParseException {
 
 		Competition rolandGarros = new Competition();
 		rolandGarros.setName("Roland Garros");
 		rolandGarros.setCountry("France");
 		rolandGarros.setCompetitionLevel(CompetitionLevel.International);
+		rolandGarros.setNbSet(2);
 
 		Competition usOpen = new Competition();
 		usOpen.setName("US Open");
 		usOpen.setCountry("USA");
 		usOpen.setCompetitionLevel(CompetitionLevel.International);
-
+		usOpen.setNbSet(3);
+		
 		Competition australianOpen = new Competition();
 		australianOpen.setName("Australian Open");
 		australianOpen.setCountry("Australie");
 		australianOpen.setCompetitionLevel(CompetitionLevel.International);
-
+		australianOpen.setNbSet(3);
+		
 		Competition wimbledon = new Competition();
 		wimbledon.setName("Wimbledon");
 		wimbledon.setCountry("Australie");
 		wimbledon.setCompetitionLevel(CompetitionLevel.International);
+		wimbledon.setNbSet(2);
 
 		new ServicesBasicDelegate<Competition>().doCrud().add(rolandGarros);
 		new ServicesBasicDelegate<Competition>().doCrud().add(usOpen);
@@ -97,13 +108,17 @@ public class LoadDB {
 	}
 
 	@SuppressWarnings("deprecation")
-	public List<Season> generateSeasons(Competition competition) {
+	public List<Season> generateSeasons(Competition competition) throws ParseException {
 		List<Season> list = null;
-
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate;
+		Date endDate;
 		for (Integer i = MIN_YEAR; i <= MAX_YEAR; i++) {
 			Season season = new Season();
-			season.setStartDate(new Date(2011 + i, 06, 10));
-			season.setEndDate(new Date(2011 + i, 07, 10));
+			startDate = sdf.parse((2011 + i)+"-06-10");
+			endDate = sdf.parse((2011 + i)+"-07-10");
+			season.setStartDate(startDate);
+			season.setEndDate(endDate);
 			season.setGender(Gender.Male);
 			season.setTitle(competition.getName() + "-" + i + " Men");
 			season.setCompetition(competition);
