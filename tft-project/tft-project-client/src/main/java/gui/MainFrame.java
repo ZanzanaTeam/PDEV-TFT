@@ -33,6 +33,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import utility.GoogleDrive;
 
 public class MainFrame extends JRibbonFrame {
 	private static final long serialVersionUID = 1L;
@@ -40,6 +41,7 @@ public class MainFrame extends JRibbonFrame {
 	private JRibbonBand band1;
 	private JRibbonBand band2;
 	private JRibbonBand band3;
+	private JRibbonBand band4;
 
 	public MainFrame() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -50,6 +52,7 @@ public class MainFrame extends JRibbonFrame {
 		band1 = new JRibbonBand("", null);
 		band2 = new JRibbonBand("Player", getResizableIconFromResource("icon/player.png"));
 		band3 = new JRibbonBand("Match Stat", getResizableIconFromResource("icon/match.png"));
+		band4 = new JRibbonBand("Config", getResizableIconFromResource("icon/config.png"));
 
 		initButton();
 
@@ -59,14 +62,20 @@ public class MainFrame extends JRibbonFrame {
 				new IconRibbonBandResizePolicy(band1.getControlPanel())));
 		band3.setResizePolicies((List) Arrays.asList(new CoreRibbonResizePolicies.None(band1.getControlPanel()),
 				new IconRibbonBandResizePolicy(band1.getControlPanel())));
+		band4.setResizePolicies((List) Arrays.asList(new CoreRibbonResizePolicies.None(band1.getControlPanel()),
+				new IconRibbonBandResizePolicy(band1.getControlPanel())));
 
+		
 		RibbonTask task1 = new RibbonTask("Gestion TFT", band1);
 		RibbonTask task2 = new RibbonTask("Player", band2);
 		RibbonTask task3 = new RibbonTask("Match Stat", band3);
+		RibbonTask task4 = new RibbonTask("Config", band4);
+
 
 		getRibbon().addTask(task1);
 		getRibbon().addTask(task2);
 		getRibbon().addTask(task3);
+		getRibbon().addTask(task4);
 
 		setApplicationIcon(getResizableIconFromResource("icon/ball2.png"));
 		getRibbon().configureHelp(getResizableIconFromResource("icon/ball2.png"), null);
@@ -179,6 +188,23 @@ public class MainFrame extends JRibbonFrame {
 				createContainer(LiveScore.class, "matchReportContainer");
 			}
 		});
+		
+		
+		JCommandButton config_btn = new JCommandButton("Google Drive",
+				getResizableIconFromResource("icon/config.png"));
+		band4.addCommandButton(config_btn, RibbonElementPriority.TOP);
+		config_btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					GoogleDrive.getService();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
 	}
 
 	public static JFXPanel fxPanel;
