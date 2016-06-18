@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Jeu implements Serializable {
@@ -79,6 +80,7 @@ public class Jeu implements Serializable {
 		this.lostServe = lostServe;
 	}
 
+	@Transient
 	public int getScore(Player player1) {
 		int score = 0;
 
@@ -94,6 +96,7 @@ public class Jeu implements Serializable {
 		return score;
 	}
 
+	@Transient
 	public Player getWinner() {
 
 		List<Player> players = new ArrayList<>();

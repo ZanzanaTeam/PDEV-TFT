@@ -12,9 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlTransient;
 
 import enumeration.Meteo;
+import enumeration.WeatherState;
 
 @Entity(name = "match_game")
 public class Match implements Serializable {
@@ -24,23 +26,21 @@ public class Match implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-
+	private WeatherState weather;
 	private Date dateMatch;
 	private int[] score;//
 	private int duration;//
 	private Tour tour;
-	
-	
+
 	private Competition competition;
 	private Court court;
 	private Referee referee;
-	private Meteo meteo; 
-	private List<SetMatch> sets; 
-	
+	private List<SetMatch> sets;
+
 	private List<Ticket> tickets;
-	
-	
-private String liveScore;
+
+	private String liveScore;
+
 	public Match() {
 		// TODO Auto-generated constructor stub
 	}
@@ -132,8 +132,8 @@ private String liveScore;
 	public void setLiveScore(String liveScore) {
 		this.liveScore = liveScore;
 	}
-	
-	@OneToMany(mappedBy = "match", fetch = FetchType.EAGER , cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "match", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@XmlTransient
 	public List<SetMatch> getSets() {
 		return sets;
@@ -142,14 +142,7 @@ private String liveScore;
 	public void setSets(List<SetMatch> sets) {
 		this.sets = sets;
 	}
-
-	public int[] getScore() {
-		return score;
-	}
-
-	public void setScore(int[] score) {
-		this.score = score;
-	}
+	
 
 	public int getDuration() {
 		return duration;
@@ -159,13 +152,14 @@ private String liveScore;
 		this.duration = duration;
 	}
 
-	public Meteo getMeteo() {
-		return meteo;
-	}
-
-	public void setMeteo(Meteo meteo) {
-		this.meteo = meteo;
-	}
-
 	
+
+	public WeatherState getWeather() {
+		return weather;
+	}
+
+	public void setWeather(WeatherState weather) {
+		this.weather = weather;
+	}
+
 }

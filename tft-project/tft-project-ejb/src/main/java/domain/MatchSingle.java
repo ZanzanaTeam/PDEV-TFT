@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class MatchSingle extends Match {
@@ -44,7 +45,7 @@ public class MatchSingle extends Match {
 	public void setPlayer2(Player player2) {
 		this.player2 = player2;
 	}
-
+	@Transient
 	public int getScore(Player player1) {
 		int score = 0;
 
@@ -56,7 +57,7 @@ public class MatchSingle extends Match {
 		}
 		return score;
 	}
-
+	@Transient
 	public Player getWinner() {
 		List<Player> players = new ArrayList<>();
 		if (getSets() == null)

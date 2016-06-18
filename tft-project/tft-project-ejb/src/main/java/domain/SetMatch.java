@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import embedded.Resultat;
 
@@ -97,7 +98,7 @@ public class SetMatch implements Serializable {
 	public void setDuration(int[] duration) {
 		this.duration = duration;
 	}
-	
+	@Transient
 	public int getScore(Player player1) {
 		int score = 0;
 
@@ -113,7 +114,7 @@ public class SetMatch implements Serializable {
 
 		return score;
 	}
-
+	@Transient
 	public Player getWinner() {
 		
 		List<Player> players = new ArrayList<>();

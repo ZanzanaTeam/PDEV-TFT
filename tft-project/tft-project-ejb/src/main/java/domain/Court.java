@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlTransient;
 
+import enumeration.Surface;
+
 @Entity
 public class Court implements Serializable{
 
@@ -24,7 +26,7 @@ public class Court implements Serializable{
 	public String toString() {
 		return name;
 	}
-
+private Surface surface;
 	private String name;
 	private String address;
 	private Double latitude;
@@ -92,5 +94,13 @@ public class Court implements Serializable{
 
 	public void setMatchs(List<Match> matchs) {
 		this.matchs = matchs;
+	}
+
+	public Surface getSurface() {
+		return surface;
+	}
+
+	public void setSurface(Surface surface) {
+		this.surface = surface;
 	}	
 }

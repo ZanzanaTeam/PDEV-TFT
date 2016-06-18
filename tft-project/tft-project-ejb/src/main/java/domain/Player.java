@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlTransient;
 
 import enumeration.AgeRange;
@@ -190,6 +191,7 @@ public class Player implements Serializable {
 	public void setMatchSingles2(List<MatchSingle> matchSingles) {
 		this.matchSingles2 = matchSingles;
 	}
+	@Transient
 	public List<MatchSingle> getAllMatchSingles() {
 		List<MatchSingle> list=new ArrayList<>();
 		list.addAll(getMatchSingles1());list.addAll(getMatchSingles2());
