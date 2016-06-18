@@ -59,7 +59,7 @@ public class CreateScoreWs {
 
 			Jeu jeu = jeuServices.findById(jeu_id, Jeu.class);
 			if (jeu == null)
-				liveSocreServices.addJeuToSet(new Jeu(jeu_id, null), set_id);
+				liveSocreServices.addJeuToSet(new Jeu(jeu_id), set_id);
 
 			liveSocreServices.addPointToJeu(new Point(point_value, PointType.valueOf(point_type)), jeu_id,
 					player.getId());

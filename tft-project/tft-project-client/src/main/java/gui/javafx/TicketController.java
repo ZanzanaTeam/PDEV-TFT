@@ -1,13 +1,11 @@
 package gui.javafx;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import delegate.ServicesBasicDelegate;
 import delegate.TicketServicesDelegate;
-import domain.Competition;
 import domain.Match;
 import domain.Ticket;
 import javafx.collections.FXCollections;

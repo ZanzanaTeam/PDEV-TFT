@@ -9,6 +9,7 @@ import java.util.Random;
 import delegate.ServicesBasicDelegate;
 import domain.Competition;
 import domain.Player;
+import domain.Referee;
 import domain.Season;
 import domain.Tour;
 import enumeration.CompetitionLevel;
@@ -30,11 +31,19 @@ public class LoadDB {
 
 	public final static Integer MIN_YEAR = 2012;
 	public final static Integer MAX_YEAR = 2016;
-	private static int number = 0;
 
 	public static void main(String[] args) {
-		List<Player> players = db.generatePlayers();
 		try {
+			@SuppressWarnings("unused")
+			List<Player> players = db.generatePlayers();
+			@SuppressWarnings("unused")
+			List<Referee> referees = db.generateReferees();
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			@SuppressWarnings("unused")
 			List<Competition> competitions = db.generateCompetition();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -43,19 +52,33 @@ public class LoadDB {
 
 	}
 
-	@SuppressWarnings("deprecation")
-	public List<Player> generatePlayers() {
+	private List<Referee> generateReferees() {
+		Random random = new Random();
+		for (int i = 1; i <= 32; i++) {
+
+			Referee referee = new Referee("Referee " + i, random.nextInt(10) + 20, Gender.Male,
+					CompetitionLevel.International);
+			new ServicesBasicDelegate<Referee>().doCrud().add(referee);
+		}
+		return new ServicesBasicDelegate<Referee>().doCrud().findAll(Referee.class);
+	}
+
+	public List<Player> generatePlayers() throws ParseException {
 
 		List<Player> list = null;
 		Random random = new Random();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		for (int i = 1; i <= 32; i++) {
 			Player player = new Player();
 			player.setFullName("Player " + i);
-			player.setAge(random.nextInt((30 - 20) + 1) + 20);
+			player.setAge(random.nextInt((30 - 20)) + 20);
 			player.setCountry("Tunisia");
 			player.setGender(Gender.Male);
 			player.setHeight((float) 1.8);
-			player.setBirthDate(new Date(1989, 01, 01));
+			player.setWeight((float) 75.8);
+
+			player.setBirthDate(sdf.parse(
+					random.nextInt(2016 - 1970) + 1970 + "-" + random.nextInt(11) + 1 + "-" + random.nextInt(29) + 1));
 			player.setBirthPlace("Tunis");
 			new ServicesBasicDelegate<Player>().doCrud().add(player);
 
@@ -77,13 +100,13 @@ public class LoadDB {
 		usOpen.setCountry("USA");
 		usOpen.setCompetitionLevel(CompetitionLevel.International);
 		usOpen.setNbSet(3);
-		
+
 		Competition australianOpen = new Competition();
 		australianOpen.setName("Australian Open");
 		australianOpen.setCountry("Australie");
 		australianOpen.setCompetitionLevel(CompetitionLevel.International);
 		australianOpen.setNbSet(3);
-		
+
 		Competition wimbledon = new Competition();
 		wimbledon.setName("Wimbledon");
 		wimbledon.setCountry("Australie");
@@ -101,13 +124,11 @@ public class LoadDB {
 			System.out.println("-----Competition " + competition.getId() + " = " + competition.getName() + " -----\n");
 			List<Season> seasons = db.generateSeasons(competition);
 			competition.setSeasons(seasons);
-
 		}
 		List<Competition> list = new ServicesBasicDelegate<Competition>().doCrud().findAll(Competition.class);
 		return list;
 	}
 
-	@SuppressWarnings("deprecation")
 	public List<Season> generateSeasons(Competition competition) throws ParseException {
 		List<Season> list = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -115,8 +136,8 @@ public class LoadDB {
 		Date endDate;
 		for (Integer i = MIN_YEAR; i <= MAX_YEAR; i++) {
 			Season season = new Season();
-			startDate = sdf.parse((2011 + i)+"-06-10");
-			endDate = sdf.parse((2011 + i)+"-07-10");
+			startDate = sdf.parse((2011 + i) + "-06-10");
+			endDate = sdf.parse((2011 + i) + "-07-10");
 			season.setStartDate(startDate);
 			season.setEndDate(endDate);
 			season.setGender(Gender.Male);

@@ -65,7 +65,6 @@ public class Player implements Serializable {
 		this.club = club;
 		this.doctor = doctor;
 		this.training = training;
-		this.matchSingles1 = matchSingles1;
 		this.antiDopingTests = antiDopingTests;
 		this.birthDate = birthDate;
 		this.birthPlace = birthPlace;
