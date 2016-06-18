@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,11 +19,10 @@ public class Jeu implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	
+
 	private SetMatch set;
 	private List<Point> points;
-	
-	private int[] score;//
+
 	private boolean serve;//
 	private boolean lostServe;//
 
@@ -30,18 +30,10 @@ public class Jeu implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Jeu(Integer id, int[] score) {
+	public Jeu(Integer id) {
 		super();
 		this.setId(id);
-		this.score = score;
-	}
 
-	public int[] getScore() {
-		return score;
-	}
-
-	public void setScore(int[] score) {
-		this.score = score;
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -87,4 +79,37 @@ public class Jeu implements Serializable {
 		this.lostServe = lostServe;
 	}
 
+	public int getScore(Player player1) {
+		int score = 0;
+
+		if (points != null) {
+			for (Point point : points) {
+				if (point.getPlayer() == player1) {
+					score++;
+				}
+			}
+
+		}
+
+		return score;
+	}
+
+	public Player getWinner() {
+
+		List<Player> players = new ArrayList<>();
+
+		if (points == null)
+			return null;
+
+		for (Point point : points) {
+			if (!players.contains(point.getPlayer())) {
+				players.add(point.getPlayer());
+			}
+		}
+
+		if (players.size() == 1)
+			return players.get(0);
+		return (getScore(players.get(0)) > getScore(players.get(1)) ? players.get(0) : players.get(1));
+
+	}
 }

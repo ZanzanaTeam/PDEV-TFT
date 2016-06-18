@@ -34,7 +34,7 @@ public class InitMatch {
 				Player player2 = players.get(index);
 				players.remove(index);
 				MatchSingle match = new MatchSingle();
-				match.setCompetition(tour.getSeason().getCompetition());
+				match.setCompetition(tour.getSeason().getCompetition());//
 				match.setTour(tour);
 				match.setPlayer(player1);
 				match.setPlayer2(player2);
