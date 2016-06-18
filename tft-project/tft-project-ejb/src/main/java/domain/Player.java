@@ -1,8 +1,10 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -188,9 +190,14 @@ public class Player implements Serializable {
 	public void setMatchSingles2(List<MatchSingle> matchSingles) {
 		this.matchSingles2 = matchSingles;
 	}
+	public List<MatchSingle> getAllMatchSingles() {
+		List<MatchSingle> list=new ArrayList<>();
+		list.addAll(getMatchSingles1());list.addAll(getMatchSingles2());
+		list.stream().sorted((m1, m2) -> m1.getDateMatch().compareTo(m2.getDateMatch())).collect(Collectors.toList());
+		return matchSingles2;
+	}
+
 	
-
-
 	public Date getBirthDate() {
 		return birthDate;
 	}
