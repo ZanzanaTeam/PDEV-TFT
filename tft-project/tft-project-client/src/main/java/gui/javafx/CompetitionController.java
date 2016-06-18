@@ -1,20 +1,15 @@
 package gui.javafx;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
 import delegate.CompetitionServicesDelegate;
-import delegate.PlayerServicesDelegate;
 import delegate.ServicesBasicDelegate;
 import domain.Competition;
-import domain.Player;
 import enumeration.CompetitionLevel;
-import enumeration.Gender;
 import formatDate.FormatDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,7 +26,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 
 public class CompetitionController implements Initializable {
 
@@ -50,16 +44,16 @@ public class CompetitionController implements Initializable {
 	@FXML
 	private TextField comboSite;
 	@FXML
-	private TextField  comboCountry;
+	private TextField comboCountry;
 
 	@FXML
 	private TableView<Competition> tableCompetition;
 	@FXML
 	private Button btnSave1;
-	@FXML 
-	private Button btnUpdate ; 
 	@FXML
-	private Button btnDelete  ; 
+	private Button btnUpdate;
+	@FXML
+	private Button btnDelete;
 	@FXML
 	private TableColumn<Competition, String> nameCompetition;
 	@FXML
@@ -83,7 +77,7 @@ public class CompetitionController implements Initializable {
 
 		isUpdate = false;
 		initTable();
-		
+
 		comboLevel.getItems().setAll(CompetitionLevel.values());
 
 		btnSave1.setOnAction(new EventHandler<ActionEvent>() {
@@ -94,8 +88,8 @@ public class CompetitionController implements Initializable {
 
 				Competition Competition = new Competition(txtName.getText(),
 						FormatDate.ToUtilDate(txtStartDate.getValue()), FormatDate.ToUtilDate(txtEndDate.getValue()),
-						comboCountry.getText(), comboSite.getText(),
-						comboLevel.getSelectionModel().getSelectedItem(), null);
+						comboCountry.getText(), comboSite.getText(), comboLevel.getSelectionModel().getSelectedItem(),
+						null);
 				if (isUpdate) {
 					Competition.setId(id);
 					new ServicesBasicDelegate<Competition>().doCrud().update(Competition);
@@ -119,19 +113,19 @@ public class CompetitionController implements Initializable {
 				if (e != null) {
 					id = e.getId();
 					txtName.setText(e.getName());
-					
+
 					comboCountry.setText(e.getCountry());
-					comboSite.setText(e.getSite());			
+					comboSite.setText(e.getSite());
 					txtStartDate.setValue(FormatDate.asLocalDate(e.getStartDate()));
 					txtEndDate.setValue(FormatDate.asLocalDate(e.getEndDate()));
 					comboLevel.setValue(e.getCompetitionLevel());
 					labelTitle.setText("Update player < " + e.getName() + " >");
 					isUpdate = true;
 				}
-				
+
 			}
 		});
-		
+
 		btnDelete.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -139,15 +133,15 @@ public class CompetitionController implements Initializable {
 				System.out.println("je suis dans delete ");
 				Competition cp = tableCompetition.getSelectionModel().getSelectedItem();
 				if (cp != null) {
-					int result = JOptionPane.showConfirmDialog(null, "Are you sure you wish to delete this player?", null,
-							JOptionPane.YES_NO_OPTION);
+					int result = JOptionPane.showConfirmDialog(null, "Are you sure you wish to delete this player?",
+							null, JOptionPane.YES_NO_OPTION);
 					if (result == JOptionPane.YES_OPTION) {
 
 						new ServicesBasicDelegate<Competition>().doCrud().delete(cp.getId(), Competition.class);
 						refresh(null);
 					}
 				}
-				
+
 			}
 		});
 		textFilter.setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -155,18 +149,17 @@ public class CompetitionController implements Initializable {
 			@Override
 			public void handle(KeyEvent event) {
 				System.out.println("Search => " + textFilter.getText());
-				List<Competition> competitions = new CompetitionServicesDelegate
-						().getProxy().findCompetitionByWord(textFilter.getText());
-				System.out.println("result => "+competitions);
+				List<Competition> competitions = new CompetitionServicesDelegate().getProxy()
+						.findCompetitionByWord(textFilter.getText());
+				System.out.println("result => " + competitions);
 				refresh(competitions);
-				
+
 			}
 		});
 	}
 
 	void initTable() {
 
-	
 		observableList = FXCollections
 				.observableList(new ServicesBasicDelegate<Competition>().doCrud().findAll(Competition.class));
 
@@ -193,7 +186,7 @@ public class CompetitionController implements Initializable {
 		txtName.clear();
 		comboCountry.clear();
 		comboSite.clear();
-		
+
 	}
 
 }

@@ -23,9 +23,8 @@ public class Jeu implements Serializable {
 
 	private SetMatch set;
 	private List<Point> points;
-
-	private boolean serve;//
-	private boolean lostServe;//
+	private Player serve;
+	private boolean lostServe;
 
 	public Jeu() {
 		// TODO Auto-generated constructor stub
@@ -64,11 +63,12 @@ public class Jeu implements Serializable {
 		this.id = id;
 	}
 
-	public boolean isServe() {
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
+	public Player getServe() {
 		return serve;
 	}
 
-	public void setServe(boolean serve) {
+	public void setServe(Player serve) {
 		this.serve = serve;
 	}
 
