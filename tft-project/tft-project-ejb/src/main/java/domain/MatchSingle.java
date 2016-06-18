@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -24,7 +27,7 @@ public class MatchSingle extends Match {
 		this.player2 = player2;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	public Player getPlayer() {
 		return player;
 	}
@@ -33,12 +36,39 @@ public class MatchSingle extends Match {
 		this.player = player;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	public Player getPlayer2() {
 		return player2;
 	}
 
 	public void setPlayer2(Player player2) {
 		this.player2 = player2;
+	}
+
+	public int getScore(Player player1) {
+		int score = 0;
+
+		if (getSets() != null) {
+			for (SetMatch set : getSets()) {
+				if (set.getWinner() == player1)
+					score++;
+			}
+		}
+		return score;
+	}
+
+	public Player getWinner() {
+		List<Player> players = new ArrayList<>();
+		if (getSets() == null)
+			return null;
+		for (SetMatch set : getSets()) {
+			if (!players.contains(set.getWinner())) {
+				players.add(set.getWinner());
+			}
+		}
+		if (players.size() == 1)
+			return players.get(0);
+		return (getScore(players.get(0)) > getScore(players.get(1)) ? players.get(0) : players.get(1));
+
 	}
 }
