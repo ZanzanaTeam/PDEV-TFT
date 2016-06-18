@@ -62,7 +62,7 @@ public class Jeu implements Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne()
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	public Player getServe() {
 		return serve;
 	}
