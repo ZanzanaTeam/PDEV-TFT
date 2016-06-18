@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class Jeu implements Serializable {
@@ -46,6 +47,7 @@ public class Jeu implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "jeu", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@XmlTransient
 	public List<Point> getPoints() {
 		return points;
 	}
@@ -64,6 +66,7 @@ public class Jeu implements Serializable {
 	}
 
 	@ManyToOne(optional = true, fetch = FetchType.EAGER)
+	@XmlTransient
 	public Player getServe() {
 		return serve;
 	}
@@ -80,6 +83,7 @@ public class Jeu implements Serializable {
 		this.lostServe = lostServe;
 	}
 
+	@XmlTransient
 	@Transient
 	public int getScore(Player player1) {
 		int score = 0;
@@ -96,6 +100,7 @@ public class Jeu implements Serializable {
 		return score;
 	}
 
+	@XmlTransient
 	@Transient
 	public Player getWinner() {
 

@@ -171,8 +171,9 @@ public class Player implements Serializable {
 		this.antiDopingTests = antiDopingTests;
 	}
 
-	@XmlTransient
+	
 	@OneToMany(mappedBy = "player",cascade=CascadeType.ALL)
+	@XmlTransient
 	public List<MatchSingle> getMatchSingles1() {
 		return matchSingles1;
 	}
@@ -181,8 +182,9 @@ public class Player implements Serializable {
 		this.matchSingles1 = matchSingles;
 	}
 	
-	@XmlTransient
+	
 	@OneToMany(mappedBy = "player2",cascade=CascadeType.ALL)
+	@XmlTransient
 	public List<MatchSingle> getMatchSingles2() {
 		return matchSingles2;
 	}
@@ -190,6 +192,7 @@ public class Player implements Serializable {
 	public void setMatchSingles2(List<MatchSingle> matchSingles) {
 		this.matchSingles2 = matchSingles;
 	}
+	@XmlTransient
 	@Transient
 	public List<MatchSingle> getAllMatchSingles() {
 		List<MatchSingle> list=new ArrayList<>();
@@ -268,7 +271,7 @@ public class Player implements Serializable {
 		this.coach = coach;
 	}
 
-
+	@XmlTransient
 	public int getClassement() {
 		return classement;
 	}

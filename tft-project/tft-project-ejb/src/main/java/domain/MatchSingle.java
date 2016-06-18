@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class MatchSingle extends Match {
@@ -45,6 +46,8 @@ public class MatchSingle extends Match {
 	public void setPlayer2(Player player2) {
 		this.player2 = player2;
 	}
+
+	@XmlTransient
 	@Transient
 	public int getScore(Player player1) {
 		int score = 0;
@@ -57,6 +60,8 @@ public class MatchSingle extends Match {
 		}
 		return score;
 	}
+
+	@XmlTransient
 	@Transient
 	public Player getWinner() {
 		List<Player> players = new ArrayList<>();

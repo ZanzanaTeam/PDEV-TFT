@@ -70,18 +70,15 @@ public class MainFrame extends JRibbonFrame {
 		// Creation des Bouttons
 		JCommandButton player_btn = new JCommandButton("Player", getResizableIconFromResource("icon/player.png"));
 		JCommandButton club_btn = new JCommandButton("Club", getResizableIconFromResource("icon/match.png"));
-		JCommandButton match_btn = new JCommandButton("Match", getResizableIconFromResource("icon/stade.png"));
-
-		JCommandButton court_btn = new JCommandButton("Satde", getResizableIconFromResource("icon/stade.png"));
+		JCommandButton court_btn = new JCommandButton("Court", getResizableIconFromResource("icon/stade.png"));
 		JCommandButton competition_btn = new JCommandButton("Competition",
 				getResizableIconFromResource("icon/match.png"));
 		JCommandButton referee_btn = new JCommandButton("Referee", getResizableIconFromResource("icon/referee.png"));
-		JCommandButton ticket_btn = new JCommandButton("Ticket", getResizableIconFromResource("icon/ticket.png"));
+		JCommandButton ticket_btn = new JCommandButton("Bill", getResizableIconFromResource("icon/ticket.png"));
 
 		// Ajouter les boutton dans le ribbon1
 		band1.addCommandButton(player_btn, RibbonElementPriority.TOP);
 		band1.addCommandButton(club_btn, RibbonElementPriority.TOP);
-		band1.addCommandButton(match_btn, RibbonElementPriority.TOP);
 		band1.addCommandButton(court_btn, RibbonElementPriority.MEDIUM);
 		band1.addCommandButton(competition_btn, RibbonElementPriority.MEDIUM);
 		band1.addCommandButton(referee_btn, RibbonElementPriority.TOP);
@@ -103,15 +100,6 @@ public class MainFrame extends JRibbonFrame {
 			}
 		});
 
-		match_btn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
-				// createContainer(nomdu controleur .class, "Nom fichier xml");
-			}
-
-		});
 		referee_btn.addActionListener(new ActionListener() {
 
 			@Override
@@ -136,7 +124,7 @@ public class MainFrame extends JRibbonFrame {
 				createContainer(TicketController.class, "ticket");
 			}
 		});
-		
+
 		court_btn.addActionListener(new ActionListener() {
 			
 			@Override
