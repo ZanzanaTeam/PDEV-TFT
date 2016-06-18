@@ -156,11 +156,20 @@ public class Pdf {
 			
 			System.out.println("in PDF => "+matchReport.getReviewPlayers());
 			
+			
+		document.add(table);
+		
 		p = new Paragraph(matchReport.getReviewPlayers(), font);
 		document.add(p);
+		p = new Paragraph("\n\n", font);
+		document.add(p);
+		p = new Paragraph(matchReport.getReviewCourt(), font);
+		document.add(p);
+		p = new Paragraph("\n\n", font);
+		document.add(p);
 		
-		document.add(table);
 		document.close();
+		
 	}
 
 }
