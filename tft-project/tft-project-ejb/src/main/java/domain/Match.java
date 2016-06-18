@@ -74,7 +74,7 @@ public class Match implements Serializable {
 		this.dateMatch = dateMatch;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	public Court getCourt() {
 		return court;
 	}
@@ -101,7 +101,7 @@ public class Match implements Serializable {
 		this.competition = competition;
 	}
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false,cascade=CascadeType.PERSIST)
 	public Tour getTour() {
 		return tour;
 	}

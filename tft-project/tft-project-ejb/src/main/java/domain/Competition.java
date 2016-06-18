@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -120,7 +121,7 @@ public class Competition implements Serializable {
 		this.competitionLevel = competitionLevel;
 	}
 
-	@OneToMany(mappedBy = "competition", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "competition", fetch = FetchType.EAGER,cascade=CascadeType.PERSIST)
 	@XmlTransient
 	public List<Match> getMatchs() {
 		return matchs;
@@ -131,7 +132,7 @@ public class Competition implements Serializable {
 	}
 	
 	
-	@OneToMany(mappedBy = "competition", fetch =FetchType.EAGER )
+	@OneToMany(mappedBy = "competition", fetch =FetchType.EAGER,cascade=CascadeType.PERSIST )
 	@XmlTransient
 	public List<Season> getSeasons() {
 		return seasons;

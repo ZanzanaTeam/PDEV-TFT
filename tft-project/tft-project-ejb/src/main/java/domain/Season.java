@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -86,7 +87,7 @@ public class Season implements Serializable {
 		this.endDate = endDate;
 	}
 
-	@ManyToOne()
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	public Competition getCompetition() {
 		return competition;
 	}
@@ -95,7 +96,7 @@ public class Season implements Serializable {
 		this.competition = competition;
 	}
 
-	@OneToMany(mappedBy = "season", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "season", fetch = FetchType.EAGER,cascade=CascadeType.PERSIST)
 	public List<Tour> getTours() {
 		return tours;
 	}
