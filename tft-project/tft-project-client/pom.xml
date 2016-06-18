@@ -34,7 +34,19 @@
 			<artifactId>jasperreports</artifactId>
 			<version>6.0.0</version>
 		</dependency>
+		<!-- http://mvnrepository.com/artifact/com.google.apis/google-api-services-drive -->
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-drive</artifactId>
+			<version>v2-rev225-1.22.0</version>
+		</dependency>
 
+		<!-- http://mvnrepository.com/artifact/com.google.http-client/google-http-client-jackson2 -->
+		<dependency>
+			<groupId>com.google.http-client</groupId>
+			<artifactId>google-http-client-jackson2</artifactId>
+			<version>1.22.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.itextpdf</groupId>

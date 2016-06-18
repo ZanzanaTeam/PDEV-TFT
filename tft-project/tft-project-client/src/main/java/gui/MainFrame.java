@@ -39,6 +39,8 @@ public class MainFrame extends JRibbonFrame {
 	// Ribbon1;
 	private JRibbonBand band1;
 	private JRibbonBand band2;
+	private JRibbonBand band3;
+
 	public MainFrame() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
@@ -47,19 +49,24 @@ public class MainFrame extends JRibbonFrame {
 		setExtendedState(MAXIMIZED_BOTH);
 		band1 = new JRibbonBand("", null);
 		band2 = new JRibbonBand("Player", getResizableIconFromResource("icon/player.png"));
-		
+		band3 = new JRibbonBand("Match Stat", getResizableIconFromResource("icon/match.png"));
+
 		initButton();
 
 		band1.setResizePolicies((List) Arrays.asList(new CoreRibbonResizePolicies.None(band1.getControlPanel()),
 				new IconRibbonBandResizePolicy(band1.getControlPanel())));
 		band2.setResizePolicies((List) Arrays.asList(new CoreRibbonResizePolicies.None(band1.getControlPanel()),
 				new IconRibbonBandResizePolicy(band1.getControlPanel())));
+		band3.setResizePolicies((List) Arrays.asList(new CoreRibbonResizePolicies.None(band1.getControlPanel()),
+				new IconRibbonBandResizePolicy(band1.getControlPanel())));
 
 		RibbonTask task1 = new RibbonTask("Gestion TFT", band1);
 		RibbonTask task2 = new RibbonTask("Player", band2);
-		
+		RibbonTask task3 = new RibbonTask("Match Stat", band3);
+
 		getRibbon().addTask(task1);
 		getRibbon().addTask(task2);
+		getRibbon().addTask(task3);
 
 		setApplicationIcon(getResizableIconFromResource("icon/ball2.png"));
 		getRibbon().configureHelp(getResizableIconFromResource("icon/ball2.png"), null);
@@ -136,17 +143,19 @@ public class MainFrame extends JRibbonFrame {
 				createContainer(TicketController.class, "ticket");
 			}
 		});
-		
+
 		court_btn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				createContainer(CourtController.class, "court");
 			}
 		});
-		
-		JCommandButton playerRankInternational_btn = new JCommandButton("Rankings International", getResizableIconFromResource("icon/ranks.png"));
-		JCommandButton playerRankNational_btn = new JCommandButton("Rankings National", getResizableIconFromResource("icon/ranks.png"));
+
+		JCommandButton playerRankInternational_btn = new JCommandButton("Rankings International",
+				getResizableIconFromResource("icon/ranks.png"));
+		JCommandButton playerRankNational_btn = new JCommandButton("Rankings National",
+				getResizableIconFromResource("icon/ranks.png"));
 		JCommandButton liveScore_btn = new JCommandButton("Live Score", getResizableIconFromResource("icon/ranks.png"));
 
 		band2.addCommandButton(playerRankInternational_btn, RibbonElementPriority.TOP);
@@ -154,16 +163,16 @@ public class MainFrame extends JRibbonFrame {
 		band2.addCommandButton(liveScore_btn, RibbonElementPriority.TOP);
 
 		playerRankInternational_btn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				createContainer(PlayerRanksController.class, "playerRanks");
 			}
 		});
-		
+
 		liveScore_btn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -171,11 +180,21 @@ public class MainFrame extends JRibbonFrame {
 
 			}
 		});
-		
+
+		JCommandButton matchContainerReport_btn = new JCommandButton("Match Report",
+				getResizableIconFromResource("icon/match.png"));
+		band3.addCommandButton(matchContainerReport_btn, RibbonElementPriority.TOP);
+		matchContainerReport_btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				createContainer(LiveScore.class, "matchReportContainer");
+			}
+		});
 	}
 
-	private JFXPanel fxPanel;
-
+	public static JFXPanel fxPanel;
+	public static javax.swing.JFrame jframe;
 	public void createContainer(Class t, String nameFileFXML) {
 		if (fxPanel != null)
 			fxPanel.setVisible(false);
@@ -186,6 +205,7 @@ public class MainFrame extends JRibbonFrame {
 		getContentPane().add(fxPanel, BorderLayout.CENTER);
 		getContentPane().revalidate();
 		getContentPane().repaint();
+		jframe = this;
 	}
 
 	private Scene createScene(Class t, String nameFileFXML) {

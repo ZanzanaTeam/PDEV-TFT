@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.javafx.MatchReportContainerController">
+	<top>
+		<ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+			<items>
+				<Button fx:id="btnGenerate" mnemonicParsing="false" onAction="#actionClickGenerate" text="Generate Match Report">
+					<graphic>
+						<ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@iconFx/save.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+			</items>
+		</ToolBar>
+	</top>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+      		<TableView fx:id="tableMatch" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      			<columns>
+      				<TableColumn prefWidth="75.0" text="id" visible="false" />
+      				<TableColumn fx:id="colId" prefWidth="75.0" text="#" />
+      				<TableColumn fx:id="colDate" prefWidth="75.0" text="Date" />
+      				<TableColumn fx:id="colReferee" prefWidth="75.0" text="Referee" />
+                  <TableColumn fx:id="colCompetition" prefWidth="75.0" text="Competetion" />
+      			</columns>
+      			<columnResizePolicy>
+      				<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+      			</columnResizePolicy>
+      		</TableView>
+         </center>
+         <top>
+            <Pane prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  
+               </children>
+            </Pane>
+         </top>
+      </BorderPane>
+   </center>
+</BorderPane>
