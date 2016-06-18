@@ -130,7 +130,7 @@ public class MatchReportController {
 		new ServicesBasicDelegate<MatchReport>().doCrud().add(matchReport);
 		
 		try {
-			new Pdf().createPdf("pdfws.pdf", matchReport);
+			new Pdf().createPdf("match_report"+matchSingle.getId()+".pdf", matchReport);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
