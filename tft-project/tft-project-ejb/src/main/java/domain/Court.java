@@ -1,7 +1,6 @@
 package domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,19 +11,22 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlTransient;
 
+import enumeration.Surface;
+
 @Entity
-public class Court implements Serializable{
+public class Court implements Serializable {
 
 	/**
 	 * Stade
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
+
 	@Override
 	public String toString() {
 		return name;
 	}
-
+private Surface surface;
 	private String name;
 	private String address;
 	private Double latitude;
@@ -43,7 +45,7 @@ public class Court implements Serializable{
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
 		return id;
 	}
@@ -85,12 +87,20 @@ public class Court implements Serializable{
 	}
 
 	@XmlTransient
-	@OneToMany(mappedBy="court",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "court", cascade = CascadeType.ALL)
 	public List<Match> getMatchs() {
 		return matchs;
 	}
 
 	public void setMatchs(List<Match> matchs) {
 		this.matchs = matchs;
+	}
+
+	public Surface getSurface() {
+		return surface;
+	}
+
+	public void setSurface(Surface surface) {
+		this.surface = surface;
 	}	
 }

@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import enumeration.Gender;
+
 @Entity
 public class Season implements Serializable {
 
@@ -24,13 +26,23 @@ public class Season implements Serializable {
 	private String title;
 	private Date startDate;
 	private Date endDate;
-	 private Competition competition;
+	private Gender gender;
+	private Competition competition;
 	private List<Tour> tours;
 
 	public Season() {
 		super();
 	}
-
+   
+	private Season(String title, Date startDate, Date endDate, Competition competition, Gender gender) {
+		super();
+		this.title = title;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.competition = competition;
+		this.gender = gender;
+	}
+	
 	public Season(String title, Date startDate, Date endDate, Competition competition, List<Tour> tours) {
 		super();
 		this.title = title;
@@ -95,6 +107,14 @@ public class Season implements Serializable {
 	@Override
 	public String toString() {
 		return title;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
 }

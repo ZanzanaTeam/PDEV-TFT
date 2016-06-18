@@ -1,8 +1,10 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlTransient;
 
 import enumeration.AgeRange;
@@ -65,7 +68,6 @@ public class Player implements Serializable {
 		this.club = club;
 		this.doctor = doctor;
 		this.training = training;
-		this.matchSingles1 = matchSingles1;
 		this.antiDopingTests = antiDopingTests;
 		this.birthDate = birthDate;
 		this.birthPlace = birthPlace;
@@ -169,8 +171,9 @@ public class Player implements Serializable {
 		this.antiDopingTests = antiDopingTests;
 	}
 
-	@XmlTransient
+	
 	@OneToMany(mappedBy = "player",cascade=CascadeType.ALL)
+	@XmlTransient
 	public List<MatchSingle> getMatchSingles1() {
 		return matchSingles1;
 	}
@@ -179,8 +182,9 @@ public class Player implements Serializable {
 		this.matchSingles1 = matchSingles;
 	}
 	
-	@XmlTransient
+	
 	@OneToMany(mappedBy = "player2",cascade=CascadeType.ALL)
+	@XmlTransient
 	public List<MatchSingle> getMatchSingles2() {
 		return matchSingles2;
 	}
@@ -188,9 +192,16 @@ public class Player implements Serializable {
 	public void setMatchSingles2(List<MatchSingle> matchSingles) {
 		this.matchSingles2 = matchSingles;
 	}
+	@XmlTransient
+	@Transient
+	public List<MatchSingle> getAllMatchSingles() {
+		List<MatchSingle> list=new ArrayList<>();
+		list.addAll(getMatchSingles1());list.addAll(getMatchSingles2());
+		list.stream().sorted((m1, m2) -> m1.getDateMatch().compareTo(m2.getDateMatch())).collect(Collectors.toList());
+		return matchSingles2;
+	}
+
 	
-
-
 	public Date getBirthDate() {
 		return birthDate;
 	}
@@ -260,7 +271,7 @@ public class Player implements Serializable {
 		this.coach = coach;
 	}
 
-
+	@XmlTransient
 	public int getClassement() {
 		return classement;
 	}

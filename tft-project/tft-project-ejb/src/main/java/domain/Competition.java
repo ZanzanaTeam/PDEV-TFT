@@ -24,6 +24,7 @@ public class Competition implements Serializable {
 	private Integer id;
 	private String name;
 	private Date startDate;
+	private Integer nbSet;
 
 	private Date endDate;
 	private String country;
@@ -143,6 +144,14 @@ public class Competition implements Serializable {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	public Integer getNbSet() {
+		return nbSet;
+	}
+
+	public void setNbSet(Integer nbSet) {
+		this.nbSet = nbSet;
 	}
 
 }
