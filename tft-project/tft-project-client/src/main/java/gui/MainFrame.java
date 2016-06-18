@@ -149,9 +149,9 @@ public class MainFrame extends JRibbonFrame {
 			}
 		});
 
-		JCommandButton playerRankInternational_btn = new JCommandButton("Rankings International",
+		JCommandButton playerRankInternational_btn = new JCommandButton("International Ranking",
 				getResizableIconFromResource("icon/ranks.png"));
-		JCommandButton playerRankNational_btn = new JCommandButton("Rankings National",
+		JCommandButton playerRankNational_btn = new JCommandButton("National Ranking",
 				getResizableIconFromResource("icon/ranks.png"));
 		JCommandButton liveScore_btn = new JCommandButton("Live Score", getResizableIconFromResource("icon/ranks.png"));
 

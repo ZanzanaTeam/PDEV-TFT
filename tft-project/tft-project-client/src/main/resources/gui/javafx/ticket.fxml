@@ -11,14 +11,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane prefHeight="391.0" prefWidth="781.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65"  fx:controller="gui.javafx.TicketController">
+<BorderPane prefHeight="391.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.javafx.TicketController">
    <center>
       <BorderPane prefHeight="387.0" prefWidth="593.0" BorderPane.alignment="CENTER">
          <top>
             <Pane fx:id="paneTicket" prefHeight="42.0" prefWidth="311.0" BorderPane.alignment="CENTER">
                <children>
-                  <ComboBox fx:id="comboByMatch" layoutX="11.0" layoutY="9.0" prefHeight="26.0" prefWidth="137.0" promptText="Match" onAction="#actionClickFilterCometition"/>
+                  <ComboBox fx:id="comboByMatch" layoutX="11.0" layoutY="9.0" onAction="#actionClickFilterCometition" prefHeight="26.0" prefWidth="137.0" promptText="Match" />
                </children>
             </Pane>
          </top>
@@ -26,7 +25,7 @@
             <TableView fx:id="tableTicket" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
                   <TableColumn fx:id="colMatch" prefWidth="89.0" text="Match" />
-                <TableColumn fx:id="colTitle" prefWidth="69.0" text="Ticket" />
+                <TableColumn fx:id="colTitle" prefWidth="69.0" text="Bills" />
                   <TableColumn fx:id="colQuantity" prefWidth="81.0" text="Quantity" />
                   <TableColumn fx:id="colPrice" prefWidth="117.0" text="Price" />
               </columns>
@@ -37,15 +36,15 @@
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-            <Button fx:id="btnUpdate" mnemonicParsing="false" text="update"  onAction="#actionClickUpdate" />
-          <Button fx:id="btnDelete" mnemonicParsing="false" text="delete" onAction="#actionClickDelete" />
+            <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#actionClickUpdate" text="update" />
+          <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#actionClickDelete" text="delete" />
         </items>
       </ToolBar>
    </top>
    <right>
       <BorderPane prefHeight="322.0" prefWidth="424.0" BorderPane.alignment="CENTER">
          <top>
-            <Label fx:id="labelTitle" prefHeight="41.0" prefWidth="128.0" text="Add Ticket" BorderPane.alignment="CENTER">
+            <Label fx:id="labelTitle" prefHeight="41.0" prefWidth="128.0" text="Bills" BorderPane.alignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
@@ -58,7 +57,7 @@
                   <Label layoutX="32.0" layoutY="71.0" text="Match" />
                   <Label layoutX="32.0" layoutY="101.0" text="Quantity" />
                   <Label layoutX="32.0" layoutY="141.0" text="Price" />
-                  <Button fx:id="btnSave" layoutX="228.0" layoutY="174.0" mnemonicParsing="false" text="Save"  onAction="#actionClickSave" />
+                  <Button fx:id="btnSave" layoutX="228.0" layoutY="174.0" mnemonicParsing="false" onAction="#actionClickSave" text="Save" />
                   <TextField fx:id="textTitle" layoutX="108.0" layoutY="30.0" />
                   <TextField fx:id="textQuantity" layoutX="108.0" layoutY="101.0" />
                   <TextField fx:id="textPrice" layoutX="108.0" layoutY="136.0" />

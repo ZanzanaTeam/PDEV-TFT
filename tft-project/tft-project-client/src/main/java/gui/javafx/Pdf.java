@@ -155,8 +155,7 @@ public class Pdf {
 
 			
 			System.out.println("in PDF => "+matchReport.getReviewPlayers());
-			
-			
+						
 		document.add(table);
 		
 		p = new Paragraph(matchReport.getReviewPlayers(), font);
