@@ -9,16 +9,23 @@ import domain.Club;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 public class ClubController {
-
+	@FXML
+	private Hyperlink registrationLink;
 	@FXML
 	TableView<Club> tableClub;
 	@FXML
@@ -47,7 +54,7 @@ public class ClubController {
 	private Integer id;
 
 	public ClubController() {
-		System.out.println("Constructeur");
+		
 		isUpdate = false;
 	}
 
@@ -56,6 +63,22 @@ public class ClubController {
 	 * va être executer automatiquement aprés le construteur
 	 */
 	void initialize() {
+
+		registrationLink.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				System.out.println("This link is clicked");
+
+				final WebView browser = new WebView();
+				final WebEngine webEngine = browser.getEngine();
+				webEngine.load("http://localhost:18080/rest-api-sample-app-java/home");
+				final Stage stage = new Stage();
+
+				stage.setScene(new Scene(browser));
+				stage.show();
+
+			}
+		});
 
 		colName.setCellValueFactory(new PropertyValueFactory<Club, String>("name"));
 		colCity.setCellValueFactory(new PropertyValueFactory<Club, String>("city"));
