@@ -12,10 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlTransient;
 
-import enumeration.Meteo;
+import enumeration.StatusMatch;
 import enumeration.WeatherState;
 
 @Entity(name = "match_game")
@@ -31,7 +30,7 @@ public class Match implements Serializable {
 	private int[] score;//
 	private int duration;//
 	private Tour tour;
-
+	private StatusMatch status;
 	private Competition competition;
 	private Court court;
 	private Referee referee;
@@ -142,7 +141,6 @@ public class Match implements Serializable {
 	public void setSets(List<SetMatch> sets) {
 		this.sets = sets;
 	}
-	
 
 	public int getDuration() {
 		return duration;
@@ -152,14 +150,20 @@ public class Match implements Serializable {
 		this.duration = duration;
 	}
 
-	
-
 	public WeatherState getWeather() {
 		return weather;
 	}
 
 	public void setWeather(WeatherState weather) {
 		this.weather = weather;
+	}
+
+	public StatusMatch getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusMatch status) {
+		this.status = status;
 	}
 
 }
