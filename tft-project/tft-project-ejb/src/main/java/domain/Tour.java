@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -88,7 +89,7 @@ public class Tour implements Serializable {
 	}
 
 	
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = true,cascade=CascadeType.PERSIST)
 	public Season getSeason() {
 		return season;
 	}
@@ -97,7 +98,7 @@ public class Tour implements Serializable {
 		this.season = season;
 	}
 
-	@OneToMany(mappedBy = "tour")
+	@OneToMany(mappedBy = "tour",cascade=CascadeType.PERSIST)
 	@XmlTransient
 	public List<Match> getMatchs() {
 		return matchs;
