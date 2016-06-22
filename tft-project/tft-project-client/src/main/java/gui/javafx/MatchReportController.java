@@ -67,6 +67,9 @@ public class MatchReportController {
 	private ComboBox<Player> cmbWinner;
 	@FXML
 	private TextArea txtareaPlayers;
+	@FXML
+	private TextArea txtareaCourt;
+
 
 	private MatchSingle matchSingle;
 	
@@ -121,8 +124,9 @@ public class MatchReportController {
 		System.out.println("je suis dans save ");
 
 		System.out.println(txtareaPlayers.getText());
+		System.out.println(txtareaCourt.getText());
 
-		MatchReport matchReport = new MatchReport("", txtareaPlayers.getText(), new Date());
+		MatchReport matchReport = new MatchReport(txtareaCourt.getText(), txtareaPlayers.getText(), new Date());
 		matchReport.setPlayer1(matchSingle.getPlayer());
 		matchReport.setPlayer2(matchSingle.getPlayer2());
 		matchReport.setCourt(matchSingle.getCourt());
@@ -140,7 +144,7 @@ public class MatchReportController {
 		}
 		
 		try {
-			GoogleDrive.uplodeGoogleDrive("D:/pdfws.pdf");
+			GoogleDrive.uplodeGoogleDrive("match_report"+matchSingle.getId()+".pdf");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
