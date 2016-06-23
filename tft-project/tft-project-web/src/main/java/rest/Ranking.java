@@ -1,7 +1,9 @@
 package rest;
 import java.util.List;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -19,17 +21,18 @@ import Modele.Rank;
  * rank table.
  */
 @Path("/ranking")
-@RequestScoped
-@Stateful
+@LocalBean
+@Stateless
 public class Ranking {
 
-		@Inject
-		private RankRep repository;
+//		@Inject
+//		private RankRep repository;
 
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		public List<Rank> listRank() {
-			return repository.displayRank();
+//			return repository.displayRank();
+			return null;
 		}
 
 	}

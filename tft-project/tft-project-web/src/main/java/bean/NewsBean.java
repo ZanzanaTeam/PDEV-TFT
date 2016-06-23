@@ -46,9 +46,8 @@ public class NewsBean {
 		            System.out.println(newdate);
 		        } catch (ParseException e) {
 		            e.printStackTrace();
-		
 		        }
-
+		
 		news = new ArrayList<News>();
 		try {
 			news.add(new News(1,"Nadal is dead", "No worries, Djokovic killed him", date = dateformat2.parse(strdate2)));
@@ -57,6 +56,12 @@ public class NewsBean {
 			e.printStackTrace();
 		}
 		
+		try {
+			news.add(new News(1,"Nadal is dead", "No worries, Djokovic killed him", date = dateformat2.parse(strdate2)));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		try {
 			news.add(new News(1,"Nadal is dead", "No worries, Djokovic killed him", date = dateformat2.parse(strdate2)));
 		} catch (ParseException e) {

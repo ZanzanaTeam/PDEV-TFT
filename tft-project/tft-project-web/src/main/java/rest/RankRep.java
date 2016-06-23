@@ -11,14 +11,14 @@ import javax.persistence.criteria.Root;
 import Modele.Rank;
 
 public class RankRep {
-	@Inject
-	private EntityManager em;
-
-	public List<Rank>displayRank() {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Rank> criteria = cb.createQuery(Rank.class);
-		Root<Rank> rank = criteria.from(Rank.class);
-		criteria.select(rank);
-		return em.createQuery(criteria).getResultList();
-	}
+//	@Inject
+//	private EntityManager em;
+//
+//	public List<Rank>displayRank() {
+//		CriteriaBuilder cb = em.getCriteriaBuilder();
+//		CriteriaQuery<Rank> criteria = cb.createQuery(Rank.class);
+//		Root<Rank> rank = criteria.from(Rank.class);
+//		criteria.select(rank);
+//		return em.createQuery(criteria).getResultList();
+//	}
 }
