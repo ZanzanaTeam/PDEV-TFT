@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template.xhtml">
+		<ui:define name="content">
+			<section id="news" class="container secondary-page">
+			<div class="general general-results players">
+				<div class="top-score-title right-score col-md-12">
+					<h3>
+						TFT <span>NEWS</span><span class="point-little">.</span>
+					</h3>
+					<div class="col-md-12 news-page">
+						<img class="img-djoko" src="images/news/1.jpg" alt="" />
+
+						<div class="col-md-10 data-news-pg">
+							<ul>
+
+								<ui:repeat value="#{newsBean.news}" var="n">
+
+									<p class="news-dd">
+										<h:link value="#{n.publishDate}" outcome="n">
+											<f:param name="id" value="#{n.id}" />
+										</h:link>
+									</p>
+									<h3>
+										<h:link value="#{n.title}" outcome="n">
+											<f:param name="id" value="#{n.id}" />
+										</h:link>
+									</h3>
+
+									<p>
+										<h:link value="#{n.body}" outcome="n">
+											<f:param name="id" value="#{n.id}" />
+										</h:link>
+									</p>
+								</ui:repeat>
+
+							</ul>
+
+							<!-- 							<p>It normally takes a great of deal time and effort to -->
+							<!-- 								defeat No. 26 Gilles Simon, largely due to his counterpunching -->
+							<!-- 								style of play and impressive foot speed. No. 14 seed Marin Cilic -->
+							<!-- 								needed that and more on Tuesday in Louis Armstrong Stadium, -->
+							<!-- 								going a marathon five sets to prevail in their fourth-round -->
+							<!-- 								match, 5-7, 7-6, 6-4, 3-6, 6-3.</p> -->
+							<div class="col-md-12 news-more">
+								<a href="single_news.html" class="ca-more"><i
+									class="fa fa-angle-double-right"></i>more...</a>
+							</div>
+						</div>
+					</div>
+<!-- 					<div class="col-md-12 news-page"> -->
+<!-- 						<img class="img-djoko" src="images/news/2.jpg" alt="" /> -->
+
+<!-- 						<div class="col-md-10 data-news-pg"> -->
+<!-- 							<p class="news-dd">FEBRUARY 1, 2015 12:00 PM</p> -->
+<!-- 							<h3>An Interview With: Marin Cilic</h3> -->
+<!-- 							<p>It normally takes a great of deal time and effort to -->
+<!-- 								defeat No. 26 Gilles Simon, largely due to his counterpunching -->
+<!-- 								style of play and impressive foot speed. No. 14 seed Marin Cilic -->
+<!-- 								needed that and more on Tuesday in Louis Armstrong Stadium, -->
+<!-- 								going a marathon five sets to prevail in their fourth-round -->
+<!-- 								match, 5-7, 7-6, 6-4, 3-6, 6-3.</p> -->
+<!-- 							<div class="col-md-12 news-more"> -->
+<!-- 								<a href="single_news.html" class="ca-more"><i -->
+<!-- 									class="fa fa-angle-double-right"></i>more...</a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-md-12 news-page"> -->
+<!-- 						<img class="img-djoko" src="images/news/3.jpg" alt="" /> -->
+
+<!-- 						<div class="col-md-10 data-news-pg"> -->
+<!-- 							<p class="news-dd">FEBRUARY 1, 2015 12:00 PM</p> -->
+<!-- 							<h3>Four quarters add up to Day 10 thrills</h3> -->
+<!-- 							<p>It normally takes a great of deal time and effort to -->
+<!-- 								defeat No. 26 Gilles Simon, largely due to his counterpunching -->
+<!-- 								style of play and impressive foot speed. No. 14 seed Marin Cilic -->
+<!-- 								needed that and more on Tuesday in Louis Armstrong Stadium, -->
+<!-- 								going a marathon five sets to prevail in their fourth-round -->
+<!-- 								match, 5-7, 7-6, 6-4, 3-6, 6-3.</p> -->
+<!-- 							<div class="col-md-12 news-more"> -->
+<!-- 								<a href="single_news.html" class="ca-more"><i -->
+<!-- 									class="fa fa-angle-double-right"></i>more...</a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-md-12 news-page"> -->
+<!-- 						<img class="img-djoko" src="images/news/4.jpg" alt="" /> -->
+
+<!-- 						<div class="col-md-10 data-news-pg"> -->
+<!-- 							<p class="news-dd">FEBRUARY 1, 2015 12:00 PM</p> -->
+<!-- 							<h3>Four quarters add up to Day 10 thrills</h3> -->
+<!-- 							<p>It normally takes a great of deal time and effort to -->
+<!-- 								defeat No. 26 Gilles Simon, largely due to his counterpunching -->
+<!-- 								style of play and impressive foot speed. No. 14 seed Marin Cilic -->
+<!-- 								needed that and more on Tuesday in Louis Armstrong Stadium, -->
+<!-- 								going a marathon five sets to prevail in their fourth-round -->
+<!-- 								match, 5-7, 7-6, 6-4, 3-6, 6-3.</p> -->
+<!-- 							<div class="col-md-12 news-more"> -->
+<!-- 								<a href="single_news.html" class="ca-more"><i -->
+<!-- 									class="fa fa-angle-double-right"></i>more...</a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-md-12 news-page"> -->
+<!-- 						<img class="img-djoko" src="images/news/5.jpg" alt="" /> -->
+
+<!-- 						<div class="col-md-10 data-news-pg"> -->
+<!-- 							<p class="news-dd">FEBRUARY 1, 2015 12:00 PM</p> -->
+<!-- 							<h3>Four quarters add up to Day 10 thrills</h3> -->
+<!-- 							<p>It normally takes a great of deal time and effort to -->
+<!-- 								defeat No. 26 Gilles Simon, largely due to his counterpunching -->
+<!-- 								style of play and impressive foot speed. No. 14 seed Marin Cilic -->
+<!-- 								needed that and more on Tuesday in Louis Armstrong Stadium, -->
+<!-- 								going a marathon five sets to prevail in their fourth-round -->
+<!-- 								match, 5-7, 7-6, 6-4, 3-6, 6-3.</p> -->
+<!-- 							<div class="col-md-12 news-more"> -->
+<!-- 								<a href="single_news.html" class="ca-more"><i -->
+<!-- 									class="fa fa-angle-double-right"></i>more...</a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-md-12 news-page"> -->
+<!-- 						<img class="img-djoko" src="images/news/6.jpg" alt="" /> -->
+
+<!-- 						<div class="col-md-10 data-news-pg"> -->
+<!-- 							<p class="news-dd">FEBRUARY 1, 2015 12:00 PM</p> -->
+<!-- 							<h3>Four quarters add up to Day 10 thrills</h3> -->
+<!-- 							<p>It normally takes a great of deal time and effort to -->
+<!-- 								defeat No. 26 Gilles Simon, largely due to his counterpunching -->
+<!-- 								style of play and impressive foot speed. No. 14 seed Marin Cilic -->
+<!-- 								needed that and more on Tuesday in Louis Armstrong Stadium, -->
+<!-- 								going a marathon five sets to prevail in their fourth-round -->
+<!-- 								match, 5-7, 7-6, 6-4, 3-6, 6-3.</p> -->
+<!-- 							<div class="col-md-12 news-more"> -->
+<!-- 								<a href="single_news.html" class="ca-more"><i -->
+<!-- 									class="fa fa-angle-double-right"></i>more...</a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-md-12 news-page"> -->
+<!-- 						<img class="img-djoko" src="images/news/7.jpg" alt="" /> -->
+
+<!-- 						<div class="col-md-10 data-news-pg"> -->
+<!-- 							<p class="news-dd">FEBRUARY 1, 2015 12:00 PM</p> -->
+<!-- 							<h3>Four quarters add up to Day 10 thrills</h3> -->
+<!-- 							<p>It normally takes a great of deal time and effort to -->
+<!-- 								defeat No. 26 Gilles Simon, largely due to his counterpunching -->
+<!-- 								style of play and impressive foot speed. No. 14 seed Marin Cilic -->
+<!-- 								needed that and more on Tuesday in Louis Armstrong Stadium, -->
+<!-- 								going a marathon five sets to prevail in their fourth-round -->
+<!-- 								match, 5-7, 7-6, 6-4, 3-6, 6-3.</p> -->
+<!-- 							<div class="col-md-12 news-more"> -->
+<!-- 								<a href="single_news.html" class="ca-more"><i -->
+<!-- 									class="fa fa-angle-double-right"></i>more...</a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-md-12 news-page"> -->
+<!-- 						<img class="img-djoko" src="images/news/8.jpg" alt="" /> -->
+
+<!-- 						<div class="col-md-10 data-news-pg"> -->
+<!-- 							<p class="news-dd">FEBRUARY 1, 2015 12:00 PM</p> -->
+<!-- 							<h3>Four quarters add up to Day 10 thrills</h3> -->
+<!-- 							<p>It normally takes a great of deal time and effort to -->
+<!-- 								defeat No. 26 Gilles Simon, largely due to his counterpunching -->
+<!-- 								style of play and impressive foot speed. No. 14 seed Marin Cilic -->
+<!-- 								needed that and more on Tuesday in Louis Armstrong Stadium, -->
+<!-- 								going a marathon five sets to prevail in their fourth-round -->
+<!-- 								match, 5-7, 7-6, 6-4, 3-6, 6-3.</p> -->
+<!-- 							<div class="col-md-12 news-more"> -->
+<!-- 								<a href="single_news.html" class="ca-more"><i -->
+<!-- 									class="fa fa-angle-double-right"></i>more...</a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-md-12 news-page-page"> -->
+<!-- 						<span class="news-page-active">1</span><span>2</span><span>3</span><span -->
+<!-- 							class="page-point">....</span><span>10</span> -->
+<!-- 					</div> -->
+ 				</div>
+ 				</div>
+				<!--Close Top Match-->
+			</section>
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
