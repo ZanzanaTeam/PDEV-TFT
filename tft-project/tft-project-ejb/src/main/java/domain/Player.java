@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -49,13 +48,12 @@ public class Player implements Serializable {
 	private Float weight;
 	private String plays;
 	private String coach;
-	
+
 	private int classement;//
-	
+
 	public Player() {
 		// TODO Auto-generated constructor stub
 	}
-	
 
 	public Player(String fullName, Gender gender, Integer age, AgeRange ageRange, Club club, Doctor doctor,
 			Training training, List<MatchSingle> matchSingles, List<AntiDopingTest> antiDopingTests, Date birthDate,
@@ -85,7 +83,7 @@ public class Player implements Serializable {
 		this.age = age;
 		this.ageRange = ageRange;
 	}
-	
+
 	@Override
 	public String toString() {
 		return fullName;
@@ -150,7 +148,7 @@ public class Player implements Serializable {
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
 	}
-	
+
 	@XmlTransient
 	@ManyToOne
 	public Training getTraining() {
@@ -173,6 +171,7 @@ public class Player implements Serializable {
 
 	@XmlTransient
 	@OneToMany(mappedBy = "player")
+
 	public List<MatchSingle> getMatchSingles1() {
 		return matchSingles1;
 	}
@@ -180,9 +179,10 @@ public class Player implements Serializable {
 	public void setMatchSingles1(List<MatchSingle> matchSingles) {
 		this.matchSingles1 = matchSingles;
 	}
-	
+
 	@XmlTransient
 	@OneToMany(mappedBy = "player2")
+
 	public List<MatchSingle> getMatchSingles2() {
 		return matchSingles2;
 	}
@@ -190,93 +190,80 @@ public class Player implements Serializable {
 	public void setMatchSingles2(List<MatchSingle> matchSingles) {
 		this.matchSingles2 = matchSingles;
 	}
+
+	@XmlTransient
 	@Transient
 	public List<MatchSingle> getAllMatchSingles() {
-		List<MatchSingle> list=new ArrayList<>();
-		list.addAll(getMatchSingles1());list.addAll(getMatchSingles2());
+		List<MatchSingle> list = new ArrayList<>();
+		list.addAll(getMatchSingles1());
+		list.addAll(getMatchSingles2());
 		list.stream().sorted((m1, m2) -> m1.getDateMatch().compareTo(m2.getDateMatch())).collect(Collectors.toList());
 		return matchSingles2;
 	}
 
-	
 	public Date getBirthDate() {
 		return birthDate;
 	}
-
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
-
 	public String getBirthPlace() {
 		return birthPlace;
 	}
-
 
 	public void setBirthPlace(String birthPlace) {
 		this.birthPlace = birthPlace;
 	}
 
-
 	public String getCountry() {
 		return country;
 	}
-
 
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
-
 	public Float getHeight() {
 		return height;
 	}
-
 
 	public void setHeight(Float height) {
 		this.height = height;
 	}
 
-
 	public Float getWeight() {
 		return weight;
 	}
-
 
 	public void setWeight(Float weight) {
 		this.weight = weight;
 	}
 
-
 	public String getPlays() {
 		return plays;
 	}
-
 
 	public void setPlays(String plays) {
 		this.plays = plays;
 	}
 
-
 	public String getCoach() {
 		return coach;
 	}
-
 
 	public void setCoach(String coach) {
 		this.coach = coach;
 	}
 
-
+	@XmlTransient
 	public int getClassement() {
 		return classement;
 	}
 
-
 	public void setClassement(int classement) {
 		this.classement = classement;
 	}
-	
-	
+
 }

@@ -30,6 +30,7 @@ public class RefereeController {
 	 * Crud Referee
 	 * 
 	 */
+
 	@FXML
 	TableView<Referee> tableReferee;
 	@FXML
@@ -96,9 +97,7 @@ public class RefereeController {
 
 		comboCompLevel.setItems(FXCollections.observableArrayList(CompetitionLevel.values()));
 		comboCompLevel.getItems().setAll(CompetitionLevel.values());
-
 		refresh(null);
-
 	}
 
 	private void refresh(List<Referee> referees) {
@@ -158,6 +157,7 @@ public class RefereeController {
 				refresh(null);
 			}
 		}
+
 	}
 
 	@FXML
@@ -167,9 +167,9 @@ public class RefereeController {
 		System.out.println("result => " + referees);
 		refresh(referees);
 	}
-	
+
 	@FXML
-	void actionMouseClickedTableReferee(MouseEvent event){
+	void actionMouseClickedTableReferee(MouseEvent event) {
 		Referee e = tableReferee.getSelectionModel().getSelectedItem();
 		System.out.println(e);
 	}
