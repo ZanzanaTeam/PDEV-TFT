@@ -5,12 +5,9 @@ import java.util.Date;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-
-import domain.News;
 import enumeration.ArticleStatus;
-import services.NewsService;
-
+import services.interfaces.NewsServiceLocal;
+import services.interfaces.NewsServiceRemote;
 
 @ManagedBean
 @SessionScoped
@@ -27,15 +24,7 @@ public class NewsBean {
 	}
 
 	@EJB
-	private NewsService newsService;
-
-	public String addVoiture() {
-		News news = (News) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get("News");
-		
-		return "";
-
-	}
+	NewsServiceLocal newsService;
 
 	public String getTitle() {
 		return title;
@@ -84,15 +73,4 @@ public class NewsBean {
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
-
-	public NewsService getNewsService() {
-		return newsService;
-	}
-
-	public void setNewsService(NewsService newsService) {
-		this.newsService = newsService;
-	}
-
-	
 }
-
