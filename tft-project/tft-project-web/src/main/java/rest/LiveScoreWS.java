@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 
 import domain.Court;
 import domain.MatchSingle;
+import domain.News;
 import domain.Player;
 import domain.Referee;
 import services.implementes.LiveScoreServices;
@@ -36,6 +37,9 @@ public class LiveScoreWS {
 	ServicesBasicLocal<Referee> refereeServices;
 	@EJB
 	ServicesBasicLocal<Player> playerServices;
+	
+	@EJB
+	ServicesBasicLocal<News> newsServices;
 	
 	@GET
 	@Path("{id}/{score}/")
