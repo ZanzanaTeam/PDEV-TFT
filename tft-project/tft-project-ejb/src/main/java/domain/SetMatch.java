@@ -70,14 +70,19 @@ public class SetMatch implements Serializable {
 
 	@OneToMany(mappedBy = "set", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	public List<Jeu> getJeus() {
-		
-		ArrayList<Jeu> list =  new ArrayList<Jeu>();
-		for (Jeu jeu : jeus) {
-			if (list.contains(jeu) == false) {
-				list.add(jeu);
-			}
-		}
-		return list;
+
+//		ArrayList<Jeu> list = new ArrayList<Jeu>();
+//		if (jeus.size() > 0) {
+//			for (Jeu jeu : jeus) {
+//				if (list.contains(jeu) == false) {
+//					list.add(jeu);
+//				}
+//			}
+//			jeus.clear();
+//			jeus.addAll(list);
+//		}
+		return jeus;
+
 	}
 
 	public void setJeus(List<Jeu> jeus) {

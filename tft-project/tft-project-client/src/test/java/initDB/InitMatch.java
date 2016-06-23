@@ -1,5 +1,7 @@
 package initDB;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -47,9 +49,11 @@ public class InitMatch {
 				match.setPlayer2(player2);
 				match.setDateMatch(new Date());
 				match.setStatus(StatusMatch.PENDING);
+				match.setDuration(0);
 				System.out.println("Tour: "+ tour.getTitle() );
 				System.out.println("Creation Match ----------------");
-				if (new ServicesBasicDelegate<MatchSingle>().doCrud().add(match) == true) {
+				ServicesBasicDelegate<MatchSingle> proxy = new ServicesBasicDelegate<MatchSingle>();
+				if (proxy.doCrud().add(match) == true) {
 					System.out.println("--------Match N° " + i);
 					System.out.println("--------" + player1.getFullName() + " VS " + player2.getFullName());
 				}
@@ -94,10 +98,11 @@ public class InitMatch {
 		new ServicesBasicDelegate<SetMatch>().doCrud().add(setMatch);
 		setMatch = new ServicesBasicDelegate<SetMatch>().doCrud().findById(idSetMatch, SetMatch.class);
 		Boolean serve = true;
+		ArrayList<Jeu> jeux = new ArrayList<Jeu>();
+		jeux.addAll(setMatch.getJeus());
 
-
-		if (setMatch.getJeus() != null && setMatch.getJeus().size() > 0) {
-			if (setMatch.getJeus().get(setMatch.getJeus().size() - 1).getWinner().getId() != match.getPlayer().getId()) {
+		if ( jeux != null && jeux.size() > 0) {
+			if (jeux.get(setMatch.getJeus().size() - 1).getWinner().getId() != match.getPlayer().getId()) {
 				serve = true;
 			} else {
 				serve = false;
@@ -113,9 +118,10 @@ public class InitMatch {
 				&& ((setMatch.getScore(match.getPlayer()) == 7) || (setMatch.getScore(match.getPlayer2()) == 7)
 
 				) == false)) {
-
-			if (setMatch.getJeus() != null && setMatch.getJeus().size() > 0) {
-				Jeu lastSet = setMatch.getJeus().get(setMatch.getJeus().size() - 1);
+			jeux.clear();
+			jeux.addAll(setMatch.getJeus());
+			if (jeux != null && jeux.size() > 0) {
+				Jeu lastSet = jeux.get(setMatch.getJeus().size() - 1);
 				if (lastSet.getServe().getId() != match.getPlayer().getId()) {
 					serve = false;
 				} else {
@@ -126,6 +132,8 @@ public class InitMatch {
 
 			setMatch = new ServicesBasicDelegate<SetMatch>().doCrud().findById(idSetMatch, SetMatch.class);
 
+			jeux.clear();
+			jeux.addAll(setMatch.getJeus());
 
 			// System.out.println("Nombre de jeu = " + jeux.size());
 

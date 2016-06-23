@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -141,7 +142,7 @@ public class Match implements Serializable {
 	public void setSets(List<SetMatch> sets) {
 		this.sets = sets;
 	}
-
+	@Column(nullable= true)
 	public int getDuration() {
 		return duration;
 	}
