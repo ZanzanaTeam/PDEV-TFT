@@ -35,7 +35,7 @@ public class LiveScoreWS {
 	ServicesBasicLocal<Referee> refereeServices;
 	@EJB
 	ServicesBasicLocal<Player> playerServices;
-	
+
 	@GET
 	@Path("{id}/{score}/")
 	public String updateScore(@PathParam("id") String id, @PathParam("score") String score) {
@@ -49,18 +49,18 @@ public class LiveScoreWS {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse("2016-06-18");
 		List<MatchSingle> matchSingles = new ArrayList<MatchSingle>();
-		
+
 		for (MatchSingle matchSingle : liveSocreServices.getMatchByDate(date)) {
 			matchSingle.setCourt(courtServices.findById(matchSingle.getCourt().getId(), Court.class));
 			matchSingle.setReferee(refereeServices.findById(matchSingle.getReferee().getId(), Referee.class));
 			matchSingle.setPlayer(playerServices.findById(matchSingle.getPlayer().getId(), Player.class));
 			matchSingle.setPlayer2(playerServices.findById(matchSingle.getPlayer2().getId(), Player.class));
 
-			//System.out.println(matchSingle);
-			
+			// System.out.println(matchSingle);
+
 			matchSingles.add(matchSingle);
 		}
-		
+
 		System.out.println(matchSingles);
 		return matchSingles;
 	}

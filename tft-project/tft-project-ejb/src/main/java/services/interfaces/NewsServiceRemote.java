@@ -2,12 +2,13 @@ package services.interfaces;
 
 import java.util.List;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
 import domain.News;
 
-@Remote
+@Local
 public interface NewsServiceRemote {
 	List<News> findNewsById(int id);
+
 	List<News> findNewsByTitle(String title);
 }
