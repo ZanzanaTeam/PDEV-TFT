@@ -29,7 +29,6 @@ public class LiveScoreWS {
 
 	@EJB
 	LiveScoreServices liveSocreServices;
-
 	@EJB
 	ServicesBasicLocal<Court> courtServices;
 	@EJB

@@ -8,16 +8,21 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import domain.Match;
 import domain.News;
 import enumeration.ArticleStatus;
-import services.NewsService;
+import services.implementes.NewsServices;
+import services.implementes.basic.ServicesBasic;
+import services.interfaces.NewsServiceLocal;
 
 
 @ManagedBean
-@SessionScoped
+@Stateless
 public class NewsBean {
 
 	
@@ -27,11 +32,15 @@ public class NewsBean {
 	private ArticleStatus articleStatus;
 	private String thumbnail;
 	private String summary;
+	
+	@EJB
+	private NewsServiceLocal newsService;
 
 	public NewsBean() {
 	}
 	
-	private List<News> news;
+	
+	List <News> newsServices;
 	
 	@PostConstruct
 	public void init(){
@@ -48,28 +57,28 @@ public class NewsBean {
 		            e.printStackTrace();
 		        }
 		
-		news = new ArrayList<News>();
+		        newsServices = new ArrayList<News>();
 		try {
-			news.add(new News(1,"Nadal is dead", "No worries, Djokovic killed him", date = dateformat2.parse(strdate2)));
+			newsServices.add(new News(1,"Nadal is dead", "No worries, Djokovic killed him", date = dateformat2.parse(strdate2)));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
-			news.add(new News(1,"Nadal is dead", "No worries, Djokovic killed him", date = dateformat2.parse(strdate2)));
+			newsServices.add(new News(1,"Nadal is dead", "No worries, Djokovic killed him", date = dateformat2.parse(strdate2)));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			news.add(new News(1,"Nadal is dead", "No worries, Djokovic killed him", date = dateformat2.parse(strdate2)));
+			newsServices.add(new News(1,"Nadal is dead", "No worries, Djokovic killed him", date = dateformat2.parse(strdate2)));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			news.add(new News(1,"Nadal is dead", "No worries, Djokovic killed him", date = dateformat2.parse(strdate2)));
+			newsServices.add(new News(1,"Nadal is dead", "No worries, Djokovic killed him", date = dateformat2.parse(strdate2)));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,14 +86,13 @@ public class NewsBean {
 	}
 
 	public List<News> getNews() {
-		return news;
+		return newsServices;
 	}
 
-	public void setNews(List<News> news) {
-		this.news = news;
+	public void setNews(List<News> newsServices) {
+		this.newsServices = newsServices;
 	}
 
-	private NewsService newsService;
 
 //	public String addNews() {
 //		News news = (News) FacesContext.getCurrentInstance()
@@ -140,12 +148,5 @@ public class NewsBean {
 		this.summary = summary;
 	}
 	
-	public NewsService getNewsService() {
-		return newsService;
-	}
-
-	public void setNewsService(NewsService newsService) {
-		this.newsService = newsService;
-	}
 }
 
