@@ -16,6 +16,16 @@ public class NewsService implements INewsService{
 	
 	@PersistenceContext
 	EntityManager entityManager;
+	
+	
+	public News findByTitle(String title){
+		try {
+			return entityManager.find(News.class, title);
+		} catch (Exception e) {
+			return null;
+		} 
+
+	}
 
 	@Override
 	public Boolean delete(Integer id, Class<News> type) {

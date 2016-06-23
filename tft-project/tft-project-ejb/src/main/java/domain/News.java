@@ -24,6 +24,24 @@ public class News implements Serializable  {
 	private String thumbnail;
 	private String summary;
 	
+	
+	
+	public News() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+
+	public News(int id, String title, String body, Date publishDate) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.body = body;
+		this.publishDate = publishDate;
+	}
+
+
+
 	@Id
 	public int getId() {
 		return id;
