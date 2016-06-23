@@ -85,39 +85,42 @@ public class Jeu implements Serializable {
 
 	@XmlTransient
 	@Transient
-	public int getScore(Player player1) {
-		int score = 0;
+	public Integer getScore(Player player) {
+		Integer score = 0;
 
-		if (points != null) {
+		if (points != null && player != null) {
 			for (Point point : points) {
-				if (point.getPlayer() == player1) {
+				if (point.getPlayer().getId() == player.getId()) {
 					score++;
 				}
 			}
-
 		}
-
 		return score;
 	}
 
 	@XmlTransient
 	@Transient
 	public Player getWinner() {
-
-		List<Player> players = new ArrayList<>();
-
-		if (points == null)
-			return null;
-
+		Player winner = null;
+		Player player1 = points.get(0).getPlayer();
+		Player player2 = null;
+		
+		if (points == null){
+			return winner;
+		}
 		for (Point point : points) {
-			if (!players.contains(point.getPlayer())) {
-				players.add(point.getPlayer());
+			if (point.getPlayer().getId() != player1.getId()){
+				player2 = point.getPlayer() ;
 			}
 		}
-
-		if (players.size() == 1)
-			return players.get(0);
-		return (getScore(players.get(0)) > getScore(players.get(1)) ? players.get(0) : players.get(1));
+		if (player2 == null) {
+			winner = player1;
+		}else {
+			winner  = getScore(player1) > getScore(player2) ? player1 : player2;
+		}
+//		System.out.println("Jeu!! Player1 =" + player1.getFullName() + " ---- Player2 =" + player2.getFullName());
+//		System.out.println("Winner Jeu :" + winner.getFullName());
+		return winner;
 
 	}
 }

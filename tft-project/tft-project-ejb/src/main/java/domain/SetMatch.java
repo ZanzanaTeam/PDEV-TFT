@@ -2,11 +2,14 @@ package domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -65,9 +68,16 @@ public class SetMatch implements Serializable {
 		this.match = match;
 	}
 
-	@OneToMany(mappedBy = "set", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "set", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	public List<Jeu> getJeus() {
-		return jeus;
+		
+		ArrayList<Jeu> list =  new ArrayList<Jeu>();
+		for (Jeu jeu : jeus) {
+			if (list.contains(jeu) == false) {
+				list.add(jeu);
+			}
+		}
+		return list;
 	}
 
 	public void setJeus(List<Jeu> jeus) {
@@ -98,38 +108,46 @@ public class SetMatch implements Serializable {
 	public void setDuration(int[] duration) {
 		this.duration = duration;
 	}
-	@Transient
-	public int getScore(Player player1) {
-		int score = 0;
 
+	@SuppressWarnings("null")
+	@Transient
+	public int getScore(Player player) {
+		Integer score = 0;
+		Map<Integer, Integer> list = new HashMap<>();
+		list.put(0, 0);
 		if (jeus != null) {
-			for (Jeu jeu: jeus) {
-				if (jeu.getWinner()== player1)
-
+			for (Jeu jeu : jeus) {
+				if (list.containsValue(jeu.getId()) == false && jeu.getWinner().getId() == player.getId()) {
 					score++;
-
-			}
-
-		}
-
-		return score;
-	}
-	@Transient
-	public Player getWinner() {
-		
-		List<Player> players = new ArrayList<>();
-		
-
-		if (jeus == null) return null;
-			
-		for (Jeu jeu: jeus) {
-				if (!players.contains(jeu.getWinner())) {
-					players.add(jeu.getWinner());
+					list.put(jeu.getId(), jeu.getId());
 				}
 			}
-		
-		if(players.size()==1)return players.get(0);
-		return(getScore(players.get(0))>getScore(players.get(1))?players.get(0):players.get(1));
-		
+		}
+		return score;
+	}
+
+	@Transient
+	public Player getWinner() {
+
+		Player winner = null;
+		Player player2 = null;
+		if (jeus == null || jeus.size() == 0) {
+			return winner;
+		}
+
+		Player player1 = jeus.get(0).getWinner();
+		for (Jeu jeu : jeus) {
+			if (jeu.getWinner().getId() != player1.getId()) {
+				player2 = jeu.getWinner();
+			}
+		}
+		if (player2 == null) {
+			winner = player1;
+		} else if (getScore(player1) == getScore(player2)) {
+			winner = player1;
+		} else {
+			winner = (getScore(player1) > getScore(player2) ? player1 : player2);
+		}
+		return winner;
 	}
 }

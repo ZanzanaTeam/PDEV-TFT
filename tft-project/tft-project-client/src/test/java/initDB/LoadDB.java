@@ -29,7 +29,7 @@ public class LoadDB {
 		return db;
 	}
 
-	public final static Integer MIN_YEAR = 2012;
+	public final static Integer MIN_YEAR = 2016;
 	public final static Integer MAX_YEAR = 2016;
 
 	public static void main(String[] args) {
@@ -100,23 +100,23 @@ public class LoadDB {
 		usOpen.setCountry("USA");
 		usOpen.setCompetitionLevel(CompetitionLevel.International);
 		usOpen.setNbSet(3);
-
-		Competition australianOpen = new Competition();
-		australianOpen.setName("Australian Open");
-		australianOpen.setCountry("Australie");
-		australianOpen.setCompetitionLevel(CompetitionLevel.International);
-		australianOpen.setNbSet(3);
-
-		Competition wimbledon = new Competition();
-		wimbledon.setName("Wimbledon");
-		wimbledon.setCountry("Australie");
-		wimbledon.setCompetitionLevel(CompetitionLevel.International);
-		wimbledon.setNbSet(2);
+//
+//		Competition australianOpen = new Competition();
+//		australianOpen.setName("Australian Open");
+//		australianOpen.setCountry("Australie");
+//		australianOpen.setCompetitionLevel(CompetitionLevel.International);
+//		australianOpen.setNbSet(3);
+//
+//		Competition wimbledon = new Competition();
+//		wimbledon.setName("Wimbledon");
+//		wimbledon.setCountry("Australie");
+//		wimbledon.setCompetitionLevel(CompetitionLevel.International);
+//		wimbledon.setNbSet(2);
 
 		new ServicesBasicDelegate<Competition>().doCrud().add(rolandGarros);
-		new ServicesBasicDelegate<Competition>().doCrud().add(usOpen);
-		new ServicesBasicDelegate<Competition>().doCrud().add(australianOpen);
-		new ServicesBasicDelegate<Competition>().doCrud().add(wimbledon);
+//		new ServicesBasicDelegate<Competition>().doCrud().add(usOpen);
+//		new ServicesBasicDelegate<Competition>().doCrud().add(australianOpen);
+//		new ServicesBasicDelegate<Competition>().doCrud().add(wimbledon);
 
 		List<Competition> competitions = new ServicesBasicDelegate<Competition>().doCrud().findAll(Competition.class);
 
@@ -161,23 +161,23 @@ public class LoadDB {
 		Tour f = new Tour(null, "Final", Order.FINAL, season, null);
 
 		Tour sf = new Tour(null, "Semi-Final", Order.SF, season, null);
-
-		Tour qf = new Tour(null, "Quart-Final", Order.QF, season, null);
-
-		Tour r16 = new Tour(null, "Round-16", Order.R16, season, null);
-
-		Tour r32 = new Tour(null, "Round-32", Order.R32, season, null);
+//
+//		Tour qf = new Tour(null, "Quart-Final", Order.QF, season, null);
+//
+//		Tour r16 = new Tour(null, "Round-16", Order.R16, season, null);
+//
+//		Tour r32 = new Tour(null, "Round-32", Order.R32, season, null);
 
 		new ServicesBasicDelegate<Tour>().doCrud().add(f);
 		new ServicesBasicDelegate<Tour>().doCrud().add(sf);
-		new ServicesBasicDelegate<Tour>().doCrud().add(qf);
-		new ServicesBasicDelegate<Tour>().doCrud().add(r16);
-		new ServicesBasicDelegate<Tour>().doCrud().add(r32);
+//		new ServicesBasicDelegate<Tour>().doCrud().add(qf);
+//		new ServicesBasicDelegate<Tour>().doCrud().add(r16);
+//		new ServicesBasicDelegate<Tour>().doCrud().add(r32);
 		System.out.println("--------------- Tour " + f.getTitle() + " -----\n");
 		System.out.println("--------------- Tour " + sf.getTitle() + " -----\n");
-		System.out.println("--------------- Tour " + qf.getTitle() + " -----\n");
-		System.out.println("--------------- Tour " + r16.getTitle() + " -----\n");
-		System.out.println("--------------- Tour " + r32.getTitle() + " -----\n");
+//		System.out.println("--------------- Tour " + qf.getTitle() + " -----\n");
+//		System.out.println("--------------- Tour " + r16.getTitle() + " -----\n");
+//		System.out.println("--------------- Tour " + r32.getTitle() + " -----\n");
 		List<Tour> tours = new ServicesBasicDelegate<Tour>().doCrud().findBy(Tour.class, "season_id",
 				season.getId().toString());
 		return tours;

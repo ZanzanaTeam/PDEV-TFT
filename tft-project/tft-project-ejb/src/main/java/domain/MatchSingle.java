@@ -1,8 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -54,7 +51,7 @@ public class MatchSingle extends Match {
 
 		if (getSets() != null) {
 			for (SetMatch set : getSets()) {
-				if (set.getWinner() == player1)
+				if (set.getWinner().getId() == player1.getId())
 					score++;
 			}
 		}
@@ -64,17 +61,27 @@ public class MatchSingle extends Match {
 	@XmlTransient
 	@Transient
 	public Player getWinner() {
-		List<Player> players = new ArrayList<>();
+
+		Player winner = null;
+		Player player1 = getSets().get(0).getWinner();
+		Player player2 = null;
+
 		if (getSets() == null)
 			return null;
-		for (SetMatch set : getSets()) {
-			if (!players.contains(set.getWinner())) {
-				players.add(set.getWinner());
+
+		for (SetMatch setMatch : getSets()) {
+			if (setMatch.getWinner().getId() != player1.getId()) {
+				player2 = setMatch.getWinner();
 			}
 		}
-		if (players.size() == 1)
-			return players.get(0);
-		return (getScore(players.get(0)) > getScore(players.get(1)) ? players.get(0) : players.get(1));
+		if (player2 == null)
+			return player1;
+		if (getScore(player1) == getScore(player2)) {
+			return winner;
+		} else {
+			winner = (getScore(player1) > getScore(player2) ? player1 : player2);
+		}
+		return winner;
 
 	}
 }
