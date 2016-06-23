@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -98,7 +99,7 @@ public class Tour implements Serializable {
 		this.season = season;
 	}
 
-	@OneToMany(mappedBy = "tour",cascade=CascadeType.PERSIST)
+	@OneToMany(mappedBy = "tour",fetch=FetchType.EAGER)
 	@XmlTransient
 	public List<Match> getMatchs() {
 		return matchs;

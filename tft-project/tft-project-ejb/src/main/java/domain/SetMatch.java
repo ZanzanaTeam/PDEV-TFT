@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,7 +59,7 @@ public class SetMatch implements Serializable {
 		this.resultat = resultat;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	public Match getMatch() {
 		return match;
 	}
@@ -67,7 +68,7 @@ public class SetMatch implements Serializable {
 		this.match = match;
 	}
 
-	@OneToMany(mappedBy = "set", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "set", fetch=FetchType.EAGER )
 	public List<Jeu> getJeus() {
 		return jeus;
 	}
@@ -77,7 +78,6 @@ public class SetMatch implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
 		return id;
 	}

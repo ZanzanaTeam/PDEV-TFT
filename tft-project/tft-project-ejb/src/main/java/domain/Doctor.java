@@ -51,7 +51,7 @@ public class Doctor implements Serializable {
 	}
 
 	@XmlTransient
-	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "doctor")
 	public List<Player> getPlayers() {
 		return players;
 	}

@@ -70,7 +70,7 @@ public class Contest implements Serializable {
 		this.endDate = endDate;
 	}
 
-	@OneToMany(mappedBy="contest",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="contest")
 	public List<Referee> getReferees() {
 		return referees;
 	}

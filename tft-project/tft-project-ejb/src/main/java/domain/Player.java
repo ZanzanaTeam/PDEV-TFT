@@ -133,7 +133,7 @@ public class Player implements Serializable {
 		this.ageRange = ageRange;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	public Club getClub() {
 		return club;
 	}
@@ -142,7 +142,7 @@ public class Player implements Serializable {
 		this.club = club;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	public Doctor getDoctor() {
 		return doctor;
 	}
@@ -152,7 +152,7 @@ public class Player implements Serializable {
 	}
 	
 	@XmlTransient
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	public Training getTraining() {
 		return training;
 	}
@@ -162,7 +162,7 @@ public class Player implements Serializable {
 	}
 
 	@XmlTransient
-	@OneToMany(mappedBy = "player",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "player")
 	public List<AntiDopingTest> getAntiDopingTests() {
 		return antiDopingTests;
 	}
@@ -172,7 +172,7 @@ public class Player implements Serializable {
 	}
 
 	@XmlTransient
-	@OneToMany(mappedBy = "player",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "player")
 	public List<MatchSingle> getMatchSingles1() {
 		return matchSingles1;
 	}
@@ -182,7 +182,7 @@ public class Player implements Serializable {
 	}
 	
 	@XmlTransient
-	@OneToMany(mappedBy = "player2",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "player2")
 	public List<MatchSingle> getMatchSingles2() {
 		return matchSingles2;
 	}

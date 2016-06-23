@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,7 +50,7 @@ public class Point implements Serializable {
 		this.value = value;
 	}
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	public Player getPlayer() {
 		return player;
 	}
@@ -68,7 +69,6 @@ public class Point implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
 		return id;
 	}

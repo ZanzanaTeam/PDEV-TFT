@@ -96,7 +96,7 @@ public class Season implements Serializable {
 		this.competition = competition;
 	}
 
-	@OneToMany(mappedBy = "season", fetch = FetchType.EAGER,cascade=CascadeType.PERSIST)
+	@OneToMany(mappedBy = "season", fetch = FetchType.EAGER)
 	public List<Tour> getTours() {
 		return tours;
 	}

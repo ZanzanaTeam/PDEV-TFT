@@ -24,7 +24,7 @@ public class MatchDuel extends Match {
 		this.playerDuel2 = playerDuel2;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	public PlayerDuel getPlayerDuel() {
 		return playerDuel;
 	}
@@ -33,7 +33,7 @@ public class MatchDuel extends Match {
 		this.playerDuel = playerDuel;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	public PlayerDuel getPlayerDuel2() {
 		return playerDuel2;
 	}

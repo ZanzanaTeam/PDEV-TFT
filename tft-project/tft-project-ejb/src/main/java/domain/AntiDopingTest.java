@@ -73,7 +73,7 @@ public class AntiDopingTest implements Serializable {
 		this.antiDopingManager = antiDopingManager;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	public Employee getEmployee() {
 		return employee;
 	}
@@ -82,7 +82,7 @@ public class AntiDopingTest implements Serializable {
 		this.employee = employee;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	public Player getPlayer() {
 		return player;
 	}

@@ -132,9 +132,9 @@ public class Match implements Serializable {
 	public void setLiveScore(String liveScore) {
 		this.liveScore = liveScore;
 	}
-
-	@OneToMany(mappedBy = "match", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	
 	@XmlTransient
+	@OneToMany(mappedBy = "match", fetch = FetchType.EAGER)
 	public List<SetMatch> getSets() {
 		return sets;
 	}

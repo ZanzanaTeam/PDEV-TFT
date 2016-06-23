@@ -87,7 +87,7 @@ private Surface surface;
 	}
 
 	@XmlTransient
-	@OneToMany(mappedBy = "court", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "court")
 	public List<Match> getMatchs() {
 		return matchs;
 	}

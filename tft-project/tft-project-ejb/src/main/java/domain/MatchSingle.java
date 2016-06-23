@@ -28,7 +28,7 @@ public class MatchSingle extends Match {
 		this.player2 = player2;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	public Player getPlayer() {
 		return player;
 	}
@@ -37,7 +37,7 @@ public class MatchSingle extends Match {
 		this.player = player;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	public Player getPlayer2() {
 		return player2;
 	}

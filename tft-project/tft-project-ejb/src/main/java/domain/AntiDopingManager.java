@@ -48,7 +48,7 @@ public class AntiDopingManager implements Serializable {
 		this.fullName = fullName;
 	}
 
-	@OneToMany(mappedBy = "antiDopingManager",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "antiDopingManager")
 	public List<AntiDopingTest> getAntiDopingTests() {
 		return antiDopingTests;
 	}

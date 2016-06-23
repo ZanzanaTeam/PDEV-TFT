@@ -75,7 +75,7 @@ public class Club implements Serializable {
 	}
 
 	@XmlTransient
-	@OneToMany(mappedBy = "club",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "club")
 	public List<Player> getPlayers() {
 		return players;
 	}

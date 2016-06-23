@@ -132,7 +132,7 @@ public class Competition implements Serializable {
 	}
 	
 	
-	@OneToMany(mappedBy = "competition", fetch =FetchType.EAGER,cascade=CascadeType.PERSIST )
+	@OneToMany(mappedBy = "competition", fetch =FetchType.EAGER )
 	@XmlTransient
 	public List<Season> getSeasons() {
 		return seasons;

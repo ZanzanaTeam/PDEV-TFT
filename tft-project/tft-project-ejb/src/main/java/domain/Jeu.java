@@ -38,7 +38,7 @@ public class Jeu implements Serializable {
 
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	public SetMatch getSet() {
 		return set;
 	}
@@ -47,7 +47,7 @@ public class Jeu implements Serializable {
 		this.set = set;
 	}
 
-	@OneToMany(mappedBy = "jeu", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "jeu", fetch = FetchType.EAGER)
 	public List<Point> getPoints() {
 		return points;
 	}
@@ -57,7 +57,6 @@ public class Jeu implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
 		return id;
 	}
@@ -104,18 +103,24 @@ public class Jeu implements Serializable {
 
 		List<Player> players = new ArrayList<>();
 
-		if (points == null)
+		if (points == null||points.size()==0)
 			return null;
 
 		for (Point point : points) {
 			if (!players.contains(point.getPlayer())) {
+			
 				players.add(point.getPlayer());
 			}
 		}
 
 		if (players.size() == 1)
 			return players.get(0);
-		return (getScore(players.get(0)) > getScore(players.get(1)) ? players.get(0) : players.get(1));
+		
+		
+		return (getScore(players.get(0)) 
+				> getScore(players.get(1)) 
+				? players.get(0) : 
+					players.get(1));
 
 	}
 }
