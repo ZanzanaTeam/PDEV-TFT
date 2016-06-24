@@ -1,4 +1,4 @@
-var socket = new WebSocket("ws://172.16.91.20:18080/tft-project-web/actions");
+var socket = new WebSocket("ws://192.168.1.3:18080/tft-project-web/actions");
 socket.onmessage = onMessage;
 
 var id;
@@ -40,25 +40,34 @@ function refresh(match){
 	var td2 ="";
 	
 	for(var i=0 ; i < set1.length ; i++){
-		td1 += '<td width="10%">'+set1[i]+'</td>';
-		td2 += '<td width="10%">'+set2[i]+'</td>';
+		td1 += '<td>'+set1[i]+'</td>';
+		td2 += '<td>'+set2[i]+'</td>';
 	}
+	html_service_1 = (service1 == 0 ) ? '<td width="18px"></td>' : '<td width="18px"><img src="img/ball.png" width="16" height="16"/></td>' ; 
+	html_service_2 = (service2 == 0 ) ? '<td width="18px"></td>' : '<td width="18px"><img src="img/ball.png" width="16" height="16"/></td>' ; 
 
-	html = 	'<table><tr>'+
-				'<td width="50%"><span class="name">'+match.player1+'</span></td>'+
+	html = 	'<div class="col-md-4"><div class="container-liveScore"><table class="liveScore">'+
+			'<tr><th colspan="7">'+match.tour+' - '+match.competition+'</th></tr>'+
+			'<tr>'+
+				html_service_1+
+				'<td width="60%">'+match.player1+'</td>'+
 				td1+
-				'<td width="10%">'+currentSet1+'</td>'+
-				'<td width="10%">'+point1+'</td>'+
-			'</tr><tr>'+
-				'<td width="50%"><span class="name">'+match.player2+'</span></td>'+
+				'<td>'+currentSet1+'</td>'+
+				'<td class="current" >'+point1+'</td>'+
+			'</tr><tr style="border-top: 1px #000 solid;">'+
+				html_service_2+
+				'<td width="60%"><span class="name">'+match.player2+'</span></td>'+
 				td2+
-				'<td width="10%">'+currentSet2+'</td>'+
-				'<td width="10%">'+point2+'</td>'+
-			'</tr></table>';
+				'<td>'+currentSet2+'</td>'+
+				'<td class="current" >'+point2+'</td></tr>'+
+				'<tr><th colspan="7" >'+match.court+'</th></tr>'+
+			'</table></div></div>';
 	return html;
 }
 
 function getData(liveScore){
+	set1 = new Array();
+	set2 = new Array();
 	var arrayLiveScore = liveScore.split('T');
 	var arraySet = arrayLiveScore[0].split('S');
 	for(var i=0 ; i < arraySet.length ; i++){
