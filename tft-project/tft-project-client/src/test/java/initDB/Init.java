@@ -70,7 +70,7 @@ public class Init {
 	}
 
 	private static void initSeasons(Competition c) {
-		 for (int i = 0; i < 2; i++) {
+		 for (int i = 0; i <2; i++) {
 		 Season season = new Season();
 		 season.setCompetition(c);
 		 seasonProxy.doCrud().add(season);
