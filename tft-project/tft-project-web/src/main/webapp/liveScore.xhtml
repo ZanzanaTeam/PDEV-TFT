@@ -5,9 +5,23 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head></h:head>
 <body>
-<ui:composition template="/template.xhtml">
+	<ui:composition template="/template.xhtml">
 		<ui:define name="content">
-			Empty
+			<div class="col-md-12 size-img back-img-liveScore">
+				<div class="effect-cover">
+					
+				</div>
+			</div>
+			<div class="container">
+				<div class="top-score-title right-score col-md-12 margin-bottom-25">
+					<h3>
+						CURRENT <span>MATCHES</span>
+					</h3>
+					<div id="content"></div>
+				</div>
+			</div>
+			<script src="wbsoket/jquery-2.1.4.min.js"></script>
+			<script src="wbsoket/websocket.js"></script>
 		</ui:define>
 	</ui:composition>
 </body>

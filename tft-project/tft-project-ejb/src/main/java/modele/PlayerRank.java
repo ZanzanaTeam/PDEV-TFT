@@ -1,4 +1,4 @@
-package gui.modele;
+package modele;
 
 import gui.modele.enumeration.StatusRanks;
 

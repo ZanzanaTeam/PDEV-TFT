@@ -8,5 +8,8 @@
         <dependent-module archiveName="tft-project-ejb.jar" deploy-path="/" handle="module:/resource/tft-project-ejb/tft-project-ejb">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="jsoup.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/org/jsoup/jsoup/1.9.2/jsoup-1.9.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>

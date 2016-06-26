@@ -6,7 +6,7 @@ import java.util.List;
 public class Country {
 	private String name;
 	private String code;
-	
+
 	public Country() {
 		// TODO Auto-generated constructor stub
 	}
@@ -37,11 +37,13 @@ public class Country {
 	public String toString() {
 		return name;
 	}
-	
-	public static List<Country> getCountry(){
-		return new ArrayList<Country>(){{
-			add(new Country("All Pays", "0"));
-			add(new Country("Tunisia", "TUN"));
-		}};	
+
+	public static List<Country> getCountry() {
+		return new ArrayList<Country>() {
+			{
+				add(new Country("All Pays", "0"));
+				add(new Country("Tunisia", "TUN"));
+			}
+		};
 	}
 }
