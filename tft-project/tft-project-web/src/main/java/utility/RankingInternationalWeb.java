@@ -1,7 +1,9 @@
-package jsoup;
+package utility;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -12,12 +14,19 @@ import org.jsoup.select.Elements;
 import gui.modele.enumeration.StatusRanks;
 import modele.PlayerRank;
 
-public class TestJsoup {
+public class RankingInternationalWeb {
 
-	public static void main(String[] args) throws IOException {
-		Document doc = Jsoup.connect("http://fr.tennistemple.com/classement-atp").get();
-		Elements elements = doc.select(".ranking_line");
+	
+	public static List<PlayerRank> getClassement(Date date , String country ,String age,String gender) throws IOException {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		int week = cal.get(Calendar.WEEK_OF_YEAR);
+		int year = cal.get(Calendar.YEAR);
+		String codeFilter = "w"+week+"y"+year+"c"+country+"l"+age;
 		
+		Document doc = Jsoup.connect("http://fr.tennistemple.com/classement-"+gender+"/"+codeFilter).get();
+		Elements elements = doc.select(".ranking_line");
+
 		List<PlayerRank> playerRanks = new ArrayList<PlayerRank>();
 		for (Element element : elements) {
 			String result = element.text();
@@ -32,7 +41,7 @@ public class TestJsoup {
 				playerRank.setAge(Integer.parseInt(arrayResult[1]));
 				playerRank.setWinPoint(arrayResult[3]);
 				playerRank.setPoint(Integer.parseInt(arrayResult[4]));
-				
+
 			} else {
 				playerRank.setCountPlace(Integer.parseInt(arrayResult[0]));
 				playerRank.setRank(Integer.parseInt(arrayResult[1].replace(".", "").trim()));
@@ -42,21 +51,23 @@ public class TestJsoup {
 			}
 			playerRank.setStatus(StatusRanks.CONSTANT);
 			Element e = element.select("div div").first();
-			if(e.attr("style").contains("up"))playerRank.setStatus(StatusRanks.UP);
-			if(e.attr("style").contains("down"))playerRank.setStatus(StatusRanks.DOWN);
+			if (e.attr("style").contains("up"))
+				playerRank.setStatus(StatusRanks.UP);
+			if (e.attr("style").contains("down"))
+				playerRank.setStatus(StatusRanks.DOWN);
 
 			playerRanks.add(playerRank);
 		}
-		System.out.println(playerRanks);
+		return playerRanks;
 	}
-
+	
 	private static String getName(String[] result) {
 		String name = "";
 		for (int i = 0; i < result.length - 2; i++) {
 			try {
 				Integer.parseInt(result[i].replace(".", ""));
 			} catch (Exception ee) {
-				name += result[i];
+				name += " " + result[i];
 			}
 		}
 		return name;
@@ -77,4 +88,5 @@ public class TestJsoup {
 		}
 		return resultArray.split(" ");
 	}
+	
 }
