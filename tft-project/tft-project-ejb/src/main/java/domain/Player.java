@@ -197,8 +197,8 @@ public class Player implements Serializable {
 		List<MatchSingle> list = new ArrayList<>();
 		list.addAll(getMatchSingles1());
 		list.addAll(getMatchSingles2());
-		list.stream().sorted((m1, m2) -> m1.getDateMatch().compareTo(m2.getDateMatch())).collect(Collectors.toList());
-		return matchSingles2;
+//		list.stream().sorted((m1, m2) -> m1.getDateMatch().compareTo(m2.getDateMatch())).collect(Collectors.toList());
+		return list;
 	}
 
 	public Date getBirthDate() {

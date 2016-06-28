@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template.xhtml">
+		<ui:define name="content">
+
+			  <section class="drawer">
+    
+    
+    <section id="summary" class="container secondary-page">
+      <div class="general general-results">
+           <div id="rrResult" class="top-score-title right-score total-reslts col-md-9">
+                <h3> <span>lifelong dream of becoming </span>RICH<span class="point-little">.</span></h3>
+                
+
+                <div class="main">
+                        <div class="tabs animated-slide-2">
+                            <ul class="tab-links">
+                                <li class="active"><a href="#tab1111">My BETs</a></li>
+                                <li><a href="#tab2222">Upcoming matches</a></li>
+                                
+                            </ul>
+                            <div class="tab-content">
+                                <div id="tab1111" class="tab active">
+                                	<h:form>
+										<h:dataTable value="#{pariBean.bets.entrySet().toArray()}"
+											var="map" class="tab-score" >
+
+											<h:column>
+												<f:facet name="header">Horaire</f:facet>
+												<h:outputText class="score-position"
+													value="${map.key.dateMatch}">
+													<f:convertDateTime type="time" pattern="HH:mm" />
+												</h:outputText>
+												
+											</h:column>
+											<h:column>
+												<f:facet class="score-position" name="header">Event</f:facet>
+												<h:outputText class="score-position"
+													value="${map.key.player} - ${map.key.player2}" />
+													<f:facet name="footer">
+													<h:outputText value="#{pariBean.amount}" />
+												</f:facet>
+											</h:column>
+
+											<h:column>
+												<f:facet class="score-position" name="header">?</f:facet>
+												<h:outputText class="score-position" value="#{map.value}" />
+											<f:facet name="footer">
+													<h:inputText value="#{pariBean.money}" />
+												</f:facet>
+											</h:column>
+
+											<h:column>
+												<f:facet class="score-position" name="header">Remove</f:facet>
+												<h:commandLink
+													action="#{pariBean.removeBet(map.key,map.value)}"
+													value="remove" />
+
+												<f:facet name="footer">
+													<h:outputText value="#{pariBean.money * pariBean.amount}" />
+												</f:facet>
+									
+
+											</h:column>
+
+										</h:dataTable>
+
+									</h:form>
+                                </div>
+                                <div id="tab2222" class="tab">
+                                <h:form>
+
+										<h:dataTable  var="m" value="#{pariBean.allMatchs}"
+											class="tab-score">
+
+											<h:column>
+												<f:facet name="header">Horaire</f:facet>
+												<h:outputText class="score-position" value="${m.dateMatch}">
+													<f:convertDateTime type="time" pattern="HH:mm" />
+												</h:outputText>
+											</h:column>
+											<h:column>
+												<f:facet class="score-position" name="header">Event</f:facet>
+												<h:commandLink
+													action="#{pronosticBean.match(m)}"
+													value="${m.player} - ${m.player2}" />
+												</h:column>
+
+											<h:column>
+												<f:facet class="score-position" name="header">1</f:facet>
+												<h:commandLink action="#{pariBean.bet(m,1)}"
+													value="#{pariBean.cote(m)}" />
+
+											</h:column>
+
+											<h:column>
+												<f:facet class="score-position" name="header">2</f:facet>
+												<h:commandLink action="#{pariBean.bet(m,2)}"
+													value="#{pariBean.cote(m)}" />
+
+											</h:column>
+
+										</h:dataTable>
+
+									</h:form>
+                                </div>
+                                
+                            </div>
+                            <div class="score-view-all"></div>
+                        </div>
+                    </div>
+           </div><!--Close Top Match-->
+           <div class="col-md-3 right-column">
+           
+          
+          
+         </div> </div>
+        </section>
+       
+   
+</section>
+<script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<!--MENU-->
+<script src="js/menu/modernizr.custom.js" type="text/javascript"></script>
+<script src="js/menu/cbpHorizontalMenu.js" type="text/javascript"></script>
+<!--END MENU-->
+
+<!-- Button Anchor Top-->
+<script src="js/jquery.ui.totop.js" type="text/javascript"></script>
+
+ <script src="js/custom.js" type="text/javascript"></script>   
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

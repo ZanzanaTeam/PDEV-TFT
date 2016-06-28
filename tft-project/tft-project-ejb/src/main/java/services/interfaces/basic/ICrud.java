@@ -20,4 +20,6 @@ public interface ICrud<T> {
 	List<T> findAll(Class<T> type);
 		
 	List<T> findBy(Class<T> type, String param,String value);
+	List<T> findBy2(Class<T> type, String param,String value);
+
 }
