@@ -32,7 +32,7 @@ public class NewsBean {
 	private ServicesBasicLocal<News> servicesBasicLocal;
 
 	List<News> news;
-	private News singleNews;
+	News singleNews;
 
 	public NewsBean() {
 	}
