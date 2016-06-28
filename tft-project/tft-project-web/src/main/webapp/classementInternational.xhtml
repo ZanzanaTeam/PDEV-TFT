@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template.xhtml">
+		<ui:define name="content">
+			<div class="drawer">
+				<div class="col-md-12 size-img back-img">
+					<div class="effect-cover">
+						<h3 class="txt-advert animated">The best Nikol Radek</h3>
+						<p class="txt-advert-sub">Lifelong dream of becoming the No. 1
+							player on the ATP World Tour</p>
+					</div>
+				</div>
+
+				<div id="summary" class="container secondary-page">
+					<div class="general general-results">
+						<div id="rrResult"
+							class="top-score-title right-score total-reslts col-md-9">
+							<h3>
+								Total <span>Scores</span><span class="point-little">.</span>
+							</h3>
+							<div class="cat-con-desc">
+								<img src="images/cup1.jpg" alt="" />
+								<p class="news-title-right">The best result</p>
+								<p class="txt-right">Lorem ipsum dolor sit amet, consectetur
+									adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+									dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+									exercitation ullamco laboris nisi ut aliquip ex ea commodo
+									consequat.</p>
+								<p class="txt-right">Lorem ipsum dolor sit amet, consectetur
+									adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+									dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+									exercitation ullamco laboris nisi ut aliquip ex ea commodo
+									consequat.</p>
+							</div>
+							<div class="main">
+								<div class="tabs animated-slide-2">
+									<ul class="tab-links">
+										<li class="active"><a href="#tab1">ATP</a></li>
+										<li><a href="#tab2">WTA</a></li>
+									</ul>
+									<div class="tab-content">
+										<div id="tab1" class="tab active">
+											<table class="tab-score">
+												<tr class="top-scrore-table">
+													<td class="score-position" width="50">#</td>
+													<td>PLAYER</td>
+													<td>AGE</td>
+													<td>POINTS</td>
+												</tr>
+												<ui:repeat value="#{rankInternational.playerRanks}" var="item">
+													<tr>
+													<td class="score-position" width="50"><img src="img/#{item.status.name()}.png" width="16"/></td>
+													<td><a href="single_player.html">#{item.name}</a></td>
+													<td>#{item.age}</td>
+													<td>#{item.point}</td>
+												</tr>
+												</ui:repeat>
+											</table>
+										</div>
+										<div id="tab2" class="tab">
+											<table class="tab-score">
+												<tr class="top-scrore-table">
+													<td class="score-position" width="50">#</td>
+													<td>PLAYER</td>
+													<td>AGE</td>
+													<td>POINTS</td>
+												</tr>
+												<ui:repeat value="#{rankInternational.playerRanksWTA}" var="item">
+													<tr>
+													<td class="score-position" width="50"><img src="img/#{item.status.name()}.png" width="16"/></td>
+													<td><a href="single_player.html">#{item.name}</a></td>
+													<td>#{item.age}</td>
+													<td>#{item.point}</td>
+												</tr>
+												</ui:repeat>
+											</table>
+										</div>
+									</div>
+									<div class="score-view-all"></div>
+								</div>
+							</div>
+						</div>
+						<!--Close Top Match-->
+						<div class="col-md-3 right-column">
+							<div class="top-score-title col-md-12 right-title">
+								<h3>Latest News</h3>
+								<div class="right-content">
+									<p class="news-title-right">A New Old Life</p>
+									<p class="txt-right">Simon, who’s seeded just a lowly 26th
+										here, was in many ways the right man for this grueling
+										assignment</p>
+									<a href="single_news.html" class="ca-more"><i
+										class="fa fa-angle-double-right"></i>more...</a>
+								</div>
+								<div class="right-content">
+									<p class="news-title-right">A New Old Life</p>
+									<p class="txt-right">Simon, who’s seeded just a lowly 26th
+										here, was in many ways the right man for this grueling
+										assignment</p>
+									<a href="single_news.html" class="ca-more"><i
+										class="fa fa-angle-double-right"></i>more...</a>
+								</div>
+								<div class="right-content">
+									<p class="news-title-right">A New Old Life</p>
+									<p class="txt-right">Simon, who’s seeded just a lowly 26th
+										here, was in many ways the right man for this grueling
+										assignment</p>
+									<a href="single_news.html" class="ca-more"><i
+										class="fa fa-angle-double-right"></i>more...</a>
+								</div>
+							</div>
+							<div class="top-score-title col-md-12">
+								<img src="images/banner2.jpg" alt="" />
+							</div>
+							<div class="top-score-title col-md-12 right-title">
+								<h3>Photos</h3>
+								<ul class="right-last-photo">
+									<li>
+										<div class="jm-item second">
+											<div class="jm-item-wrapper">
+												<div class="jm-item-image">
+													<img src="images/1/1.jpg" alt="" />
+													<div class="jm-item-description">
+														<div class="jm-item-button">
+															<i class="fa fa-plus"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="jm-item second">
+											<div class="jm-item-wrapper">
+												<div class="jm-item-image">
+													<img src="images/1/2.jpg" alt="" />
+													<div class="jm-item-description">
+														<div class="jm-item-button">
+															<i class="fa fa-plus"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="jm-item second">
+											<div class="jm-item-wrapper">
+												<div class="jm-item-image">
+													<img src="images/1/3.jpg" alt="" />
+													<div class="jm-item-description">
+														<div class="jm-item-button">
+															<i class="fa fa-plus"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="jm-item second">
+											<div class="jm-item-wrapper">
+												<div class="jm-item-image">
+													<img src="images/1/4.jpg" alt="" />
+													<div class="jm-item-description">
+														<div class="jm-item-button">
+															<i class="fa fa-plus"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="jm-item second">
+											<div class="jm-item-wrapper">
+												<div class="jm-item-image">
+													<img src="images/1/2.jpg" alt="" />
+													<div class="jm-item-description">
+														<div class="jm-item-button">
+															<i class="fa fa-plus"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="jm-item second">
+											<div class="jm-item-wrapper">
+												<div class="jm-item-image">
+													<img src="images/1/3.jpg" alt="" />
+													<div class="jm-item-description">
+														<div class="jm-item-button">
+															<i class="fa fa-plus"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="jm-item second">
+											<div class="jm-item-wrapper">
+												<div class="jm-item-image">
+													<img src="images/1/2.jpg" alt="" />
+													<div class="jm-item-description">
+														<div class="jm-item-button">
+															<i class="fa fa-plus"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="jm-item second">
+											<div class="jm-item-wrapper">
+												<div class="jm-item-image">
+													<img src="images/1/1.jpg" alt="" />
+													<div class="jm-item-description">
+														<div class="jm-item-button">
+															<i class="fa fa-plus"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="jm-item second">
+											<div class="jm-item-wrapper">
+												<div class="jm-item-image">
+													<img src="images/1/4.jpg" alt="" />
+													<div class="jm-item-description">
+														<div class="jm-item-button">
+															<i class="fa fa-plus"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="sponsor" class="container">
+						<!--SECTION SPONSOR-->
+						<div class="client-sport client-sport-nomargin">
+							<div class="content-banner">
+								<ul class="sponsor second">
+									<li><img src="images/sponsor/2/1.jpg" alt="" /></li>
+									<li><img src="images/sponsor/2/2.jpg" alt="" /></li>
+									<li><img src="images/sponsor/2/3.jpg" alt="" /></li>
+									<li><img src="images/sponsor/2/4.jpg" alt="" /></li>
+									<li><img src="images/sponsor/2/5.jpg" alt="" /></li>
+									<li><img src="images/sponsor/2/2.jpg" alt="" /></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

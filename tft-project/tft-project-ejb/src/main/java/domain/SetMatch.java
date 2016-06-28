@@ -1,15 +1,13 @@
+
 package domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -68,7 +66,7 @@ public class SetMatch implements Serializable {
 		this.match = match;
 	}
 
-	@OneToMany(mappedBy = "set", fetch=FetchType.EAGER )
+	@OneToMany(mappedBy = "set", fetch = FetchType.EAGER)
 	public List<Jeu> getJeus() {
 		return jeus;
 	}
@@ -101,13 +99,14 @@ public class SetMatch implements Serializable {
 	public void setDuration(int[] duration) {
 		this.duration = duration;
 	}
+
 	@Transient
 	public int getScore(Player player1) {
 		int score = 0;
 
 		if (jeus != null) {
-			for (Jeu jeu: jeus) {
-				if (jeu.getWinner()== player1)
+			for (Jeu jeu : jeus) {
+				if (jeu.getWinner() == player1)
 
 					score++;
 
@@ -117,22 +116,24 @@ public class SetMatch implements Serializable {
 
 		return score;
 	}
+
 	@Transient
 	public Player getWinner() {
-		
-		List<Player> players = new ArrayList<>();
-		
 
-		if (jeus == null) return null;
-			
-		for (Jeu jeu: jeus) {
-				if (!players.contains(jeu.getWinner())) {
-					players.add(jeu.getWinner());
-				}
+		List<Player> players = new ArrayList<>();
+
+		if (jeus == null)
+			return null;
+
+		for (Jeu jeu : jeus) {
+			if (!players.contains(jeu.getWinner())) {
+				players.add(jeu.getWinner());
 			}
-		
-		if(players.size()==1)return players.get(0);
-		return(getScore(players.get(0))>getScore(players.get(1))?players.get(0):players.get(1));
-		
+		}
+
+		if (players.size() == 1)
+			return players.get(0);
+		return (getScore(players.get(0)) > getScore(players.get(1)) ? players.get(0) : players.get(1));
+
 	}
 }
