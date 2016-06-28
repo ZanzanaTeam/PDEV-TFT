@@ -71,7 +71,9 @@ public class LiveScoreSessionHandler {
 				.add("score", device.getLiveScore())
 				.add("tour", device.getTour().getTitle())
 				.add("competition", device.getCompetition().getName())
-				.add("court", device.getCourt().getName()).build();
+				.add("court", device.getCourt().getName())
+				.add("courtId" , device.getCourt().getId())
+				.build();
 		return addMessage;
 	}
 

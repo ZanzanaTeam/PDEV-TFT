@@ -1,4 +1,4 @@
-var socket = new WebSocket("ws://192.168.1.7:18080/tft-project-web/actions");
+var socket = new WebSocket("ws://192.168.1.10:18080/tft-project-web/actions");
 socket.onmessage = onMessage;
 
 var id;
@@ -60,7 +60,7 @@ function refresh(match){
 				td2+
 				'<td>'+currentSet2+'</td>'+
 				'<td class="current" >'+point2+'</td></tr>'+
-				'<tr><th colspan="7" >'+match.court+'</th></tr>'+
+				'<tr><th colspan="7" ><a href="http://localhost:18080/tft-project-web/location.jsf?id='+match.courtId+'">'+match.court+'</a></th></tr>'+
 			'</table></div></div>';
 	return html;
 }
