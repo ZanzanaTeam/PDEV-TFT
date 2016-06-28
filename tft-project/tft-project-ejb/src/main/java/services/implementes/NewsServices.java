@@ -33,7 +33,7 @@ public class NewsServices implements NewsServiceLocal, NewsServiceRemote {
 		return lists;
 
 	}
-	
+
 	public List<News> findNewsByTitle(String title) {
 		List<News> lists = null;
 		try {
@@ -50,5 +50,10 @@ public class NewsServices implements NewsServiceLocal, NewsServiceRemote {
 		return lists;
 
 	}
-	
+
+	@Override
+	public News findSingleNewsById(int id) {
+		return entityManager.find(News.class, id);
+	}
+
 }

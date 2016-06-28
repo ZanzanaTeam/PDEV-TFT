@@ -14,14 +14,11 @@
 					<h3>
 						TFT <span>NEWS</span><span class="point-little">.</span>
 					</h3>
-					<div class="col-md-12 news-page">
-						<img class="img-djoko" src="images/news/1.jpg" alt="" />
-
-						<div class="col-md-10 data-news-pg">
-							<ul>
-
-								<ui:repeat value="#{newsBean.news}" var="n">
-
+					<ul>
+						<ui:repeat value="#{newsBean.news}" var="n">
+							<div class="col-md-12 news-page">
+								<img class="img-djoko" src="#{n.thumbnail}" alt="" />
+								<div class="col-md-10 data-news-pg">
 									<p class="news-dd">
 										<h:link value="#{n.publishDate}" outcome="n">
 											<f:param name="id" value="#{n.id}" />
@@ -32,28 +29,39 @@
 											<f:param name="id" value="#{n.id}" />
 										</h:link>
 									</h3>
-
 									<p>
-										<h:link value="#{n.body}" outcome="n">
+										<h:link value="#{n.summary}" outcome="n">
 											<f:param name="id" value="#{n.id}" />
 										</h:link>
 									</p>
-								</ui:repeat>
+									<div class="col-md-12 news-more">
 
-							</ul>
 
-							<!-- 							<p>It normally takes a great of deal time and effort to -->
-							<!-- 								defeat No. 26 Gilles Simon, largely due to his counterpunching -->
-							<!-- 								style of play and impressive foot speed. No. 14 seed Marin Cilic -->
-							<!-- 								needed that and more on Tuesday in Louis Armstrong Stadium, -->
-							<!-- 								going a marathon five sets to prevail in their fourth-round -->
-							<!-- 								match, 5-7, 7-6, 6-4, 3-6, 6-3.</p> -->
-							<div class="col-md-12 news-more">
-								<a href="single_news.html" class="ca-more"><i
-									class="fa fa-angle-double-right"></i>more...</a>
+										<h:form>
+
+											<i class="fa fa-angle-double-right"><h:commandButton
+													value="More" action="#{newsBean.NewsById()}" /></i>
+										</h:form>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
+						</ui:repeat>
+					</ul>
+				</div>
+			</div>
+			</section>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
+<!-- 							<p>It normally takes a great of deal time and effort to -->
+<!-- 								defeat No. 26 Gilles Simon, largely due to his counterpunching -->
+<!-- 								style of play and impressive foot speed. No. 14 seed Marin Cilic -->
+<!-- 								needed that and more on Tuesday in Louis Armstrong Stadium, -->
+<!-- 								going a marathon five sets to prevail in their fourth-round -->
+<!-- 								match, 5-7, 7-6, 6-4, 3-6, 6-3.</p> -->
+
+
 <!-- 					<div class="col-md-12 news-page"> -->
 <!-- 						<img class="img-djoko" src="images/news/2.jpg" alt="" /> -->
 
@@ -184,12 +192,6 @@
 <!-- 						<span class="news-page-active">1</span><span>2</span><span>3</span><span -->
 <!-- 							class="page-point">....</span><span>10</span> -->
 <!-- 					</div> -->
- 				</div>
- 				</div>
-				<!--Close Top Match-->
-			</section>
 
-		</ui:define>
-	</ui:composition>
-</body>
-</html>
+<!--Close Top Match-->
+
