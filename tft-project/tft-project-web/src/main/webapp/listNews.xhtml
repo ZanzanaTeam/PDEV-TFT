@@ -8,48 +8,45 @@
 <body>
 	<ui:composition template="/template.xhtml">
 		<ui:define name="content">
-			<section id="news" class="container secondary-page">
-			<div class="general general-results players">
-				<div class="top-score-title right-score col-md-12">
-					<h3>
-						TFT <span>NEWS</span><span class="point-little">.</span>
-					</h3>
-					<ul>
-						<ui:repeat value="#{newsBean.news}" var="n">
-							<div class="col-md-12 news-page">
-								<img class="img-djoko" src="#{n.thumbnail}" alt="" />
-								<div class="col-md-10 data-news-pg">
-									<p class="news-dd">
-										<h:link value="#{n.publishDate}" outcome="n">
-											<f:param name="id" value="#{n.id}" />
-										</h:link>
-									</p>
-									<h3>
-										<h:link value="#{n.title}" outcome="n">
-											<f:param name="id" value="#{n.id}" />
-										</h:link>
-									</h3>
-									<p>
-										<h:link value="#{n.summary}" outcome="n">
-											<f:param name="id" value="#{n.id}" />
-										</h:link>
-									</p>
-									<div class="col-md-12 news-more">
+			<div id="news" class="container secondary-page">
+				<div class="general general-results players">
+					<div class="top-score-title right-score col-md-12">
+						<h3>
+							TFT <span>NEWS</span><span class="point-little">.</span>
+						</h3>
+						<ul>
+							<ui:repeat value="#{newsBean.news}" var="n">
+								<div class="col-md-12 news-page">
+									<img class="img-djoko" src="#{n.thumbnail}" alt="" />
+									<div class="col-md-10 data-news-pg">
+										<p class="news-dd">
+											<h:link value="#{n.publishDate}" outcome="n">
+											</h:link>
+										</p>
+										<h3>
+											<h:link value="#{n.title}" outcome="n">
+											</h:link>
+										</h3>
+										<p>
+											<h:link value="#{n.summary}" outcome="n">
+											</h:link>
+										</p>
+										<div class="col-md-12 news-more">
 
 
-										<h:form>
+											<h:form>
 
-											<i class="fa fa-angle-double-right"><h:commandButton
-													value="More" action="#{newsBean.NewsById(n.id)}" /></i>
-										</h:form>
+												<i class="fa fa-angle-double-right">
+												<h:commandLink action="#{newsBean.NewsById(n.id)}" >More</h:commandLink></i>
+											</h:form>
+										</div>
 									</div>
 								</div>
-							</div>
-						</ui:repeat>
-					</ul>
+							</ui:repeat>
+						</ul>
+					</div>
 				</div>
 			</div>
-			</section>
 		</ui:define>
 	</ui:composition>
 </body>

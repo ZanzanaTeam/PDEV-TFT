@@ -4,9 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 
 import domain.News;
 import enumeration.ArticleStatus;
@@ -14,7 +13,7 @@ import services.interfaces.NewsServiceLocal;
 import services.interfaces.basic.ServicesBasicLocal;
 
 @ManagedBean
-@Stateless
+@ApplicationScoped
 public class NewsBean {
 
 	private int id;
@@ -32,17 +31,16 @@ public class NewsBean {
 	private ServicesBasicLocal<News> servicesBasicLocal;
 
 	List<News> news;
-	News singleNews;
+	private News singleNews;
 
 	public NewsBean() {
 	}
 
 	public String NewsById(int id) {
-		News singleNews = (News) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.get("singleNews");
 		// idSelected = singleNews.getId();
-		singleNews = newsService.findSingleNewsById(id);
-		return "single_news?faces-redirect=true&includeViewParams=true";
+		setId(id);
+		singleNews = servicesBasicLocal.findById(id, News.class);
+		return "single_news?faces-redirect=true";
 	}
 
 	public int getIdSelected() {
@@ -60,14 +58,6 @@ public class NewsBean {
 	public void setNews(List<News> news) {
 		this.news = news;
 	}
-
-	// public String addNews() {
-	// News news = (News) FacesContext.getCurrentInstance()
-	// .getExternalContext().getSessionMap().get("News");
-	//
-	// return "";
-	//
-	// }
 
 	public String getTitle() {
 		return title;
@@ -124,11 +114,7 @@ public class NewsBean {
 	public void setId(int id) {
 		this.id = id;
 	}
-	// public String getNewsById(int id){
-	// news = newsService.findNewsById(id);
-	// return "news_single?faces-redirect=true&includeViewParams=true";
-	// }
-
+	
 	public News getSingleNews() {
 		return singleNews;
 	}

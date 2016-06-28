@@ -8,14 +8,15 @@
 <body>
 	<ui:composition template="/template.xhtml">
 		<ui:define name="content">
-		#{newsBean.id}		#{newsBean.title}
+		#{newsBean.singleNews.title}		#{newsBean.singleNews.body}
 		
 			<f:metadata>
 				<f:viewParam name="id" value="#{newsBean.id}" />
 			</f:metadata>
 
-			<h:outputFormat value="This is my title: {0}">
-				<f:param value="#{newsBean.title}" />
+			<h:outputFormat value="This is my title: {0} , id : {1}">
+				<f:param value="#{newsBean.singleNews.title}" />
+				<f:param value="#{newsBean.id}" />
 			</h:outputFormat>
 			<!-- 			<section class="drawer"> -->
 			<!-- 			<div class="col-md-12 size-img back-img-shop"> -->
