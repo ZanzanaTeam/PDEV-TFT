@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlTransient;
 
 import enumeration.CompetitionLevel;
+import enumeration.Surface;
 
 @Entity
 public class Competition implements Serializable {
@@ -26,7 +27,7 @@ public class Competition implements Serializable {
 	private String name;
 	private Date startDate;
 	private Integer nbSet;
-
+private Surface surface;
 	private Date endDate;
 	private String country;
 	private String Site;
@@ -153,6 +154,14 @@ public class Competition implements Serializable {
 
 	public void setNbSet(Integer nbSet) {
 		this.nbSet = nbSet;
+	}
+
+	public Surface getSurface() {
+		return surface;
+	}
+
+	public void setSurface(Surface surface) {
+		this.surface = surface;
 	}
 
 }

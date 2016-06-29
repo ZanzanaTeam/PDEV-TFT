@@ -1,6 +1,8 @@
 package initDB;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -19,6 +21,7 @@ public class initMatchs {
 	static ServicesBasicDelegate<Competition> competitionProxy = new ServicesBasicDelegate<>();
 	static ServicesBasicDelegate<MatchSingle> matchProxy = new ServicesBasicDelegate<>();
 	static ServicesBasicDelegate<Player> playerProxy = new ServicesBasicDelegate<>();
+	static ServicesBasicDelegate<Court> courtProxy = new ServicesBasicDelegate<>();
 
 	static ServicesBasicDelegate<SetMatch> setProxy = new ServicesBasicDelegate<>();
 	static ServicesBasicDelegate<Jeu> jeuProxy = new ServicesBasicDelegate<>();
@@ -52,9 +55,23 @@ public class initMatchs {
 //		System.err.println(s.getTours().size());
 List<Player> Seasonplayers = playerProxy.doCrud().findAll(Player.class);
 //System.err.println(Seasonplayers.size());
-		s.getTours().stream().forEach(t -> {
-			do {
 
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+		s.getTours().stream().forEach(t -> {
+
+			int day = 0;
+			int d = t.getSeason().getStartDate().getDay()+ day ;
+			Date startDate = null;
+			try {
+				startDate = sdf.parse(t.getSeason().getStartDate().getYear() +"-"+t.getSeason().getStartDate().getMonth() + "-"+ d);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			do {
+				
 				setInd(Seasonplayers.size());
 				Player player = Seasonplayers.get(ind);
 				Seasonplayers.remove(ind);
@@ -66,10 +83,12 @@ List<Player> Seasonplayers = playerProxy.doCrud().findAll(Player.class);
 				match.setPlayer(player);
 				match.setPlayer2(player2);
 				match.setTour(t);
+				
+				match.setCourt(courtProxy.doCrud().findById(s.getCompetition().getNbSet(), Court.class));
+				match.setDateMatch(startDate);
 				matchProxy.doCrud().add(match);
-
 			} while (Seasonplayers.size() != 0);
-			List<MatchSingle> list = matchProxy.doCrud().findBy(MatchSingle.class, "tour.id",
+			List<MatchSingle> list = matchProxy.doCrud().findBy2(MatchSingle.class, "tour.id",
 					String.valueOf(t.getId()));
 
 			list.forEach(m -> {
@@ -77,7 +96,8 @@ List<Player> Seasonplayers = playerProxy.doCrud().findAll(Player.class);
 				Seasonplayers.add(m.getWinner());
 
 			});
-			
+
+			day +=5;
 		});
 
 	}

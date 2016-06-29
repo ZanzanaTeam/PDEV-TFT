@@ -74,9 +74,9 @@ i=0;j=0;amount=1;money=0;
 	}
 
 	public float cote(MatchSingle m) {
-		Random random=new Random();
-		if(m.getPlayer().getClassement()==0)m.getPlayer().setClassement(random.nextInt(105));
-		if(m.getPlayer2().getClassement()==0)m.getPlayer2().setClassement(random.nextInt(105));
+//		Random random=new Random();
+//		if(m.getPlayer().getClassement()==0)m.getPlayer().setClassement(random.nextInt(105));
+//		if(m.getPlayer2().getClassement()==0)m.getPlayer2().setClassement(random.nextInt(105));
 		if (i == 0) {
 			i++;
 			j = proxy.pronostic(m);
