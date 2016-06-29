@@ -60,7 +60,7 @@ function refresh(match){
 				td2+
 				'<td>'+currentSet2+'</td>'+
 				'<td class="current" >'+point2+'</td></tr>'+
-				'<tr><th colspan="7" ><a href="http://localhost:18080/tft-project-web/location.jsf?id='+match.courtId+'">'+match.court+'</a></th></tr>'+
+				'<tr><th colspan="7" ><a href="http://localhost:18080/tft-project-web/location.jsf?id='+match.courtId+'">Go to Court : '+match.court+'</a></th></tr>'+
 			'</table></div></div>';
 	return html;
 }
