@@ -13,12 +13,21 @@
 	min-height: 450px;
 }
 </style>
-			<div id="map">
-				<p>Veuillez patienter pendant le chargement de la carte...</p>
+			<div class="container" style="margin-bottom : 20px;">
+				<div class="top-score-title right-score col-md-12 margin-bottom-25">
+					<h3 style="margin-top:30px;">
+						Court <span>#{liveScoreBean.court.name}</span>
+					</h3>
+					<div id="content"></div>
+				</div>
+			
+				<div id="map" class="col-md-6">
+					<p>Veuillez patienter pendant le chargement de la carte...</p>
+				</div>
+				<div id="panel" class="col-md-6"></div>
 			</div>
-			<div id="panel"></div>
-			<input type="hidden" id="lat" value="36.802318" />
-			<input type="hidden" id="lng" value="10.152445" />
+			<input type="hidden" id="lat" value="#{liveScoreBean.court.latitude}" />
+			<input type="hidden" id="lng" value="#{liveScoreBean.court.longitude}" />
 			<script type="text/javascript">
 				var pos;
 				var map;
@@ -30,10 +39,10 @@
 				}
 
 				function init(){
-					console.log(pos.lat+","+pos.lng);
 					var latPosB = parseFloat(document.getElementById("lat").value);
 					var lngPosB = parseFloat(document.getElementById("lng").value); 
 					var posB = {lat: latPosB , lng : lngPosB };
+					console.log(posB.lat+","+posB.lng);
 
 			        var request = {
 			            origin      : pos,

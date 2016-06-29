@@ -1,4 +1,4 @@
-var socket = new WebSocket("ws://192.168.1.10:18080/tft-project-web/actions");
+var socket = new WebSocket("ws://localhost:18080/tft-project-web/actions");
 socket.onmessage = onMessage;
 
 var id;
