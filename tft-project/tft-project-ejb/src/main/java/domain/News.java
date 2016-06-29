@@ -6,10 +6,14 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import enumeration.ArticleStatus;
 
 @Entity
+@XmlRootElement(name="item")
 public class News implements Serializable {
 
 	/**
@@ -37,6 +41,7 @@ public class News implements Serializable {
 	}
 
 	@Id
+	@XmlTransient
 	public int getId() {
 		return id;
 	}
@@ -54,6 +59,7 @@ public class News implements Serializable {
 	}
 
 	@Column(columnDefinition = "text")
+	@XmlElement(name = "description")
 	public String getBody() {
 		return body;
 	}
@@ -62,6 +68,7 @@ public class News implements Serializable {
 		this.body = body;
 	}
 
+	@XmlTransient
 	public ArticleStatus getArticleStatus() {
 		return articleStatus;
 	}
@@ -70,6 +77,7 @@ public class News implements Serializable {
 		this.articleStatus = articleStatus;
 	}
 
+	@XmlTransient
 	public String getThumbnail() {
 		return thumbnail;
 	}
@@ -78,6 +86,7 @@ public class News implements Serializable {
 		this.thumbnail = thumbnail;
 	}
 
+	@XmlTransient
 	public String getSummary() {
 		return summary;
 	}
@@ -86,6 +95,7 @@ public class News implements Serializable {
 		this.summary = summary;
 	}
 
+	@XmlElement(name = "pubDate")
 	public Date getPublishDate() {
 		return publishDate;
 	}
