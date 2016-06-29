@@ -1,101 +1,63 @@
 package bean;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 import domain.News;
 import enumeration.ArticleStatus;
 import services.interfaces.NewsServiceLocal;
+import services.interfaces.basic.ServicesBasicLocal;
 
 @ManagedBean
-@Stateless
+@ApplicationScoped
 public class NewsBean {
 
+	private int id;
 	private String title;
 	private String body;
 	private Date publishDate;
 	private ArticleStatus articleStatus;
 	private String thumbnail;
 	private String summary;
+	private int idSelected;
 
 	@EJB
 	private NewsServiceLocal newsService;
+	@EJB
+	private ServicesBasicLocal<News> servicesBasicLocal;
 
 	List<News> news;
+	private News singleNews;
 
 	public NewsBean() {
 	}
 
-	@PostConstruct
-	public void init() {
-		Date date = new Date();
-		System.out.println("Today's date is: " + date.toString());
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-		System.out.println("Today's date is: " + dateFormat.format(date));
-		SimpleDateFormat dateformat2 = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-		String strdate2 = "23-06-2016 11:35:42";
-		try {
-			Date newdate = dateformat2.parse(strdate2);
-			System.out.println(newdate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+	public String NewsById(int id) {
+		// idSelected = singleNews.getId();
+		setId(id);
+		singleNews = servicesBasicLocal.findById(id, News.class);
+		return "single_news?faces-redirect=true";
+	}
 
-		news = new ArrayList<News>();
-		try {
-			news.add(new News(1, "Nadal is dead", "No worries, Djokovic killed him",
-					date = dateformat2.parse(strdate2)));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public int getIdSelected() {
+		return idSelected;
+	}
 
-		try {
-			news.add(new News(1, "Nadal is dead", "No worries, Djokovic killed him",
-					date = dateformat2.parse(strdate2)));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			news.add(new News(1, "Nadal is dead", "No worries, Djokovic killed him",
-					date = dateformat2.parse(strdate2)));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			news.add(new News(1, "Nadal is dead", "No worries, Djokovic killed him",
-					date = dateformat2.parse(strdate2)));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void setIdSelected(int idSelected) {
+		this.idSelected = idSelected;
 	}
 
 	public List<News> getNews() {
-		return news;
+		return servicesBasicLocal.findAll(News.class);
 	}
 
 	public void setNews(List<News> news) {
 		this.news = news;
 	}
-
-	// public String addNews() {
-	// News news = (News) FacesContext.getCurrentInstance()
-	// .getExternalContext().getSessionMap().get("News");
-	//
-	// return "";
-	//
-	// }
 
 	public String getTitle() {
 		return title;
@@ -144,4 +106,21 @@ public class NewsBean {
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public News getSingleNews() {
+		return singleNews;
+	}
+
+	public void setSingleNews(News singleNews) {
+		this.singleNews = singleNews;
+	}
+
 }
