@@ -15,6 +15,7 @@ import domain.Player;
 import domain.Point;
 import domain.Season;
 import domain.SetMatch;
+import enumeration.PointType;
 
 public class initMatchs {
 
@@ -32,6 +33,7 @@ public class initMatchs {
 	static List<Competition> competitions;
 
 	static int ind;
+	static boolean server = true;
 
 	public static int getInd() {
 		return ind;
@@ -148,6 +150,15 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		int sc1;
 		int sc2;
 		int id = 0;
+		Player servePlayer = null;
+		if (server == true){
+			servePlayer = player;
+			server = false;
+		}else{
+			servePlayer = player2;
+			server = true;
+		}
+		Random random = new Random();
 		do {
 			id++;
 			Point point = new Point();
@@ -155,11 +166,12 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			setInd(2);
 			point.setPlayer(getInd() == 0 ? player : player2);
 			point.setId(jeu.getId() * 100 + id);
+			point.setPointType(PointType.values()[random.nextInt(PointType.values().length)]);
 			pointProxy.doCrud().add(point);
 			if (jeu.getPoints() == null)
 				jeu.setPoints(new ArrayList<Point>());
 			jeu.getPoints().add(point);
-
+			jeu.setServe(servePlayer);
 			sc1 = jeu.getScore(player);
 			sc2 = jeu.getScore(player2);
 			// System.out.println(jeu.getId()+"

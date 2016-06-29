@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import delegate.ServicesBasicDelegate;
+import domain.Court;
 import domain.Jeu;
 import domain.MatchSingle;
 import domain.Player;
@@ -17,6 +18,7 @@ import domain.Tour;
 import enumeration.Order;
 import enumeration.PointType;
 import enumeration.StatusMatch;
+import enumeration.Surface;
 
 public class InitMatch {
 
@@ -63,6 +65,10 @@ public class InitMatch {
 					"status", "0");
 			System.out.println("Nombre de match: " + matchs.size());
 			for (MatchSingle match : matchs) {
+				Court court= new ServicesBasicDelegate<Court>().doCrud().findBy
+						(Court.class, "surface", String.valueOf(match.getCompetition().getSurface().ordinal())) .get(0);
+				
+				match.setCourt(court);
 				match.setStatus(StatusMatch.PROGRESS);
 				System.out.println("--------Match  -- ID = " + match.getId() + " ------ In Progress");
 				new ServicesBasicDelegate<MatchSingle>().doCrud().update(match);
