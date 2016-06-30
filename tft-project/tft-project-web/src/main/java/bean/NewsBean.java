@@ -32,6 +32,7 @@ public class NewsBean {
 
 	List<News> news;
 	private News singleNews;
+	private News moreSingleNews;
 
 	public NewsBean() {
 	}
@@ -40,7 +41,15 @@ public class NewsBean {
 		// idSelected = singleNews.getId();
 		setId(id);
 		singleNews = servicesBasicLocal.findById(id, News.class);
-		return "single_news?faces-redirect=true";
+		return "single_news?faces-redirect=true&id=" + id;
+	}
+
+	public int singleNewsById(int id) {
+		// idSelected = singleNews.getId();
+		setId(id);
+		moreSingleNews = servicesBasicLocal.findById(id, News.class);
+		//return "single_news?faces-redirect=true&id=" + id;
+		return id;
 	}
 
 	public int getIdSelected() {
@@ -114,13 +123,21 @@ public class NewsBean {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public News getSingleNews() {
 		return singleNews;
 	}
 
 	public void setSingleNews(News singleNews) {
 		this.singleNews = singleNews;
+	}
+
+	public News getMoreSingleNews() {
+		return moreSingleNews;
+	}
+
+	public void setMoreSingleNews(News moreSingleNews) {
+		this.moreSingleNews = moreSingleNews;
 	}
 
 }
