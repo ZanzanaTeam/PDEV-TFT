@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +19,12 @@ import enumeration.Gender;
 
 @Entity
 public class Player implements Serializable {
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		
+		return super.clone();
+	}
 
 	/**
 	 * 

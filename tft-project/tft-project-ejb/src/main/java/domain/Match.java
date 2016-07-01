@@ -74,7 +74,7 @@ public class Match implements Serializable {
 		this.dateMatch = dateMatch;
 	}
 
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	public Court getCourt() {
 		return court;
 	}
@@ -101,7 +101,7 @@ public class Match implements Serializable {
 		this.competition = competition;
 	}
 
-	@ManyToOne(optional = false,cascade=CascadeType.PERSIST)
+	@ManyToOne(optional = false, cascade = CascadeType.PERSIST)
 	public Tour getTour() {
 		return tour;
 	}
@@ -132,7 +132,7 @@ public class Match implements Serializable {
 	public void setLiveScore(String liveScore) {
 		this.liveScore = liveScore;
 	}
-	
+
 	@XmlTransient
 	@OneToMany(mappedBy = "match", fetch = FetchType.EAGER)
 	public List<SetMatch> getSets() {
@@ -142,7 +142,8 @@ public class Match implements Serializable {
 	public void setSets(List<SetMatch> sets) {
 		this.sets = sets;
 	}
-	@Column(nullable= true)
+
+	@Column(nullable = true)
 	public int getDuration() {
 		return duration;
 	}
