@@ -1,29 +1,35 @@
 package bean;
 
 import java.text.NumberFormat;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import domain.Combination;
+import domain.Line;
 import domain.MatchSingle;
 import services.interfaces.PronosticServiceLocal;
 import services.interfaces.basic.ServicesBasicLocal;
 
 @ManagedBean
 @SessionScoped
-public class PariBean {
+public class PariBean2 {
 	@EJB
 	PronosticServiceLocal proxy;
 	@EJB
 	ServicesBasicLocal<MatchSingle> matchProxy;
+	@EJB
+	ServicesBasicLocal<Combination> combinationProxy;
+	@EJB
+	ServicesBasicLocal<Line> lineProxy;
 	float amount;
-
+	String codeLoader;
+	String codeSaver;
 	int i;
 	float j;
 	private int competitionId;
@@ -37,7 +43,7 @@ public class PariBean {
 		this.competitionId = competitionId;
 	}
 
-	private Map<MatchSingle, Integer> bets;
+	private Combination combination;
 	float money;
 
 	@PostConstruct
@@ -46,7 +52,7 @@ public class PariBean {
 		j = 0;
 		amount = 1;
 		money = 0;
-		bets = new HashMap<MatchSingle, Integer>();
+		combination = new Combination();
 	}
 
 	public float getMoney() {
@@ -68,7 +74,8 @@ public class PariBean {
 	public String showCompetetion(int competitionId) {
 		this.competitionId = competitionId;
 		amount = 1;
-		return "pari?faces-redirect=true";
+		combination = new Combination();
+		return "newPari?faces-redirect=true";
 	}
 
 	public List<MatchSingle> getAllMatchs() {
@@ -103,13 +110,13 @@ public class PariBean {
 	}
 
 	public void bet(MatchSingle key, int value) {
-		if (bets.containsKey(key))
-			removeBet(key, bets.get(key));
+		if (combination.containsKey(key))
+			removeBet(key, combination.getValue(key));
 		if (value == 1)
 			amount *= formatFloat(1 - (float) Math.log(proxy.pronostic(key)));
 		else
 			amount *= formatFloat(1 - (float) Math.log(1 - proxy.pronostic(key)));
-		bets.put(key, value);
+		combination.getLines().add(new Line(key, value));
 	}
 
 	public void removeBet(MatchSingle key, Integer value) {
@@ -117,15 +124,67 @@ public class PariBean {
 			amount /= formatFloat(1 - (float) Math.log(proxy.pronostic(key)));
 		else
 			amount /= formatFloat(1 - (float) Math.log(1 - proxy.pronostic(key)));
-		bets.remove(key, value);
+		combination.remove(key);
 	}
 
-	public Map<MatchSingle, Integer> getBets() {
-		return bets;
+	public Combination getCombination() {
+		return combination;
 	}
 
-	public void setBets(Map<MatchSingle, Integer> bets) {
-		this.bets = bets;
+	public void setCombination(Combination combination) {
+		this.combination = combination;
+	}
+
+	public String randomString() {
+		String candidateChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		StringBuilder sb = new StringBuilder();
+		Random random = new Random();
+		for (int i = 0; i < 8; i++) {
+			sb.append(candidateChars.charAt(random.nextInt(candidateChars.length())));
+		}
+
+		return sb.toString();
+	}
+
+	public String getCodeLoader() {
+		return codeLoader;
+	}
+
+	public void setCodeLoader(String codeLoader) {
+		this.codeLoader = codeLoader;
+	}
+
+	public String getCodeSaver() {
+		return codeSaver;
+	}
+
+	public void setCodeSaver(String codeSaver) {
+		this.codeSaver = codeSaver;
+	}
+
+	public void saveCombination() {
+		combination.setIdentifier(randomString());
+		codeSaver = combination.getIdentifier();
+		combinationProxy.add(combination);
+		combination.setId(((List<Combination>) combinationProxy.findBy(Combination.class, "identifier", codeSaver))
+				.get(0).getId());
+		System.out.println(combination.getId());
+		for (Line l : combination.getLines()) {
+			l.setCombination(combination);
+			System.out.println(l.getMatch().getId());
+			System.out.println(l.getGame());
+
+			lineProxy.add(l);
+		}
+	}
+
+	public void loadCombination() {
+		
+		System.out.println(codeLoader);
+		
+		setCombination(
+				((List<Combination>) combinationProxy.findBy(Combination.class, "identifier", codeLoader)).get(0));
+
 	}
 
 }

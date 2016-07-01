@@ -133,7 +133,7 @@ private Surface surface;
 	}
 	
 	
-	@OneToMany(mappedBy = "competition", fetch =FetchType.EAGER )
+	@OneToMany(mappedBy = "competition")
 	@XmlTransient
 	public List<Season> getSeasons() {
 		return seasons;

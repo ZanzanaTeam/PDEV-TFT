@@ -13,9 +13,9 @@
 				<h:dataTable var="c" value="#{competitionsBean.allCompetitions}">
 					<h:column>
 						<f:facet name="header">Competition Name</f:facet>
-						<h:commandButton action="#{pariBean.showCompetetion(c)}"
+						<h:commandLink  action="#{pariBean2.showCompetetion(c.id)}"
 							value="${c.name}" />
-						<h:outputText value="${c.name}" />
+						
 					</h:column>
 				</h:dataTable>
 			</h:form>
