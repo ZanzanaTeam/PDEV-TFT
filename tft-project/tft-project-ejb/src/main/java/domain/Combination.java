@@ -55,12 +55,12 @@ public class Combination implements Serializable {
 		this.lines = lines;
 	}
 
-	public boolean containsKey(MatchSingle key) {
+	public Line containsKey(MatchSingle key) {
 		for (Line line : lines) {
 			if (line.getMatch().getId() == key.getId())
-				return true;
+				return line;
 		}
-		return false;
+		return null;
 	}
 
 	public Integer getValue(MatchSingle key) {
@@ -71,12 +71,6 @@ public class Combination implements Serializable {
 		return null;
 	}
 
-	public void remove(MatchSingle key) {
-		for (Line line : lines) {
-			if (line.getMatch().getId() == key.getId())
-				lines.remove(line);
-		}
 
-	}
 
 }

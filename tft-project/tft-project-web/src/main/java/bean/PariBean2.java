@@ -110,8 +110,9 @@ public class PariBean2 {
 	}
 
 	public void bet(MatchSingle key, int value) {
-		if (combination.containsKey(key))
-			removeBet(key, combination.getValue(key));
+		Line line=combination.containsKey(key);
+		if (line!=null)
+			removeBet(line);
 		if (value == 1)
 			amount *= formatFloat(1 - (float) Math.log(proxy.pronostic(key)));
 		else
@@ -119,14 +120,15 @@ public class PariBean2 {
 		combination.getLines().add(new Line(key, value));
 	}
 
-	public void removeBet(MatchSingle key, Integer value) {
-		if (value == 1)
-			amount /= formatFloat(1 - (float) Math.log(proxy.pronostic(key)));
-		else
-			amount /= formatFloat(1 - (float) Math.log(1 - proxy.pronostic(key)));
-		combination.remove(key);
-	}
 
+	public void removeBet(Line line) {
+		int i=line.getGame();
+		if (  i== 1)
+			amount /= formatFloat(1 - (float) Math.log(proxy.pronostic(line.getMatch())));
+		else
+			amount /= formatFloat(1 - (float) Math.log(1 - proxy.pronostic(line.getMatch())));
+		combination.getLines().remove(line);
+	}
 	public Combination getCombination() {
 		return combination;
 	}

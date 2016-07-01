@@ -21,12 +21,13 @@
 
 <div class="tabs animated-slide-2">
                             <ul class="tab-links">
-                                <li class="active"><a href="#tab1111">My BETs</a></li>
-                                <li><a href="#tab2222">Upcoming matches</a></li>
+                                <li class="active"><a href="#tab2222">Upcoming matches</a></li>
+                                 <li ><a href="#tab1111">My BETs</a></li>
+                               
                                 
                             </ul>
                             <div class="tab-content">
-                                <div id="tab1111" class="tab active">
+                                <div id="tab1111" class="tab">
                                 	<h:form id="form"  class="login-form">
 										<h:dataTable value="#{pariBean2.combination.lines}"
 											var="l" class="tab-score" >
@@ -59,8 +60,9 @@
 											<h:column>
 												<f:facet class="score-position" name="header">Remove</f:facet>
 												<h:commandLink
-													action="#{pariBean2.removeBet(l.match,l.game)}"
-													value="remove" ><f:ajax render="form"/></h:commandLink>
+													action="#{pariBean2.removeBet(l)}"
+													value="remove" >
+													<f:ajax immediate="false" render="form"/></h:commandLink>
 
 												<f:facet name="footer">
 													<h:outputText value="#{pariBean2.money * pariBean2.amount}" />
@@ -78,7 +80,7 @@
                    
 									</h:form>
 									</div>
-                                <div id="tab2222" class="tab">
+                                <div id="tab2222" class="tab active">
                                 <h:form>
 
 										<h:dataTable  var="m" value="#{pariBean2.allMatchs}"
