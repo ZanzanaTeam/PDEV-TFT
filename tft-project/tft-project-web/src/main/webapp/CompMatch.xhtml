@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head></h:head>
+<body>
+
+
+	<ui:composition template="/template.xhtml">
+		<ui:define name="content">
+			<div class="bbtxt-content-subscription">
+				<div class="container">
+					<div class="col-xs-12 bbtxt-box">
+						<h4>
+							<span class="point-big">EVENTS</span>
+						</h4>
+						<p class="subin">All tours in Tunisia step by step.</p>
+
+						<ui:repeat value="#{compMatchBean.allCompetitions}" var="c">
+							<div class="subscription-content">
+								<div class="col-md-4">
+									<div class="subscription-tennis">
+
+										<h3>
+											<h:link value="#{c.name}" outcome="c">
+												<f:param name="Name" value="#{c.name}" />
+											</h:link>
+										</h3>
+										<p class="desc-subscription">
+											<h:column>
+
+												<h2>
+													<p class="nm-name">Site</p>
+												</h2>
+												<h:outputLabel value="#{c.site}" />
+											</h:column>
+											<br> <h:column>
+													<h2>
+														<p class="nm-name">Numbers of Sets</p>
+													</h2>
+													<h:outputLabel value="#{c.nbSet}" />
+												</h:column> </br>
+										<div class="col-xs-12 atphead">
+											<div class="match-sing-title inf-bottom">
+												<p>
+													<i class="fa fa-calendar-o"></i>
+													<h:link value="#{c.startDate}" outcome="c">
+														<f:param name="Date" value="#{c.startDate}" />
+														<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+													</h:link>
+													<i class="fa fa-map-marker"></i>
+													<h:link value="#{c.country}" outcome="c">
+														<f:param name="Country" value="#{c.country}" />
+													</h:link>
+												</p>
+											</div>
+										</div>
+										</p>
+									</div>
+
+								</div>
+							</div>
+
+						</ui:repeat>
+					</div>
+				</div>
+
+			</div>
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
