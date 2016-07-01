@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template.xhtml">
+		<ui:define name="content">
+
+			<section id="summary" class="container secondary-page">
+			<div class="general general-results tournaments">
+
+				<div id="c-calend" class="top-score-title right-score col-md-9">
+					<h3>
+						2016 <span>CALENDAR</span><span class="point-little">.</span>
+					</h3>
+					<p class="txt-right">All competitions step by step</p>
+					<p class="txt-right txt-dd-second"></p>
+					<ui:repeat value="#{matchsBean.all}" var="c">
+						<div class="accordion" id="section1">
+							<i class="fa fa-calendar-o"></i>JANUARY<span></span>
+						</div>
+						<div class="acc-content">
+							<div class="col-md-1 acc-title">Cat.</div>
+							<div class="col-md-2 acc-title">Date</div>
+							<div class="col-md-3 acc-title">Tournament</div>
+							<div class="col-md-2 acc-title">$ Money</div>
+							<div class="col-md-2 acc-title">Draw</div>
+							<div class="col-md-2 acc-title">Winners</div>
+
+							<div class="col-md-1 timg">
+								<img src="images/atp_img.png" alt="" />
+							</div>
+							<div class="col-md-2 t1">
+								<p>29.12.2013</p>
+							</div>
+							<div class="col-md-3 t2">
+								<p>
+									<h:link value="#{c.competition.name}" outcome="c">
+										<f:param name="Name" value="#{c.competition.name}" />
+									</h:link>
+								</p>
+							</div>
+							<div class="col-md-2 t3">
+								<p>$ 552,670</p>
+							</div>
+							<div class="col-md-2 t4">
+								<p>
+									SGL 28 <br />DBL 16
+								</p>
+							</div>
+							<div class="col-md-2 t5">
+								<p>
+									<h:link value="#{c.player}" outcome="c">
+										<f:param name="Name" value="#{c.player}" />
+									</h:link>
+								</p>
+							</div>
+
+						</div>
+					</ui:repeat>
+				</div>
+
+			</div>
+			</section>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

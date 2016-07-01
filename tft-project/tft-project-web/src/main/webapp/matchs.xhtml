@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head></h:head>
+<body>
+	<ui:composition template="/template.xhtml">
+		<ui:define name="content">
+
+			<!-- <h:form>
+				<h:dataTable var="c" value="#{matchsBean.all}">
+					<h:column>
+						<f:facet name="header">Competition Name</f:facet>
+						<h:outputText value="${c.competition.name}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Weather</f:facet>
+						<h:outputText value="${c.weather}" />
+					</h:column> -->
+
+
+			<!--SECTION Match TOP SCORE-->
+			<div id="atp-match">
+				<div class="container">
+					<div id="people-top" class="top-match col-xs-12 col-md-12">
+						<h3 class="news-title n-match">
+							Last <span>Match</span><span class="point-little">.</span>
+						</h3>
+						<p class="subtitle">All matchs step by step</p>
+
+						<div id="next-match">
+							<div class="container">
+								<ui:repeat value="#{matchsBean.all}" var="c">
+									<div class="other-match col-md-4">
+										<div class="match-team-list">
+											<img class="t-img1" src="images/sub-ball.png" alt="" /> <span><h:link
+													value="#{c.player}" outcome="c">
+													<f:param name="Name" value="#{c.player}" />
+												</h:link></span> <span class="txt-vs"> - vs - </span> <span><h:link
+													value="#{c.player2}" outcome="c">
+													<f:param name="Name" value="#{c.player2}" />
+												</h:link></span>
+											<p>
+													<h:link value="#{c.liveScore}" outcome="c">
+														<f:param name="Name" value="#{c.liveScore}" />
+													</h:link>
+												</p>	
+												
+											<p class='sub-result'>
+												<h:link value="#{c.dateMatch}" outcome="c">
+													<f:param name="Name" value="#{c.dateMatch}" />
+												</h:link>
+											</p>
+											
+											<p class="dd-news-date">
+												<p>
+													<h:link value="#{c.competition.name}" outcome="c">
+														<f:param name="Name" value="#{c.competition.name}" />
+													</h:link>
+												</p>
+												<p>
+													<h:link value="#{c.court}" outcome="c">
+														<f:param name="Name" value="#{c.court}" />
+													</h:link>
+												</p>
+												<p>
+													<h:link value="#{c.status}" outcome="c">
+														<f:param name="Name" value="#{c.status}" />
+													</h:link>
+												</p>
+											</p>
+										</div>
+									</div>
+								</ui:repeat>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
