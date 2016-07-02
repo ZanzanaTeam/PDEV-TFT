@@ -1,7 +1,7 @@
 var socket = new WebSocket("ws://localhost:18080/tft-project-web/actions");
 socket.onmessage = onMessage;
 
-var id=5;
+var id=3000;
 var liveScore;
 var set1 = new Array();
 var set2 = new Array();
