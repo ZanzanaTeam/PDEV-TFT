@@ -1,4 +1,4 @@
-var socket = new WebSocket("ws://localhost:18080/tft-project-web/actions");
+var socket = new WebSocket("ws://172.16.91.20:18080/tft-project-web/actions");
 socket.onmessage = onMessage;
 
 var id=3000;
@@ -17,20 +17,18 @@ var service2= 0;
 function onMessage(event) {
     var device = JSON.parse(event.data);
     if (device.action === "add") {
-    	
+
     	if(device.id == id){
     		document.getElementById('content').innerHTML = "";
     		printDeviceElement(device);
     	}
-    		
+
     }
     if (device.action === "refresh") {
-    	
     	if(device.id == id){
     		document.getElementById('content').innerHTML = "";
     		printDeviceElement(device);
     	}
-    		
     }
 }
 

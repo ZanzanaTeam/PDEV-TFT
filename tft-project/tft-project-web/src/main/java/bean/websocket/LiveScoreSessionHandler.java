@@ -53,27 +53,16 @@ public class LiveScoreSessionHandler {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		System.out.println(liveScoreServicesLocal.getMatchByDate(date));
-
 		return liveScoreServicesLocal.getMatchByDate(date);
-	}
-
-	private MatchSingle getDeviceById(int id) {
-		return servicesBasicLocal.findById(id, MatchSingle.class);
 	}
 
 	private JsonObject createAddMessage(MatchSingle device) {
 		JsonProvider provider = JsonProvider.provider();
-		JsonObject addMessage = provider.createObjectBuilder().add("action", "add")
-				.add("id", device.getId())
-				.add("player1", device.getPlayer().getFullName())
-				.add("player2", device.getPlayer2().getFullName())
-				.add("score", device.getLiveScore())
-				.add("tour", device.getTour().getTitle())
-				.add("competition", device.getCompetition().getName())
-				.add("court", device.getCourt().getName())
-				.add("courtId" , device.getCourt().getId())
-				.build();
+		JsonObject addMessage = provider.createObjectBuilder().add("action", "add").add("id", device.getId())
+				.add("player1", device.getPlayer().getFullName()).add("player2", device.getPlayer2().getFullName())
+				.add("score", device.getLiveScore()).add("tour", device.getTour().getTitle())
+				.add("competition", device.getCompetition().getName()).add("court", device.getCourt().getName())
+				.add("courtId", device.getCourt().getId()).build();
 		return addMessage;
 	}
 
@@ -93,20 +82,17 @@ public class LiveScoreSessionHandler {
 	}
 
 	public void updateLiveScore(int id, String liveScore) {
-		
+
 		liveScoreServicesLocal.updateLiveScoreOfMatch(id, liveScore);
-		
-		
+
 	}
-	
-	public void refresh(){
+
+	public void refresh() {
 		JsonProvider provider = JsonProvider.provider();
 		for (MatchSingle matchSingle : getMatchLive()) {
 			JsonObject addMessage = provider.createObjectBuilder().add("action", "refresh")
-					.add("id", matchSingle.getId())
-					.add("player1", matchSingle.getPlayer().getFullName())
-					.add("player2", matchSingle.getPlayer2().getFullName())
-					.add("score", matchSingle.getLiveScore())
+					.add("id", matchSingle.getId()).add("player1", matchSingle.getPlayer().getFullName())
+					.add("player2", matchSingle.getPlayer2().getFullName()).add("score", matchSingle.getLiveScore())
 					.add("tour", matchSingle.getTour().getTitle())
 					.add("competition", matchSingle.getCompetition().getName())
 					.add("court", matchSingle.getCourt().getName()).build();
