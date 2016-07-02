@@ -110,8 +110,8 @@ public class PariBean2 {
 	}
 
 	public void bet(MatchSingle key, int value) {
-		Line line=combination.containsKey(key);
-		if (line!=null)
+		Line line = combination.containsKey(key);
+		if (line != null)
 			removeBet(line);
 		if (value == 1)
 			amount *= formatFloat(1 - (float) Math.log(proxy.pronostic(key)));
@@ -120,15 +120,15 @@ public class PariBean2 {
 		combination.getLines().add(new Line(key, value));
 	}
 
-
 	public void removeBet(Line line) {
-		int i=line.getGame();
-		if (  i== 1)
+		int i = line.getGame();
+		if (i == 1)
 			amount /= formatFloat(1 - (float) Math.log(proxy.pronostic(line.getMatch())));
 		else
 			amount /= formatFloat(1 - (float) Math.log(1 - proxy.pronostic(line.getMatch())));
 		combination.getLines().remove(line);
 	}
+
 	public Combination getCombination() {
 		return combination;
 	}
@@ -170,23 +170,26 @@ public class PariBean2 {
 		combinationProxy.add(combination);
 		combination.setId(((List<Combination>) combinationProxy.findBy(Combination.class, "identifier", codeSaver))
 				.get(0).getId());
-		System.out.println(combination.getId());
+
 		for (Line l : combination.getLines()) {
 			l.setCombination(combination);
-			System.out.println(l.getMatch().getId());
-			System.out.println(l.getGame());
 
 			lineProxy.add(l);
 		}
 	}
 
 	public void loadCombination() {
-		
-		System.out.println(codeLoader);
-		
+
 		setCombination(
 				((List<Combination>) combinationProxy.findBy(Combination.class, "identifier", codeLoader)).get(0));
 
+	}
+
+	public String loadCombinationWithRedirect() {
+
+		setCombination(
+				((List<Combination>) combinationProxy.findBy(Combination.class, "identifier", codeLoader)).get(0));
+		return "newPari?faces-redirect=true";
 	}
 
 }

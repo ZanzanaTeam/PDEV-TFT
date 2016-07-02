@@ -11,11 +11,7 @@
 		<ui:define name="content">
 
 			<div class="drawer">
-				<div class="col-md-12 size-img back-img-match">
-					<div class="effect-cover">
-						<h3 class="txt-advert animated">latest results</h3>
-					</div>
-				</div>
+				
 
 				<div id="allmatch" class="container secondary-page">
 					<div class="general general-results">
@@ -43,127 +39,129 @@
 													<f:selectItem itemValue="2" itemLabel="Grass" />
 													<f:selectItem itemValue="3" itemLabel="Hard" />
 													<f:ajax render="tb1"></f:ajax>
-												</h:selectOneRadio></h:form>
-												<h:panelGroup id="tb1" >
+												</h:selectOneRadio>
+											</h:form>
+											<h:panelGroup id="tb1">
 
-													<ui:repeat value="#{pronosticBean.getPlayerMatches(1)}"
-														var="m" varStatus="status">
-														<table class="match-tbs">
-															<tr>
-																<td class="match-tbs-title" colspan="7">${m.court.name}
-																	- MEN'S SINGLES - ${m.tour.position}</td>
-															</tr>
-															<tr class="match-sets">
-																<td></td>
-																<td class="fpt">Pts</td>
-																<td class="fpt">1</td>
-																<td class="fpt">2</td>
-																<h:panelGroup rendered="#{m.sets.size()>2}">
-																	<td class="fpt">3</td>
+												<ui:repeat value="#{pronosticBean.getPlayerMatches(1)}"
+													var="m" varStatus="status">
+													<table class="match-tbs">
+														<tr>
+															<td class="match-tbs-title" colspan="7">${m.court.name}
+																- MEN'S SINGLES - ${m.tour.position}</td>
+														</tr>
+														<tr class="match-sets">
+															<td></td>
+															<td class="fpt">Pts</td>
+															<td class="fpt">1</td>
+															<td class="fpt">2</td>
+															<h:panelGroup rendered="#{m.sets.size()>2}">
+																<td class="fpt">3</td>
+															</h:panelGroup>
+
+
+
+														</tr>
+														<tr>
+
+															<td class="fpt">#{m.player.fullName} <h:panelGroup
+																	rendered="#{m.winner==m.player}">
+																	<i class="fa fa-check"></i>
 																</h:panelGroup>
+															</td>
+															<td class="fpt">#{m.getScore(m.player)}</td>
+															<ui:repeat var="s" value="#{m.sets}">
+																<td class="fpt">#{s.getScore(m.player)}</td>
+															</ui:repeat>
 
+														</tr>
+														<tr>
+															<td class="fpt fpt2">#{m.player2.fullName}<h:panelGroup
+																	rendered="#{m.winner==m.player2}">
+																	<i class="fa fa-check"></i>
+																</h:panelGroup>
+															</td>
+															<td class="fpt fpt2">#{m.getScore(m.player2)}</td>
+															<ui:repeat var="s" value="#{m.sets}">
+																<td class="fpt">#{s.getScore(m.player2)}</td>
+															</ui:repeat>
 
+														</tr>
+														<tr>
+															<td class="match-more" colspan="7"><a
+																href="match.html" class="ca-more"><i
+																	class="fa fa-angle-double-right"></i>more</a></td>
+														</tr>
+													</table>
+												</ui:repeat>
+											</h:panelGroup>
 
-															</tr>
-															<tr>
-
-																<td class="fpt">#{m.player.fullName} <h:panelGroup
-																		rendered="#{m.winner==m.player}">
-																		<i class="fa fa-check"></i>
-																	</h:panelGroup>
-																</td>
-																<td class="fpt">#{m.getScore(m.player)}</td>
-																<ui:repeat var="s" value="#{m.sets}">
-																	<td class="fpt">#{s.getScore(m.player)}</td>
-																</ui:repeat>
-
-															</tr>
-															<tr>
-																<td class="fpt fpt2">#{m.player2.fullName}<h:panelGroup
-																		rendered="#{m.winner==m.player2}">
-																		<i class="fa fa-check"></i>
-																	</h:panelGroup>
-																</td>
-																<td class="fpt fpt2">#{m.getScore(m.player2)}</td>
-																<ui:repeat var="s" value="#{m.sets}">
-																	<td class="fpt">#{s.getScore(m.player2)}</td>
-																</ui:repeat>
-
-															</tr>
-															<tr>
-																<td class="match-more" colspan="7"><a
-																	href="match.html" class="ca-more"><i
-																		class="fa fa-angle-double-right"></i>more</a></td>
-															</tr>
-														</table>
-													</ui:repeat>
-												</h:panelGroup>
-											
 										</div>
 
 										<div id="tab2222" class="tab">
 											<h:form>
-												<h:selectOneRadio
-													value="#{pronosticBean.selectedRadiof}">
+												<h:selectOneRadio value="#{pronosticBean.selectedRadiof}">
 													<f:selectItem itemValue="-1" itemLabel="All" />
 													<f:selectItem itemValue="0" itemLabel="Carpet" />
 													<f:selectItem itemValue="1" itemLabel="Clay" />
 													<f:selectItem itemValue="2" itemLabel="Grass" />
 													<f:selectItem itemValue="3" itemLabel="Hard" />
 													<f:ajax render="tb0"></f:ajax>
-												</h:selectOneRadio></h:form>
-												<h:panelGroup id="tb0" >
-											<ui:repeat value="#{pronosticBean.getPlayerMatches(0)}" var="m"
-												varStatus="status">
-												<table class="match-tbs">
-													<tr>
-														<td class="match-tbs-title" colspan="7">${m.court.name}
-															- MEN'S SINGLES - ${m.tour.position}</td>
-													</tr>
-													<tr class="match-sets">
-														<td></td>
-														<td class="fpt">Pts</td>
-														<td class="fpt">1</td>
-														<td class="fpt">2</td>
-														<h:panelGroup rendered="#{m.sets.size()>2}">
-															<td class="fpt">3</td>
-														</h:panelGroup>
-
-
-
-													</tr>
-													<tr>
-
-														<td class="fpt">#{m.player.fullName} <h:panelGroup
-																rendered="#{m.winner==m.player}">
-																<i class="fa fa-check"></i>
+												</h:selectOneRadio>
+											</h:form>
+											<h:panelGroup id="tb0">
+												<ui:repeat value="#{pronosticBean.getPlayerMatches(0)}"
+													var="m" varStatus="status">
+													<table class="match-tbs">
+														<tr>
+															<td class="match-tbs-title" colspan="7">${m.court.name}
+																- MEN'S SINGLES - ${m.tour.position}</td>
+														</tr>
+														<tr class="match-sets">
+															<td></td>
+															<td class="fpt">Pts</td>
+															<td class="fpt">1</td>
+															<td class="fpt">2</td>
+															<h:panelGroup rendered="#{m.sets.size()>2}">
+																<td class="fpt">3</td>
 															</h:panelGroup>
-														</td>
-														<td class="fpt">#{m.getScore(m.player)}</td>
-														<ui:repeat var="s" value="#{m.sets}">
-															<td class="fpt">#{s.getScore(m.player)}</td>
-														</ui:repeat>
 
-													</tr>
-													<tr>
-														<td class="fpt fpt2">#{m.player2.fullName}<h:panelGroup
-																rendered="#{m.winner==m.player2}">
-																<i class="fa fa-check"></i>
-															</h:panelGroup>
-														</td>
-														<td class="fpt fpt2">#{m.getScore(m.player2)}</td>
-														<ui:repeat var="s" value="#{m.sets}">
-															<td class="fpt">#{s.getScore(m.player2)}</td>
-														</ui:repeat>
 
-													</tr>
-													<tr>
-														<td class="match-more" colspan="7"><a
-															href="match.html" class="ca-more"><i
-																class="fa fa-angle-double-right"></i>more</a></td>
-													</tr>
-												</table>
-											</ui:repeat></h:panelGroup>
+
+														</tr>
+														<tr>
+
+															<td class="fpt">#{m.player.fullName} <h:panelGroup
+																	rendered="#{m.winner==m.player}">
+																	<i class="fa fa-check"></i>
+																</h:panelGroup>
+															</td>
+															<td class="fpt">#{m.getScore(m.player)}</td>
+															<ui:repeat var="s" value="#{m.sets}">
+																<td class="fpt">#{s.getScore(m.player)}</td>
+															</ui:repeat>
+
+														</tr>
+														<tr>
+															<td class="fpt fpt2">#{m.player2.fullName}<h:panelGroup
+																	rendered="#{m.winner==m.player2}">
+																	<i class="fa fa-check"></i>
+																</h:panelGroup>
+															</td>
+															<td class="fpt fpt2">#{m.getScore(m.player2)}</td>
+															<ui:repeat var="s" value="#{m.sets}">
+																<td class="fpt">#{s.getScore(m.player2)}</td>
+															</ui:repeat>
+
+														</tr>
+														<tr>
+															<td class="match-more" colspan="7"><a
+																href="match.html" class="ca-more"><i
+																	class="fa fa-angle-double-right"></i>more</a></td>
+														</tr>
+													</table>
+												</ui:repeat>
+											</h:panelGroup>
 
 										</div>
 										<div id="tab3333" class="tab">
@@ -175,60 +173,61 @@
 													<f:selectItem itemValue="2" itemLabel="Grass" />
 													<f:selectItem itemValue="3" itemLabel="Hard" />
 													<f:ajax render="tb2"></f:ajax>
-												</h:selectOneRadio></h:form>
-												<h:panelGroup id="tb2" >
-											<ui:repeat
-												value="#{pronosticBean.getPlayerMatches(2)}"
-												var="m" varStatus="status">
-												<table class="match-tbs">
-													<tr>
-														<td class="match-tbs-title" colspan="7">${m.court.name}
-															- MEN'S SINGLES - ${m.tour.position}</td>
-													</tr>
-													<tr class="match-sets">
-														<td></td>
-														<td class="fpt">Pts</td>
-														<td class="fpt">1</td>
-														<td class="fpt">2</td>
-														<h:panelGroup rendered="#{m.sets.size()>2}">
-															<td class="fpt">3</td>
-														</h:panelGroup>
-
-
-
-													</tr>
-													<tr>
-
-														<td class="fpt">#{m.player.fullName} <h:panelGroup
-																rendered="#{m.winner==m.player}">
-																<i class="fa fa-check"></i>
+												</h:selectOneRadio>
+											</h:form>
+											<h:panelGroup id="tb2">
+												<ui:repeat value="#{pronosticBean.getPlayerMatches(2)}"
+													var="m" varStatus="status">
+													<table class="match-tbs">
+														<tr>
+															<td class="match-tbs-title" colspan="7">${m.court.name}
+																- MEN'S SINGLES - ${m.tour.position}</td>
+														</tr>
+														<tr class="match-sets">
+															<td></td>
+															<td class="fpt">Pts</td>
+															<td class="fpt">1</td>
+															<td class="fpt">2</td>
+															<h:panelGroup rendered="#{m.sets.size()>2}">
+																<td class="fpt">3</td>
 															</h:panelGroup>
-														</td>
-														<td class="fpt">#{m.getScore(m.player)}</td>
-														<ui:repeat var="s" value="#{m.sets}">
-															<td class="fpt">#{s.getScore(m.player)}</td>
-														</ui:repeat>
 
-													</tr>
-													<tr>
-														<td class="fpt fpt2">#{m.player2.fullName}<h:panelGroup
-																rendered="#{m.winner==m.player2}">
-																<i class="fa fa-check"></i>
-															</h:panelGroup>
-														</td>
-														<td class="fpt fpt2">#{m.getScore(m.player2)}</td>
-														<ui:repeat var="s" value="#{m.sets}">
-															<td class="fpt">#{s.getScore(m.player2)}</td>
-														</ui:repeat>
 
-													</tr>
-													<tr>
-														<td class="match-more" colspan="7"><a
-															href="match.html" class="ca-more"><i
-																class="fa fa-angle-double-right"></i>more</a></td>
-													</tr>
-												</table>
-											</ui:repeat></h:panelGroup>
+
+														</tr>
+														<tr>
+
+															<td class="fpt">#{m.player.fullName} <h:panelGroup
+																	rendered="#{m.winner==m.player}">
+																	<i class="fa fa-check"></i>
+																</h:panelGroup>
+															</td>
+															<td class="fpt">#{m.getScore(m.player)}</td>
+															<ui:repeat var="s" value="#{m.sets}">
+																<td class="fpt">#{s.getScore(m.player)}</td>
+															</ui:repeat>
+
+														</tr>
+														<tr>
+															<td class="fpt fpt2">#{m.player2.fullName}<h:panelGroup
+																	rendered="#{m.winner==m.player2}">
+																	<i class="fa fa-check"></i>
+																</h:panelGroup>
+															</td>
+															<td class="fpt fpt2">#{m.getScore(m.player2)}</td>
+															<ui:repeat var="s" value="#{m.sets}">
+																<td class="fpt">#{s.getScore(m.player2)}</td>
+															</ui:repeat>
+
+														</tr>
+														<tr>
+															<td class="match-more" colspan="7"><a
+																href="match.html" class="ca-more"><i
+																	class="fa fa-angle-double-right"></i>more</a></td>
+														</tr>
+													</table>
+												</ui:repeat>
+											</h:panelGroup>
 
 										</div>
 
