@@ -9,133 +9,171 @@
 	<ui:composition template="/template.xhtml">
 		<ui:define name="content">
 
-			  <section class="drawer">
-    
-    
-    <section id="summary" class="container secondary-page">
-      <div class="general general-results">
-           <div id="rrResult" class="top-score-title right-score total-reslts col-md-9">
-                <h3> <span>lifelong dream of becoming </span>RICH<span class="point-little">.</span></h3>
-                
 
-                <div class="main">
-                        <div class="tabs animated-slide-2">
-                            <ul class="tab-links">
-                                <li class="active"><a href="#tab1111">My BETs</a></li>
-                                <li><a href="#tab2222">Upcoming matches</a></li>
-                                
-                            </ul>
-                            <div class="tab-content">
-                                <div id="tab1111" class="tab active">
-                                	<h:form>
-										<h:dataTable value="#{pariBean.bets.entrySet().toArray()}"
-											var="map" class="tab-score" >
+			<div class="drawer">
+				<div id="summary" class="container secondary-page">
 
-											<h:column>
-												<f:facet name="header">Horaire</f:facet>
-												<h:outputText class="score-position"
-													value="${map.key.dateMatch}">
-													<f:convertDateTime type="time" pattern="HH:mm" />
-												</h:outputText>
-												
-											</h:column>
-											<h:column>
-												<f:facet class="score-position" name="header">Event</f:facet>
-												<h:outputText class="score-position"
-													value="${map.key.player} - ${map.key.player2}" />
-													<f:facet name="footer">
-													<h:outputText value="#{pariBean.amount}" />
-												</f:facet>
-											</h:column>
+					<div id="sponsor" class="container">
+						<!--div SPONSOR-->
+						<div class="client-sport client-sport-nomargin">
+							<div class="content-banner">
+								<ul class="sponsor second">
+									<li><img src="images/sponsor/2/1.jpg" alt="" /></li>
+									<li><img src="images/sponsor/2/2.jpg" alt="" /></li>
+									<li><img src="images/sponsor/2/3.jpg" alt="" /></li>
+									<li><img src="images/sponsor/2/4.jpg" alt="" /></li>
+									<li><img src="images/sponsor/2/5.jpg" alt="" /></li>
+									<li><img src="images/sponsor/2/2.jpg" alt="" /></li>
+								</ul>
+							</div>
+						</div>
+					</div>
 
-											<h:column>
-												<f:facet class="score-position" name="header">?</f:facet>
-												<h:outputText class="score-position" value="#{map.value}" />
-											<f:facet name="footer">
-													<h:inputText value="#{pariBean.money}" />
-												</f:facet>
-											</h:column>
+					<div id="summary" class="container secondary-page">
+						<div class="general general-results">
+							<div id="rrResult"
+								class="top-score-title right-score total-reslts col-md-9">
+								<h3>
+									<span>lifelong dream of becoming </span>RICH<span
+										class="point-little">.</span>
+								</h3>
 
-											<h:column>
-												<f:facet class="score-position" name="header">Remove</f:facet>
-												<h:commandLink
-													action="#{pariBean.removeBet(map.key,map.value)}"
-													value="remove" />
 
-												<f:facet name="footer">
-													<h:outputText value="#{pariBean.money * pariBean.amount}" />
-												</f:facet>
-									
+								<div class="main">
 
-											</h:column>
+									<div class="tabs animated-slide-2">
+										<ul class="tab-links">
+											<li class="active"><a href="#tab1111">My BETs</a></li>
+											<li><a href="#tab2222">Upcoming matches</a></li>
 
-										</h:dataTable>
+										</ul>
+										<div class="tab-content">
+											<div id="tab1111" class="tab active">
+												<h:form id="form">
+													<h:dataTable value="#{pariBean.bets.entrySet().toArray()}"
+														var="map" class="tab-score">
 
-									</h:form>
-                                </div>
-                                <div id="tab2222" class="tab">
-                                <h:form>
+														<h:column>
+															<f:facet name="header">Horaire</f:facet>
+															<h:outputText class="score-position"
+																value="${map.key.dateMatch}">
+																<f:convertDateTime type="time" pattern="HH:mm" />
+															</h:outputText>
 
-										<h:dataTable  var="m" value="#{pariBean.allMatchs}"
-											class="tab-score">
+														</h:column>
+														<h:column>
+															<f:facet class="score-position" name="header">Event</f:facet>
+															<h:outputText class="score-position"
+																value="${map.key.player.fullName} - ${map.key.player2.fullName}" />
+															<f:facet name="footer">
+																<h:outputText value="#{pariBean.amount}" />
+															</f:facet>
+														</h:column>
 
-											<h:column>
-												<f:facet name="header">Horaire</f:facet>
-												<h:outputText class="score-position" value="${m.dateMatch}">
-													<f:convertDateTime type="time" pattern="HH:mm" />
-												</h:outputText>
-											</h:column>
-											<h:column>
-												<f:facet class="score-position" name="header">Event</f:facet>
-												<h:commandLink
-													action="#{pronosticBean.match(m)}"
-													value="${m.player} - ${m.player2}" />
-												</h:column>
+														<h:column>
+															<f:facet class="score-position" name="header">?</f:facet>
+															<h:outputText class="score-position" value="#{map.value}" />
+															<f:facet name="footer">
+																<h:inputText value="#{pariBean.money}" />
+															</f:facet>
+														</h:column>
 
-											<h:column>
-												<f:facet class="score-position" name="header">1</f:facet>
-												<h:commandLink action="#{pariBean.bet(m,1)}"
-													value="#{pariBean.cote(m)}" />
+														<h:column>
+															<f:facet class="score-position" name="header">Remove</f:facet>
+															<h:commandLink
+																action="#{pariBean.removeBet(map.key,map.value)}"
+																value="remove">
+																<f:ajax render="form" />
+															</h:commandLink>
 
-											</h:column>
+															<f:facet name="footer">
+																<h:outputText
+																	value="#{pariBean.money * pariBean.amount}" />
+															</f:facet>
 
-											<h:column>
-												<f:facet class="score-position" name="header">2</f:facet>
-												<h:commandLink action="#{pariBean.bet(m,2)}"
-													value="#{pariBean.cote(m)}" />
 
-											</h:column>
+														</h:column>
 
-										</h:dataTable>
+													</h:dataTable>
 
-									</h:form>
-                                </div>
-                                
-                            </div>
-                            <div class="score-view-all"></div>
-                        </div>
-                    </div>
-           </div><!--Close Top Match-->
-           <div class="col-md-3 right-column">
-           
-          
-          
-         </div> </div>
-        </section>
-       
-   
-</section>
-<script src="js/jquery-1.10.2.js" type="text/javascript"></script>
-<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-<!--MENU-->
-<script src="js/menu/modernizr.custom.js" type="text/javascript"></script>
-<script src="js/menu/cbpHorizontalMenu.js" type="text/javascript"></script>
-<!--END MENU-->
+												</h:form>
+												<div class="top-score-title right-score col-md-6">
+													<h3>
+														Login<span> Now</span><span class="point-int"> !</span>
+													</h3>
 
-<!-- Button Anchor Top-->
-<script src="js/jquery.ui.totop.js" type="text/javascript"></script>
 
- <script src="js/custom.js" type="text/javascript"></script>   
+												</div>
+											</div>
+											<div id="tab2222" class="tab">
+												<h:form>
+
+													<h:dataTable var="m" value="#{pariBean.allMatchs}"
+														class="tab-score">
+
+														<h:column>
+															<f:facet name="header">Horaire</f:facet>
+															<h:outputText class="score-position"
+																value="${m.dateMatch}">
+																<f:convertDateTime type="time" pattern="HH:mm" />
+															</h:outputText>
+														</h:column>
+														<h:column>
+															<f:facet class="score-position" name="header">Event</f:facet>
+															<h:commandLink action="#{pronosticBean.match(m)}"
+																value="${m.player.fullName} - ${m.player2.fullName}"
+																target="_new" />
+														</h:column>
+
+														<h:column>
+															<f:facet class="score-position" name="header">1</f:facet>
+															<h:commandLink action="#{pariBean.bet(m,1)}"
+																value="#{pariBean.cote(m)}">
+																<f:ajax render="form" />
+															</h:commandLink>
+
+
+
+														</h:column>
+
+														<h:column>
+															<f:facet class="score-position" name="header">2</f:facet>
+															<h:commandLink action="#{pariBean.bet(m,2)}"
+																value="#{pariBean.cote(m)}">
+																<f:ajax render="form" />
+															</h:commandLink>
+
+														</h:column>
+
+													</h:dataTable>
+
+												</h:form>
+											</div>
+
+										</div>
+										<div class="score-view-all"></div>
+									</div>
+								</div>
+							</div>
+							<!--Close Top Match-->
+							<div class="col-md-3 right-column"></div>
+						</div>
+					</div>
+
+
+				</div>
+				<script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+				<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+				<!--MENU-->
+				<script src="js/menu/modernizr.custom.js" type="text/javascript"></script>
+				<script src="js/menu/cbpHorizontalMenu.js" type="text/javascript"></script>
+				<!--END MENU-->
+
+				<!-- Button Anchor Top-->
+				<script src="js/jquery.ui.totop.js" type="text/javascript"></script>
+
+				<script src="js/custom.js" type="text/javascript"></script>
+			</div>
 		</ui:define>
 	</ui:composition>
 </body>

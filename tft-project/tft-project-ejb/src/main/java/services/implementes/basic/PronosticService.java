@@ -1,7 +1,6 @@
 package services.implementes.basic;
 
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -25,9 +24,9 @@ import services.interfaces.basic.ServicesBasicLocal;
 @Stateless
 
 public class PronosticService implements PronosticServiceLocal, PronosticServiceRemote {
-@EJB
+	@EJB
 	ServicesBasicLocal<MatchSingle> proxy;
-	
+
 	/**
 	 * Default constructor.
 	 */
@@ -38,8 +37,8 @@ public class PronosticService implements PronosticServiceLocal, PronosticService
 	public float pronostic(MatchSingle match) {
 		// return new Random().nextFloat();
 		float[] classement = classement(match.getPlayer(), match.getPlayer2());
-//		 float[] derniersResultats = derniersResultats(match.getPlayer(),
-//		 match.getPlayer2());
+		// float[] derniersResultats = derniersResultats(match.getPlayer(),
+		// match.getPlayer2());
 		// float[] surface = surface(match.getPlayer(), match.getPlayer2(),
 		// match.getCourt().getSurface());
 		// float[] blessure = blessure(match.getPlayer(), match.getPlayer2());
@@ -50,22 +49,21 @@ public class PronosticService implements PronosticServiceLocal, PronosticService
 		// match.getPlayer2(),
 		// match.getCompetition().getCountry());
 		float[] somme = { 0, 0 };
-		somme[0] = (classement[0]  /*+ derniersResultats[0] + surface[0] +
+		somme[0] = (classement[0] /*
+									 * + derniersResultats[0] + surface[0] +
 									 * lieuDuTournoi[0]
 									 */);
 		somme[1] = (classement[1]
-									 /* + derniersResultats[1] + surface[1] + //
-									 * lieuDuTournoi[1]
-									 */);
+		/*
+		 * + derniersResultats[1] + surface[1] + // lieuDuTournoi[1]
+		 */);
 		float res = somme[0] / (somme[0] + somme[1]);
 		NumberFormat formatter = NumberFormat.getInstance(Locale.US);
 		formatter.setMaximumFractionDigits(2);
 		formatter.setMinimumFractionDigits(2);
-		formatter.setRoundingMode(RoundingMode.DOWN); 
+		formatter.setRoundingMode(RoundingMode.DOWN);
 		Float formatedFloat = new Float(formatter.format(res));
-		
-		
-				
+
 		return formatedFloat;
 
 	}
@@ -116,36 +114,36 @@ public class PronosticService implements PronosticServiceLocal, PronosticService
 		float[] res = { 0, 0 };
 		res[0] = classement(player1);
 		res[1] = classement(player2);
-		System.out.println(res[0]);
-		System.out.println(res[1]);
+
 		return res;
 	}
 
 	public float classement(Player player) {
-		int cj = player.getClassement();
-		if (cj == 0)
-			return 0;
-		if (player.getClassement() < 4)
-			return 40;
-		if (cj < 11 && cj > 3)
-			return 30;
-		if (cj < 51 && cj > 10)
-			return 20;
-		if (cj < 101 && cj > 50)
-			return 15;
-		if (cj > 100)
-			return 10;
-		return 0;
+		// int cj = player.getClassement();
+		// if (cj == 0)
+		// return 0;
+		// if (player.getClassement() < 4)
+		// return 40;
+		// if (cj < 11 && cj > 3)
+		// return 30;
+		// if (cj < 51 && cj > 10)
+		// return 20;
+		// if (cj < 101 && cj > 50)
+		// return 15;
+		// if (cj > 100)
+		// return 10;
+		// return 0;
+		return player.getClassement();
 	}
 
 	public float[] derniersResultats(Player player1, Player player2) {
 
-		float[] dR = { 0, 0 }, dF={ 0, 0 }, res = { 0, 0 };
+		float[] dR = { 0, 0 }, dF = { 0, 0 }, res = { 0, 0 };
 		dR[0] = derniersResultats(player1);
 		dR[1] = derniersResultats(player2);
-//		dF = derniersFaceAFace(player1, player2);
-		res[1] = (dR[0]+ dF[0]);
-		res[1] = (dR[1]+dF[1] );
+		// dF = derniersFaceAFace(player1, player2);
+		res[1] = (dR[0] + dF[0]);
+		res[1] = (dR[1] + dF[1]);
 		return res;
 	}
 
@@ -156,11 +154,11 @@ public class PronosticService implements PronosticServiceLocal, PronosticService
 
 	public int derniersResultats(Player player) {
 		int res = 0, i = 0;
-		System.out.println("player id   "+ player.getId());
-		player.setMatchSingles1(proxy.findBy2(MatchSingle.class, "player.id",String.valueOf(player.getId())));
-		player.setMatchSingles2(proxy.findBy2(MatchSingle.class, "player2.id",String.valueOf(player.getId())));
+		System.out.println("player id   " + player.getId());
+		player.setMatchSingles1(proxy.findBy2(MatchSingle.class, "player.id", String.valueOf(player.getId())));
+		player.setMatchSingles2(proxy.findBy2(MatchSingle.class, "player2.id", String.valueOf(player.getId())));
 		List<MatchSingle> list = player.getAllMatchSingles();
-System.out.println("list matches size  "+list.size());
+		System.out.println("list matches size  " + list.size());
 		for (MatchSingle match : list) {
 
 			i++;
@@ -172,7 +170,7 @@ System.out.println("list matches size  "+list.size());
 			if (i == 5)
 				break;
 		}
-System.out.println("resultat  "+res);
+		System.out.println("resultat  " + res);
 		return res;
 	}
 

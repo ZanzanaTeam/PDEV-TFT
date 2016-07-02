@@ -8,17 +8,87 @@
 <body>
 	<ui:composition template="/template.xhtml">
 		<ui:define name="content">
-			<h3>Competitions List</h3>
-			<h:form>
-				<h:dataTable var="c" value="#{competitionsBean.allCompetitions}">
-					<h:column>
-						<f:facet name="header">Competition Name</f:facet>
-						<h:commandButton action="#{pariBean.showCompetetion(c)}"
-							value="${c.name}" />
-						<h:outputText value="${c.name}" />
-					</h:column>
-				</h:dataTable>
-			</h:form>
+			<div class="drawer">
+
+
+				<div id="summary" class="container secondary-page">
+					<div class="general general-results">
+						<div id="rrResult"
+							class="top-score-title right-score total-reslts col-md-9">
+							<h3>
+								<span>lifelong dream of becoming </span>RICH<span
+									class="point-little">.</span>
+							</h3>
+
+							<section class="drawer"> <section id="summary"
+								class="container secondary-page">
+							<div class="general general-results tournaments">
+
+								<div id="c-calend" class="top-score-title right-score col-md-9">
+
+
+									<div class="accordion" id="section1">
+										<i class="fa fa-calendar-o"></i>Competitions<span></span>
+									</div>
+									<h:form>
+
+										<ui:repeat var="c" value="#{competitionsBean.allCompetitions}">
+
+											<div class="acc-content">
+
+
+												<h:commandLink action="#{pariBean2.showCompetetion(c.id)}"
+													value="${c.name}" />
+
+
+
+
+											</div>
+
+										</ui:repeat>
+
+
+									</h:form>
+
+								</div>
+
+							</div>
+							<!--Close Top Match--> </section></section>
+						</div>
+						<!--Close Top Match-->
+						<div class="col-md-3 right-column">
+							<div class="top-score-title col-md-12 right-title">
+								<h3>Import your combination</h3>
+								<div class="right-content">
+									<div class="col-md-12 login-page">
+										<h:form class="login-form">
+											<div class="name">
+												<label for="name_login">Code:</label>
+												<div class="clear"></div>
+												<h:inputText value="#{pariBean2.codeLoader}" id="name_login"
+													name="name_login" type="text" placeholder="your  code here"
+													required="" />
+											</div>
+
+											<div id="login-submit">
+												<h:commandButton value="submit"
+													action="#{pariBean2.loadCombinationWithRedirect()}" />
+											</div>
+										</h:form>
+									</div>
+								</div>
+
+							</div>
+
+
+						</div>
+					</div>
+					<div id="sponsor" class="container">
+						<!--div SPONSOR-->
+
+					</div>
+				</div>
+			</div>
 		</ui:define>
 	</ui:composition>
 </body>
