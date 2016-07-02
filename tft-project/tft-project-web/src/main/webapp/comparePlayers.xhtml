@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template.xhtml">
+		<ui:define name="content">
+
+
+			<div class="col-md-12 size-img back-img-match">
+				<div class="effect-cover">
+					<h3 class="txt-advert animated">Tunisian Palyer</h3>
+					<p class="txt-advert-sub">Lifelong dream of becoming the No. 1
+						player on the ATP World Tour</p>
+				</div>
+			</div>
+			<section id="single_player" class="container secondary-page">
+			<div class="general general-results players">
+				<div class="top-score-title right-score col-md-12">
+					<div class="col-md-6 atp-single-player">
+					
+					<h4>
+						#{playersBean.player.fullName}
+					</h4>
+						<h:graphicImage styleClass="img-djoko"
+							value="images/player/player.jpg" alt="" width="150px" />
+						<div class="col-md-2 data-player">
+							<p>Birthdate:</p>
+							<p>Birthplace:</p>
+							<p>Height:</p>
+							<p>Weight:</p>
+						</div>
+						<div class="col-md-3 data-player-2">
+							<p>#{playersBean.player.birthDate}</p>
+							<p>#{playersBean.player.birthPlace}</p>
+							<p>#{playersBean.player.height}</p>
+							<p>#{playersBean.player.weight}</p>
+						</div>
+						<div class="col-md-2 rank-player">
+							<div class="content-rank">
+								<p class="rank-data">#{playersBean.player.classement}</p>
+							</div>
+							<p class="rank-title">Current Ranked</p>
+						</div>
+					</div>
+					<div class="col-md-6 atp-single-player">
+					
+						<h3>
+							#{playersBean.player2.fullName}
+						</h3>
+						<h:graphicImage styleClass="img-djoko"
+							value="images/player/player.jpg" alt="" width="150px" />
+						<div class="col-md-2 data-player">
+							<p>Birthdate:</p>
+							<p>Birthplace:</p>
+							<p>Height:</p>
+							<p>Weight:</p>
+						</div>
+						<div class="col-md-3 data-player-2">
+							<p>#{playersBean.player2.birthDate}</p>
+							<p>#{playersBean.player2.birthPlace}</p>
+							<p>#{playersBean.player2.height}</p>
+							<p>#{playersBean.player2.weight}</p>
+						</div>
+						<div class="col-md-2 rank-player">
+							<div class="content-rank">
+								<p class="rank-data">#{playersBean.player2.classement}</p>
+							</div>
+							<p class="rank-title">Current Ranked</p>
+						</div>
+					</div>
+
+					<div class="col-md-12 atp-single-player skill-content">
+						<div class="exp-skill">
+							<p class="exp-title-pp">SKILLS</p>
+							<div class="col-md-6">
+								<div class="skills-pp">
+									<c:forEach items="#{playersBean.skills}" var="s">
+										<div class="skillbar-pp clearfix" data-percent="#{s.value*5}%">
+											<div class="skillbar-title-pp">
+												<span>#{s.key} </span>
+											</div>
+											<div class="skillbar-bar-pp"></div>
+											<div class="skill-bar-percent-pp">#{s.value*5}%</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="skills-pp">
+									<c:forEach items="#{playersBean.skills}" var="s">
+										<div class="skillbar-pp clearfix" data-percent="#{s.value*5}%">
+											<div class="skillbar-title-pp">
+												<span>#{s.key} </span>
+											</div>
+											<div class="skillbar-bar-pp"></div>
+											<div class="skill-bar-percent-pp">#{s.value*5}%</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-12 atp-single-player skill-content">
+						<div class="ppl-desc">
+							<p class="exp-title-pp">Statistics</p>
+
+						</div>
+					</div>
+					<div class="col-md-12 atp-single-player skill-content">
+						<div class="ppl-desc">
+							<p class="exp-title-pp">Last
+								#{playersBean.matchs.size()}Matchs</p>
+							<ui:repeat value="#{playersBean.matchs}" var="m">
+								<table class="match-tbs">
+									<tr>
+										<td class="match-tbs-title" colspan="7">#{m.tour.season.title}
+											- #{m.tour.title}</td>
+									</tr>
+									<tr class="match-sets">
+										<td class="fpt">Sets</td>
+
+										<ui:repeat value="#{m.sets}" var="set">
+											<td class="fpt">#{m.sets.indexOf(set)+1}</td>
+										</ui:repeat>
+									</tr>
+									<tr>
+										<td class="fpt">#{m.player.fullName} <h:panelGroup
+												rendered="#{m.winner==m.player}">
+												<i class="fa fa-check"></i>
+											</h:panelGroup>
+
+										</td>
+
+										<ui:repeat value="#{m.sets}" var="set">
+											<td class="fpt">#{set.getScore(m.player)}</td>
+										</ui:repeat>
+									</tr>
+									<tr>
+										<td class="fpt fpt2">#{m.player2.fullName} <h:panelGroup
+												rendered="#{m.winner==m.player2}">
+												<i class="fa fa-check"></i>
+											</h:panelGroup>
+										</td>
+
+										<ui:repeat value="#{m.sets}" var="set">
+											<td class="fpt">#{set.getScore(m.player2)}</td>
+										</ui:repeat>
+									</tr>
+								</table>
+							</ui:repeat>
+						</div>
+					</div>
+				</div>
+				<!--Close Top Match-->
+				<!--Right Column-->
+
+			</div>
+			</section>
+
+
+
+
+			<section id="sponsor" class="container"> <!--SECTION SPONSOR-->
+			<div class="client-sport client-sport-nomargin">
+				<div class="content-banner">
+					<ul class="sponsor second">
+						<li><img src="images/sponsor/2/1.jpg" alt="" /></li>
+						<li><img src="images/sponsor/2/2.jpg" alt="" /></li>
+						<li><img src="images/sponsor/2/3.jpg" alt="" /></li>
+						<li><img src="images/sponsor/2/4.jpg" alt="" /></li>
+						<li><img src="images/sponsor/2/5.jpg" alt="" /></li>
+						<li><img src="images/sponsor/2/2.jpg" alt="" /></li>
+					</ul>
+				</div>
+			</div>
+			</section>
+
+			<!--FOOTER-->
+			<section id="footer-tag">
+			<div class="container">
+				<div class="col-md-12">
+					<div class="col-md-3">
+						<h3>About Us</h3>
+						<p>Thank you for visiting tennisclub.com. Our mission is to
+							provide unrivalled and unbiased informative and resources to help
+							any sports fan who enjoys a flutter make informed and value led
+							decisions.</p>
+						<p>Our mission is to provide unrivalled and unbiased
+							informative, resources to help any sports fan who enjoys a
+							flutter make.</p>
+					</div>
+					<div class="col-md-3 cat-footer">
+						<div class="footer-map"></div>
+						<h3 class='last-cat'>Categories</h3>
+						<ul class="last-tips">
+							<li><a href="tournaments.html">Tournaments</a></li>
+							<li><a href="results.html">All Results</a></li>
+							<li><a href="matches.html">Matches London ATP</a></li>
+							<li><a href="matches.html">Double ATP</a></li>
+							<li><a href="matches.html">Double WTP</a></li>
+							<li><a href="shops.html">Shop Best Price</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h3>Last News</h3>
+						<ul class="footer-last-news">
+							<li><img src="images/1/1.jpg" alt="" />
+								<p>Fusce risus metus, placerat in consectetur eu...</p></li>
+							<li><img src="images/1/2.jpg" alt="" />
+								<p>Fusce risus metus, placerat in consectetur eu...</p></li>
+							<li><img src="images/1/3.jpg" alt="" />
+								<p>Fusce risus metus, placerat in consectetur eu...</p></li>
+						</ul>
+					</div>
+					<div class="col-md-3 footer-newsletters">
+						<h3>Newsletters</h3>
+						<form method="post">
+							<div class="name">
+								<label for="name">* Name:</label>
+								<div class="clear"></div>
+								<input id="name" name="name" type="text"
+									placeholder="e.g. Mr. John Doe" required="" />
+							</div>
+							<div class="email">
+								<label for="email">* Email:</label>
+								<div class="clear"></div>
+								<input id="email" name="email" type="text"
+									placeholder="example@domain.com" required="" />
+							</div>
+							<div id="loader">
+								<input type="submit" value="Submit" />
+							</div>
+						</form>
+					</div>
+					<div class="col-xs-12">
+						<ul class="social">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+							<li><a href="#"><i class="fa fa-digg"></i></a></li>
+							<li><a href="#"><i class="fa fa-rss"></i></a></li>
+							<li><a href="#"><i class="fa fa-youtube"></i></a></li>
+							<li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+			</section>
+			<script>
+    $(function () {
+        "use strict";
+        $('.skillbar-pp').each(function () {
+            $(this).find('.skillbar-bar-pp').width(0);
+        });
+
+        $('.skillbar-pp').each(function () {
+            $(this).find('.skillbar-bar-pp').animate({
+                width: $(this).attr('data-percent')
+            }, 2000);
+        });
+    });
+</script>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

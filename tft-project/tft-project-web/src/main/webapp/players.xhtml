@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template.xhtml">
+		<ui:define name="content">
+
+			<section class="drawer">
+			<div class="col-md-12 size-img back-img-match">
+				<div class="effect-cover">
+					<h3 class="txt-advert animated">Tunisian Palyer</h3>
+					<p class="txt-advert-sub">Lifelong dream of becoming the No. 1
+						player on the ATP World Tour</p>
+				</div>
+			</div>
+			<section id="players" class="container secondary-page">
+			<div class="general general-results players">
+
+				<div class="top-score-title right-score col-md-12">
+					<h3>
+						Tunisian <span>Players</span><span class="point-little">.</span>
+					</h3>
+					<p class="txt-right">Lorem ipsum dolor sit amet, consectetur
+						adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+						dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+						exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat.</p>
+					<ui:repeat value="#{playersBean.players}" var="player">
+						<div class="col-md-3 atp-player">
+
+							<h:outputLink value="singlePlayer.jsf">
+								<h:graphicImage value="images/player/player.jpg" alt=""
+									width="120px" />
+								<p>#{player.fullName}</p>
+								<f:param value="#{player.id}" name="id" />
+							</h:outputLink>
+						</div>
+					</ui:repeat>
+				</div>
+			</div>
+			</section> </section>
+
+			<section id="sponsor" class="container"> <!--SECTION SPONSOR-->
+			<div class="client-sport client-sport-nomargin">
+				<div class="content-banner">
+					<ul class="sponsor second">
+						<li><img src="images/sponsor/2/1.jpg" alt="" /></li>
+						<li><img src="images/sponsor/2/2.jpg" alt="" /></li>
+						<li><img src="images/sponsor/2/3.jpg" alt="" /></li>
+						<li><img src="images/sponsor/2/4.jpg" alt="" /></li>
+						<li><img src="images/sponsor/2/5.jpg" alt="" /></li>
+						<li><img src="images/sponsor/2/2.jpg" alt="" /></li>
+					</ul>
+				</div>
+			</div>
+			</section>
+
+			<!--FOOTER-->
+			<section id="footer-tag">
+			<div class="container">
+				<div class="col-md-12">
+					<div class="col-md-3">
+						<h3>About Us</h3>
+						<p>Thank you for visiting tennisclub.com. Our mission is to
+							provide unrivalled and unbiased informative and resources to help
+							any sports fan who enjoys a flutter make informed and value led
+							decisions.</p>
+						<p>Our mission is to provide unrivalled and unbiased
+							informative, resources to help any sports fan who enjoys a
+							flutter make.</p>
+					</div>
+					<div class="col-md-3 cat-footer">
+						<div class="footer-map"></div>
+						<h3 class='last-cat'>Categories</h3>
+						<ul class="last-tips">
+							<li><a href="tournaments.html">Tournaments</a></li>
+							<li><a href="results.html">All Results</a></li>
+							<li><a href="matches.html">Matches London ATP</a></li>
+							<li><a href="matches.html">Double ATP</a></li>
+							<li><a href="matches.html">Double WTP</a></li>
+							<li><a href="shops.html">Shop Best Price</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h3>Last News</h3>
+						<ul class="footer-last-news">
+							<li><img src="images/1/1.jpg" alt="" />
+							<p>Fusce risus metus, placerat in consectetur eu...</p></li>
+							<li><img src="images/1/2.jpg" alt="" />
+							<p>Fusce risus metus, placerat in consectetur eu...</p></li>
+							<li><img src="images/1/3.jpg" alt="" />
+							<p>Fusce risus metus, placerat in consectetur eu...</p></li>
+						</ul>
+					</div>
+					<div class="col-md-3 footer-newsletters">
+						<h3>Newsletters</h3>
+						<form method="post">
+							<div class="name">
+								<label for="name">* Name:</label>
+								<div class="clear"></div>
+								<input id="name" name="name" type="text"
+									placeholder="e.g. Mr. John Doe" required="" />
+							</div>
+							<div class="email">
+								<label for="email">* Email:</label>
+								<div class="clear"></div>
+								<input id="email" name="email" type="text"
+									placeholder="example@domain.com" required="" />
+							</div>
+							<div id="loader">
+								<input type="submit" value="Submit" />
+							</div>
+						</form>
+					</div>
+					<div class="col-xs-12">
+						<ul class="social">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+							<li><a href="#"><i class="fa fa-digg"></i></a></li>
+							<li><a href="#"><i class="fa fa-rss"></i></a></li>
+							<li><a href="#"><i class="fa fa-youtube"></i></a></li>
+							<li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+			</section>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
