@@ -13,7 +13,7 @@
 
 			<div class="col-md-12 size-img back-img-match">
 				<div class="effect-cover">
-					<h3 class="txt-advert animated">Tunisian Palyer</h3>
+					<h3 class="txt-advert animated">Compare Players</h3>
 					<p class="txt-advert-sub">Lifelong dream of becoming the No. 1
 						player on the ATP World Tour</p>
 				</div>
@@ -23,9 +23,9 @@
 				<div class="top-score-title right-score col-md-12">
 					<div class="col-md-6 atp-single-player">
 					
-					<h4>
+					<h3>
 						#{playersBean.player.fullName}
-					</h4>
+					</h3>
 						<h:graphicImage styleClass="img-djoko"
 							value="images/player/player.jpg" alt="" width="150px" />
 						<div class="col-md-2 data-player">
@@ -92,7 +92,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="skills-pp">
-									<c:forEach items="#{playersBean.skills}" var="s">
+									<c:forEach items="#{playersBean.skills2}" var="s">
 										<div class="skillbar-pp clearfix" data-percent="#{s.value*5}%">
 											<div class="skillbar-title-pp">
 												<span>#{s.key} </span>
@@ -105,24 +105,26 @@
 							</div>
 						</div>
 					</div>
-
+					<!-- 
 					<div class="col-md-12 atp-single-player skill-content">
 						<div class="ppl-desc">
 							<p class="exp-title-pp">Statistics</p>
 
 						</div>
 					</div>
+					 --> 
 					<div class="col-md-12 atp-single-player skill-content">
 						<div class="ppl-desc">
 							<p class="exp-title-pp">Last
-								#{playersBean.matchs.size()}Matchs</p>
-							<ui:repeat value="#{playersBean.matchs}" var="m">
+								#{playersBean.comparedMatchs.size()} To face</p>
+							<ui:repeat value="#{playersBean.comparedMatchs}" var="m">
 								<table class="match-tbs">
 									<tr>
 										<td class="match-tbs-title" colspan="7">#{m.tour.season.title}
 											- #{m.tour.title}</td>
 									</tr>
 									<tr class="match-sets">
+										<td></td>
 										<td class="fpt">Sets</td>
 
 										<ui:repeat value="#{m.sets}" var="set">
@@ -137,6 +139,7 @@
 
 										</td>
 
+										<td class="fpt">#{m.getScore(m.player)}</td>
 										<ui:repeat value="#{m.sets}" var="set">
 											<td class="fpt">#{set.getScore(m.player)}</td>
 										</ui:repeat>
@@ -148,6 +151,7 @@
 											</h:panelGroup>
 										</td>
 
+										<td class="fpt">#{m.getScore(m.player2)}</td>
 										<ui:repeat value="#{m.sets}" var="set">
 											<td class="fpt">#{set.getScore(m.player2)}</td>
 										</ui:repeat>
