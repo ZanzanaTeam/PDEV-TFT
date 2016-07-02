@@ -7,7 +7,7 @@
 
 <h:head>
 	<h:outputScript name="charts/charts.js" library="primefaces" />
-		<h:outputStylesheet name="charts/charts.css" library="primefaces" />
+	<h:outputStylesheet name="charts/charts.css" library="primefaces" />
 
 </h:head>
 <body>
@@ -19,7 +19,7 @@
 				<div class="top-score-title right-score col-md-9">
 					<div class="top-score-title player-vs">
 						<h3>
-							Ashe Stadium - <span>#{statistics.match.tour.position}</span><span
+							#{statistics.match.competition.name} <span>#{statistics.match.tour.position}</span><span
 								class="point-little">.</span>
 						</h3>
 						<div class="main">
@@ -36,17 +36,14 @@
 											</div>
 											<div class="col-md-12 play-vs">
 												<div class="result-name">
-													<img src="img/flag2.jpg" alt="" /> <span>RODAK
-														JAMAL</span> <span class="txt-vs">vs</span> <img
-														src="img/flag1.jpg" alt="" /> <span>JAMES WOZNIK</span>
+													<img src="img/flag2.jpg" alt="" /> <span>#{statistics.playerOne}
+														</span> <span class="txt-vs">vs</span> <img
+														src="img/flag1.jpg" alt="" /> <span>#{statistics.playerTwo}</span>
 												</div>
 											</div>
 											<div class="clear"></div>
 											<div class="col-md-12 play-vs">
-												<!--                                                 <table id="result-table"> -->
-												<!--                                                       <tr><td class="fpt">R. JAMAL</td><td class="fpt">3</td><td class="fpt">6</td><td class="fpt">6</td><td>6</td></tr> -->
-												<!--                                                       <tr><td class="fpt fpt2">J. WOZNIK</td><td class="fpt fpt2">6</td><td class="fpt fpt2">4</td><td class="fpt fpt2">2</td><td class="fpt2">4</td></tr> -->
-												<!--                                                  </table> -->
+										                                          
 
 												<table id="result-table">
 													<tr>
@@ -76,26 +73,126 @@
 							<div class="tabs standard single-pl">
                                 <ul class="tab-links-match tb-set">
                                     <li class="active"><a class="first-tabs" href="#tab1">Match Summary</a></li>
-                                    <li><a class="first-tabs" href="#tab2">set 1</a></li>
-                                    <li><a href="#">set 2</a></li>
-                                    <li><a href="#">set 3</a></li>
-                                    <li><a href="#">set 4</a></li>
-                                    <li><a href="#">set 5</a></li>
+                                    
+                                   <ui:repeat var="s" value="#{statistics.match.sets}"
+															class="fpt">
+															 <li><a class="first-tabs" href="#tab2">#{statistics.setNumber}</a></li>
+														</ui:repeat>
                                 </ul>
                                 <div class="tab-content single-match">
                                     <div id="tab1" class="tab active">
                                        <h3 class="tab-match-title">MATCH STATISTICS</h3>
                                         <div class="tabs standard">
-                                           
-                                           <p:panel>
+                                   
+                                   
+                                   			<div class="tabs standard">
+                                            <ul class="tab-links-match">
+                                                <li class="active"><a class="first-tabs" href="#tab1a">OVERALL MATCH STATS</a></li>
+                                                <li><a href="#tab2a">SERVE STATS</a></li>
+                                            </ul>
+			                                            <div class="tab-content">
+                                                <div id="tab1a" class="tab active">
+                                                                                   <p:panel>
 			<p:chart type="bar" model="#{statistics.barModel}"
 				style="height:300px width:600px" />
 				</p:panel>
+                                                </div>
+                                                <div id="tab2a" class="tab">
+                                                  <div class="col-md-4 single-match-data">
+                                                      <p class="nm-player">#{statistics.match.player}</p>
+                                                      <div class="col-md-4 subcol-pl">
+                                                          <p>TOTAL</p>
+                                                          <p>7</p>
+                                                          <p>1</p>
+                                                          <p>3</p>
+                                                          <p>49</p>
+                                                          <p>32</p>
+                                                          <p>9</p>
+                                                          <p>97</p>
+                                                          <p>120</p>
+                                                      </div>
+                                                      <div class="col-md-4 subcol-pl">
+                                                         <p>1ST SERVE</p>
+                                                          <p>7</p>
+                                                          <p>1</p>
+                                                          <p>3</p>
+                                                          <p>49</p>
+                                                          <p>32</p>
+                                                          <p>9</p>
+                                                          <p>97</p>
+                                                          <p>120</p>
+                                                      </div>
+                                                      <div class="col-md-4 subcol-pl">
+                                                          <p>2ND SERVE</p>
+                                                          <p>7</p>
+                                                          <p>1</p>
+                                                          <p>3</p>
+                                                          <p>49</p>
+                                                          <p>32</p>
+                                                          <p>9</p>
+                                                          <p>97</p>
+                                                          <p>120</p>
+                                                      </div>
+                                                   </div>
+                                                   <div class="col-md-4 single-match-data">
+                                                     <p class="nm-player">Stats</p>
+                                                     <p>-</p>
+                                                     <p>Aces</p>
+                                                      <p>Service winners</p>
+                                                      <p>Double faults</p>
+                                                      <p>Total points</p>
+                                                      <p>Total points won</p>
+                                                      <p>Service games</p>
+                                                      <p>Average serve speed</p>
+                                                      <p>Fastest serve speed</p>
+                                                   </div>
+                                                   <div class="col-md-4 single-match-data">
+                                                     <p class="nm-player">Alex Serghi</p>
+                                                    <div class="col-md-4 subcol-pl">
+                                                          
+                                                          <p>2ND SERVE</p>
+                                                          <p>7</p>
+                                                          <p>1</p>
+                                                          <p>3</p>
+                                                          <p>49</p>
+                                                          <p>32</p>
+                                                          <p>9</p>
+                                                          <p>97</p>
+                                                          <p>120</p>
+                                                      </div>
+                                                      <div class="col-md-4 subcol-pl">
+                                                          <p>1ST SERVE</p>
+                                                          <p>7</p>
+                                                          <p>1</p>
+                                                          <p>3</p>
+                                                          <p>49</p>
+                                                          <p>32</p>
+                                                          <p>9</p>
+                                                          <p>97</p>
+                                                          <p>120</p>
+                                                      </div>
+                                                      <div class="col-md-4 subcol-pl">
+                                                         <p>TOTAL</p>
+                                                          <p>7</p>
+                                                          <p>1</p>
+                                                          <p>3</p>
+                                                          <p>49</p>
+                                                          <p>32</p>
+                                                          <p>9</p>
+                                                          <p>97</p>
+                                                          <p>120</p>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                 </div>        
+                                          
 						</div>
 					</div>
 				</div>
 				<!--Close Top Match-->
 			</div>
+
 </div>
 </div>
 </div></div>

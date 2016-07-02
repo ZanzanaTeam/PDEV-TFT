@@ -1,14 +1,13 @@
 package bean;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 import org.primefaces.model.chart.Axis;
@@ -26,9 +25,9 @@ import services.interfaces.SetServicesLocal;
 import services.interfaces.basic.ServicesBasicLocal;
 
 @ManagedBean
-@ApplicationScoped
-public class Statistics {
 
+public class Statistics {
+	static String SET = "SET ";
 	private BarChartModel barModel;
 
 	@EJB
@@ -49,6 +48,17 @@ public class Statistics {
 	List<Point> listPointPlayer1 = new ArrayList<>();
 	List<Point> listPointPlayer2 = new ArrayList<>();
 
+	Map<PointType, Integer> listPointPlayer1Regroupe;
+	Map<PointType, Integer> listPointPlayer2Regroupe;
+
+	String setNumber;
+	int i = 0;
+
+	public String getSetNumber() {
+
+		return SET + (++i) + "";
+	}
+
 	public String getPlayerOne() {
 		return playerOne;
 	}
@@ -65,10 +75,11 @@ public class Statistics {
 		return listPointPlayer2;
 	}
 
-	@PostConstruct
-	public void init() {
+	public String init(Integer id) {
 
-		createBarModels();
+		createBarModels(id);
+		return "matchDetails.jsf?faces-redirect=true";
+
 	}
 
 	public BarChartModel getBarModel() {
@@ -76,17 +87,23 @@ public class Statistics {
 		return barModel;
 	}
 
-	private BarChartModel initBarModel() {
+	/**
+	 * @return BarChartModel
+	 * @param
+	 */
+	private BarChartModel initBarModel(Integer idMatch) {
 
 		BarChartModel model = new BarChartModel();
 
 		ChartSeries playertwoChart = new ChartSeries();
 
 		ChartSeries playerOneChart = new ChartSeries();
-		System.out.println("point par Set " + setServices.findPointSet(11, 10));
-		List<Point> points = pointServices.findAllPointsByMatch(1);
+
+		match = servicesBasicMatch.findById(idMatch, MatchSingle.class);
+		System.out.println("matchid    " + match.getPlayer().getId());
+
+		List<Point> points = pointServices.findAllPointsByMatch(idMatch);
 		System.out.println(points.size());
-		match = servicesBasicMatch.findById(1, MatchSingle.class);
 
 		if (match instanceof MatchSingle) {
 			playerOne = ((MatchSingle) match).getPlayer().getFullName();
@@ -94,8 +111,7 @@ public class Statistics {
 		}
 
 		playerOneChart.setLabel(playerOne);
-		System.out.println("player One Name : " + playerOne);
-		System.out.println("player two Name : " + playerTwo);
+
 		playertwoChart.setLabel(playerTwo);
 
 		for (Point point : points) {
@@ -109,11 +125,9 @@ public class Statistics {
 				listPointPlayer2.add(point);
 			}
 		}
-		System.out.println("size list Player Points 1 " + listPointPlayer1.size());
-		System.out.println("size list Player Points 2 " + listPointPlayer2.size());
 
-		Map<PointType, Integer> listPointPlayer1Regroupe = CountPointByType(listPointPlayer1);
-		Map<PointType, Integer> listPointPlayer2Regroupe = CountPointByType(listPointPlayer2);
+		listPointPlayer1Regroupe = CountPointByType(listPointPlayer1);
+		listPointPlayer2Regroupe = CountPointByType(listPointPlayer2);
 		for (Entry<PointType, Integer> entry : listPointPlayer1Regroupe.entrySet()) {
 
 			playerOneChart.set(entry.getKey(), entry.getValue().intValue());
@@ -125,12 +139,12 @@ public class Statistics {
 
 		model.addSeries(playerOneChart);
 		model.addSeries(playertwoChart);
+
 		return model;
 	}
 
 	public MatchSingle getMatch() {
-		System.out.println("msets match " + match.getSets().size());
-		match.getSets().forEach(s->{System.out.println(s.getScore(match.getPlayer()));System.out.println(s.getScore(match.getPlayer2()));});
+
 		return match;
 	}
 
@@ -194,14 +208,17 @@ public class Statistics {
 		return mapPoint;
 	}
 
-	private void createBarModels() {
-		createBarModel();
+	private void createBarModels(Integer id) {
+		createBarModel(id);
 
 	}
 
-	private void createBarModel() {
+	/**
+	 * @return Void
+	 */
+	private void createBarModel(Integer idMatch) {
 
-		barModel = initBarModel();
+		barModel = initBarModel(idMatch);
 
 		barModel.setTitle("Bar Chart");
 		barModel.setLegendPosition("ne");
@@ -213,7 +230,9 @@ public class Statistics {
 		Axis yAxis = barModel.getAxis(AxisType.Y);
 		yAxis.setLabel("Nombre des points ");
 		yAxis.setMin(0);
-		yAxis.setMax(200);
+		Integer key = Collections.max(listPointPlayer2Regroupe.entrySet(), Map.Entry.comparingByValue()).getValue();
+		yAxis.setMax(key + 10);
+
 	}
 
 	public List<SetMatch> getSetsMatch() {
