@@ -87,15 +87,13 @@
 										<li><img src="#{n.thumbnail}" alt="" />
 											<p class="product-title">#{n.title}</p>
 											<p class="txt-other-news">#{n.summary}</p>
-<!-- 											<div> -->
+											<div>
 
-<!-- 												<h:form> -->
-<!-- 													<h:link value="Read"> -->
-<!-- 														<f:param name="id" value="#{newsBean.singleNewsById(n.id)}" /> -->
-<!-- 													</h:link> -->
-<!-- 												</h:form> -->
-<!-- 											</div> -->
-											</li>
+												<h:form>
+													<h:commandButton class="pl-point-button"
+														action="#{newsBean.singleNewsById(n.id)}" value="Read" />
+												</h:form>
+											</div></li>
 									</ui:repeat>
 								</ul>
 							</div>
@@ -104,13 +102,10 @@
 				</div>
 				<!-- 				Close Top Match -->
 				<div class="col-md-3 right-column">
-					<div class="top-score-title col-md-12 right-title">
-				
-
-					</div>
-<!-- 					<div class="top-score-title col-md-12"> -->
-<!-- 						<br></br> <br></br> <img src="images/banner2.jpg" alt="" /> -->
-<!-- 					</div> -->
+					<div class="top-score-title col-md-12 right-title"></div>
+					<!-- 					<div class="top-score-title col-md-12"> -->
+					<!-- 						<br></br> <br></br> <img src="images/banner2.jpg" alt="" /> -->
+					<!-- 					</div> -->
 					<div class="top-score-title col-md-12 right-title">
 						<h3>Photos</h3>
 						<ul class="right-last-photo">
