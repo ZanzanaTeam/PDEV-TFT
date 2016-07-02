@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -136,7 +137,7 @@ public class Match implements Serializable {
 	@XmlTransient
 	@OneToMany(mappedBy = "match", fetch = FetchType.EAGER)
 	public List<SetMatch> getSets() {
-		return sets;
+		return sets.stream().distinct().collect(Collectors.toList());
 	}
 
 	public void setSets(List<SetMatch> sets) {
