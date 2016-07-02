@@ -7,20 +7,16 @@
 <body>
 	<ui:composition template="/template.xhtml">
 		<ui:define name="content">
-
 			<!-- <h:form>
 				<h:dataTable var="c" value="#{matchsBean.all}">
 					<h:column>
 						<f:facet name="header">Competition Name</f:facet>
 						<h:outputText value="${c.competition.name}" />
-					</h:column>
-					
+					</h:column>			
 					<h:column>
 						<f:facet name="header">Weather</f:facet>
 						<h:outputText value="${c.weather}" />
 					</h:column> -->
-
-
 			<!--SECTION Match TOP SCORE-->
 			<div id="atp-match">
 				<div class="container">
@@ -29,7 +25,6 @@
 							Last <span>Match</span><span class="point-little">.</span>
 						</h3>
 						<p class="subtitle">All matchs step by step</p>
-
 						<div id="next-match">
 							<div class="container">
 								<ui:repeat value="#{matchsBean.all}" var="c">
@@ -42,13 +37,11 @@
 													value="#{c.player2}" outcome="c">
 													<f:param name="Name" value="#{c.player2}" />
 												</h:link></span>
-												
 											<p class='sub-result'>
 												<h:link value="#{c.dateMatch}" outcome="c">
 													<f:param name="Name" value="#{c.dateMatch}" />
 												</h:link>
 											</p>
-											
 											<p class="dd-news-date">
 												<p>
 													<h:link value="#{c.competition.name}" outcome="c">
@@ -75,8 +68,6 @@
 
 				</div>
 			</div>
-
-
 		</ui:define>
 	</ui:composition>
 </body>
