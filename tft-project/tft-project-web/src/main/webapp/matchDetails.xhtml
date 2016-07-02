@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputScript name="charts/charts.js" library="primefaces" />
+		<h:outputStylesheet name="charts/charts.css" library="primefaces" />
+
+</h:head>
+<body>
+	<ui:composition template="/template.xhtml">
+		<ui:define name="content">
+	
+			<section id="single-match-pl" class="container secondary-page">
+			<div class="general general-results players">
+				<div class="top-score-title right-score col-md-9">
+					<div class="top-score-title player-vs">
+						<h3>
+							Ashe Stadium - <span>#{statistics.match.tour.position}</span><span
+								class="point-little">.</span>
+						</h3>
+						<div class="main">
+							<div class="tabs standard">
+								<div class="tab-content">
+									<div class="effect-color">
+										<div class="tab active">
+											<div class="col-md-12 player-score-bg"></div>
+											<div class="col-md-12 player-photo">
+												<img class="img-face img-mm1"
+													src="images/player/mediumw.jpg" alt="" /> <img
+													class="img-face img-mm2" src="images/player/mediumw2.jpg"
+													alt="" />
+											</div>
+											<div class="col-md-12 play-vs">
+												<div class="result-name">
+													<img src="img/flag2.jpg" alt="" /> <span>RODAK
+														JAMAL</span> <span class="txt-vs">vs</span> <img
+														src="img/flag1.jpg" alt="" /> <span>JAMES WOZNIK</span>
+												</div>
+											</div>
+											<div class="clear"></div>
+											<div class="col-md-12 play-vs">
+												<!--                                                 <table id="result-table"> -->
+												<!--                                                       <tr><td class="fpt">R. JAMAL</td><td class="fpt">3</td><td class="fpt">6</td><td class="fpt">6</td><td>6</td></tr> -->
+												<!--                                                       <tr><td class="fpt fpt2">J. WOZNIK</td><td class="fpt fpt2">6</td><td class="fpt fpt2">4</td><td class="fpt fpt2">2</td><td class="fpt2">4</td></tr> -->
+												<!--                                                  </table> -->
+
+												<table id="result-table">
+													<tr>
+														<td class="fpt">#{statistics.match.player.fullName}</td>
+														<ui:repeat var="s" value="#{statistics.match.sets}"
+															class="fpt">
+															<td class="fpt">#{s.getScore(statistics.match.player)}</td>
+														</ui:repeat>
+
+													</tr>
+													<tr>
+														<td class="fpt fpt2">#{statistics.match.player2.fullName}</td>
+														<ui:repeat var="s" value="#{statistics.match.sets}"
+															class="fpt">
+															<td class="fpt">#{s.getScore(statistics.match.player2)}</td>
+														</ui:repeat>
+													</tr>
+
+												</table>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+							<div class="tabs standard single-pl">
+                                <ul class="tab-links-match tb-set">
+                                    <li class="active"><a class="first-tabs" href="#tab1">Match Summary</a></li>
+                                    <li><a class="first-tabs" href="#tab2">set 1</a></li>
+                                    <li><a href="#">set 2</a></li>
+                                    <li><a href="#">set 3</a></li>
+                                    <li><a href="#">set 4</a></li>
+                                    <li><a href="#">set 5</a></li>
+                                </ul>
+                                <div class="tab-content single-match">
+                                    <div id="tab1" class="tab active">
+                                       <h3 class="tab-match-title">MATCH STATISTICS</h3>
+                                        <div class="tabs standard">
+                                           
+                                           <p:panel>
+			<p:chart type="bar" model="#{statistics.barModel}"
+				style="height:300px width:600px" />
+				</p:panel>
+						</div>
+					</div>
+				</div>
+				<!--Close Top Match-->
+			</div>
+</div>
+</div>
+</div></div>
+			</section>
+
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
