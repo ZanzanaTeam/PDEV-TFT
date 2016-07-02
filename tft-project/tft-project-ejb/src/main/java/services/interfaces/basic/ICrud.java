@@ -1,6 +1,7 @@
 package services.interfaces.basic;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author MedAymen
@@ -21,5 +22,7 @@ public interface ICrud<T> {
 		
 	List<T> findBy(Class<T> type, String param,String value);
 	List<T> findBy2(Class<T> type, String param,String value);
+	
+	List<T> find(Class<T> type, Map<String, Object> criteria, Map<String, String> orderBy, Integer limit , Integer offset);
 
 }

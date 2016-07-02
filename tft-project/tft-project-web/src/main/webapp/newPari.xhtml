@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+<ui:composition template="/template.xhtml">
+		<ui:define name="content">
+			<div class="drawer">
+    
+    
+    <div id="summary" class="container secondary-page">
+      <div class="general general-results">
+           <div id="rrResult" class="top-score-title right-score total-reslts col-md-9">
+                 <h3> <span>lifelong dream of becoming </span>RICH<span class="point-little">.</span></h3>
+                
+                <div class="main">
+                        
+
+<div class="tabs animated-slide-2">
+                            <ul class="tab-links">
+                                <li class="active"><a href="#tab2222">Upcoming matches</a></li>
+                                 <li ><a href="#tab1111">My BETs</a></li>
+                               
+                                
+                            </ul>
+                            <div class="tab-content">
+                                <div id="tab1111" class="tab">
+                                	<h:form id="form"  class="login-form">
+										<h:dataTable value="#{pariBean2.combination.lines}"
+											var="l" class="tab-score" >
+
+											<h:column>
+												<f:facet name="header">Horaire</f:facet>
+												<h:outputText class="score-position"
+													value="${l.match.dateMatch}">
+													<f:convertDateTime type="time" pattern="HH:mm" />
+												</h:outputText>
+												
+											</h:column>
+											<h:column>
+												<f:facet class="score-position" name="header">Event</f:facet>
+												<h:outputText class="score-position"
+													value="${l.match.player.fullName} - ${l.match.player2.fullName}" />
+													<f:facet name="footer">
+													<h:outputText value="#{pariBean2.amount}" />
+												</f:facet>
+											</h:column>
+
+											<h:column>
+												<f:facet class="score-position" name="header">?</f:facet>
+												<h:outputText class="score-position" value="#{l.game}" />
+											<f:facet name="footer">
+													<h:inputText value="#{pariBean2.money}" />
+												</f:facet>
+											</h:column>
+
+											<h:column>
+												<f:facet class="score-position" name="header">Remove</f:facet>
+												<h:commandLink
+													action="#{pariBean2.removeBet(l)}"
+													value="remove" >
+													<f:ajax immediate="false" render="form"/></h:commandLink>
+
+												<f:facet name="footer">
+													<h:outputText value="#{pariBean2.money * pariBean2.amount}" />
+												</f:facet>
+									
+
+											</h:column>
+
+										</h:dataTable>
+           
+                        <h:panelGrid columns="4"> <h:inputText value="#{pariBean2.codeSaver}" id="name_login"/>
+                            <h:commandButton value="Save Combination" action="#{pariBean2.saveCombination()}" /></h:panelGrid>
+                       
+                       
+                   
+									</h:form>
+									</div>
+                                <div id="tab2222" class="tab active">
+                                <h:form>
+
+										<h:dataTable  var="m" value="#{pariBean2.allMatchs}"
+											class="tab-score">
+
+											<h:column>
+												<f:facet name="header">Horaire</f:facet>
+												<h:outputText class="score-position" value="${m.dateMatch}">
+													<f:convertDateTime type="time" pattern="HH:mm" />
+												</h:outputText>
+											</h:column>
+											<h:column>
+												<f:facet class="score-position" name="header">Event</f:facet>
+												<h:commandLink
+													action="#{pronosticBean.match(m)}"
+													value="${m.player.fullName} - ${m.player2.fullName}" 
+													target="_new"/>
+												</h:column>
+
+											<h:column>
+												<f:facet class="score-position" name="header">1</f:facet>
+													<h:commandLink action="#{pariBean2.bet(m,1)}"
+													value="#{pariBean2.cote(m)}" >									
+													<f:ajax render="form"/></h:commandLink>
+												
+												
+
+											</h:column>
+
+											<h:column>
+												<f:facet class="score-position" name="header">2</f:facet>
+												<h:commandLink action="#{pariBean2.bet(m,2)}"
+													value="#{pariBean2.cote(m)}" ><f:ajax render="form"/></h:commandLink>
+
+											</h:column>
+
+										</h:dataTable>
+
+									</h:form>
+                                </div>
+                                
+                            </div>
+                            <div class="score-view-all"></div>
+                        </div>
+
+
+
+
+                    </div>
+           </div><!--Close Top Match-->
+           <div class="col-md-3 right-column">
+           <div class="top-score-title col-md-12 right-title">
+                <h3>Import your combination</h3>
+                <div class="right-content">
+                     <div class="col-md-12 login-page">
+                  <h:form  class="login-form">            
+                        <div class="name">
+                            <label for="name_login">Code:</label><div class="clear"></div>
+                            <h:inputText value="#{pariBean2.codeLoader}" id="name_login" name="name_login" type="text" placeholder="your  code here" required=""/>
+                        </div>
+                        
+                        <div id="login-submit">
+                            <h:commandButton value="submit" action="#{pariBean2.loadCombination()}"/>
+                        </div>
+                     </h:form>
+                </div>
+                </div>
+                
+          </div>
+          
+          
+         </div>
+        </div>
+        <div id="sponsor" class="container">
+            <!--div SPONSOR-->
+           
+       </div></div></div>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

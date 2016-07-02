@@ -41,7 +41,6 @@ public class News implements Serializable {
 	}
 
 	@Id
-	@XmlTransient
 	public int getId() {
 		return id;
 	}

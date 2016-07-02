@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template.xhtml">
+		<ui:define name="content">
+			<section class="drawer">
+			<div class="col-md-12 size-img back-img-shop">
+				<div class="effect-cover">
+					<h3 class="txt-advert animated">Club Subscriptions</h3>
+					<p class="txt-advert-sub">Ariana - Menzah - Sousse - Djerba...</p>
+				</div>
+			</div>
+
+			<section id="shop" class="container secondary-page">
+			<div class="general general-results">
+				<div class="top-score-title right-score col-md-9">
+					<h3>
+						<span>All details about the club in Tunisia</span><span class="point-little">.</span>
+					</h3>
+					<ui:repeat value="#{clubBean.allCompetitions}" var="c">
+					<div class="col-md-12 shops shops-top">
+						<div class="col-md-4 shop-prod">
+							<img src="images/shop/bags1.jpg" alt="" />
+							<div class="title-prod">
+								<a href="details_prod.html"><h:link value="#{c.name}" outcome="c">
+											<f:param name="Name" value="#{c.name}" />
+										</h:link> <span><h:link value="#{c.city}" outcome="c">
+											<f:param name="Name" value="#{c.city}" />
+										</h:link></span></a>
+							</div>
+							<div class="prod-buy">
+							
+							<h:outputLink value="ClubSubscription.jsf" styleClass="prod-cart">
+								<i class="fa fa-shopping-cart"></i>Subscription
+								<f:param value="#{c.id}" name="id" />
+							</h:outputLink>
+								<p class="prod-sh-price">$35.00</p>
+							</div>
+						</div>
+					</div>
+					</ui:repeat>
+				</div>
+			</div>
+			</section>
+			</section>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

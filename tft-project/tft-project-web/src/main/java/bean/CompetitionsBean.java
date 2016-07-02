@@ -8,7 +8,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import domain.Competition;
-import domain.MatchSingle;
 import services.interfaces.basic.ServicesBasicLocal;
 
 @ManagedBean
@@ -17,15 +16,10 @@ public class CompetitionsBean {
 	@EJB
 	ServicesBasicLocal<Competition> proxy;
 
-	
-
-
 	public List<Competition> getAllCompetitions() {
 		List<Competition> competitions = new ArrayList<Competition>();
-		competitions.add(proxy.findById(2, Competition.class));
+		competitions.addAll(proxy.findAll(Competition.class));
 		return competitions;
 	}
-
-	
 
 }

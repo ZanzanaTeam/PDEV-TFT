@@ -38,8 +38,8 @@ public class PronosticService implements PronosticServiceLocal, PronosticService
 	public float pronostic(MatchSingle match) {
 		// return new Random().nextFloat();
 		float[] classement = classement(match.getPlayer(), match.getPlayer2());
-//		 float[] derniersResultats = derniersResultats(match.getPlayer(),
-//		 match.getPlayer2());
+//	 float[] derniersResultats = derniersResultats(match.getPlayer(),
+//	 match.getPlayer2());
 		// float[] surface = surface(match.getPlayer(), match.getPlayer2(),
 		// match.getCourt().getSurface());
 		// float[] blessure = blessure(match.getPlayer(), match.getPlayer2());
@@ -54,7 +54,7 @@ public class PronosticService implements PronosticServiceLocal, PronosticService
 									 * lieuDuTournoi[0]
 									 */);
 		somme[1] = (classement[1]
-									 /* + derniersResultats[1] + surface[1] + //
+									 /*+ derniersResultats[1] + surface[1] + //
 									 * lieuDuTournoi[1]
 									 */);
 		float res = somme[0] / (somme[0] + somme[1]);
@@ -116,26 +116,26 @@ public class PronosticService implements PronosticServiceLocal, PronosticService
 		float[] res = { 0, 0 };
 		res[0] = classement(player1);
 		res[1] = classement(player2);
-		System.out.println(res[0]);
-		System.out.println(res[1]);
+		
 		return res;
 	}
 
 	public float classement(Player player) {
-		int cj = player.getClassement();
-		if (cj == 0)
-			return 0;
-		if (player.getClassement() < 4)
-			return 40;
-		if (cj < 11 && cj > 3)
-			return 30;
-		if (cj < 51 && cj > 10)
-			return 20;
-		if (cj < 101 && cj > 50)
-			return 15;
-		if (cj > 100)
-			return 10;
-		return 0;
+//		int cj = player.getClassement();
+//		if (cj == 0)
+//			return 0;
+//		if (player.getClassement() < 4)
+//			return 40;
+//		if (cj < 11 && cj > 3)
+//			return 30;
+//		if (cj < 51 && cj > 10)
+//			return 20;
+//		if (cj < 101 && cj > 50)
+//			return 15;
+//		if (cj > 100)
+//			return 10;
+//		return 0;
+		return player.getClassement();
 	}
 
 	public float[] derniersResultats(Player player1, Player player2) {
