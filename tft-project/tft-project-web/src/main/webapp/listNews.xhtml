@@ -15,6 +15,7 @@
 							TFT <span>NEWS</span><span class="point-little">.</span>
 						</h3>
 						<ul>
+<!-- 						<h:form><h:inputHidden value="#{newsBean.news}" /></h:form> -->
 							<ui:repeat value="#{newsBean.news}" var="n">
 								<div class="col-md-12 news-page">
 									<img class="img-djoko" src="#{n.thumbnail}" alt="" />
@@ -37,20 +38,34 @@
 													action="#{newsBean.NewsById(n.id)}">
 													<i class="fa fa-angle-double-right">More</i>
 												</h:commandLink>
+
 											</h:form>
 										</div>
 									</div>
 								</div>
 							</ui:repeat>
-
+							<h:form>
+								<div class="col-md-12 news-page-page">
+<!-- 									<ui:repeat value="#{newsBean.paginator.model}"> -->
+										
+<!-- 									</ui:repeat> -->
+									<h:commandLink value="Prev"
+										action="#{newsBean.paginator.prev()}" />
+									<h:outputText
+										value="#{newsBean.paginator.pageIndex} / #{newsBean.paginator.pages}" />
+									<h:commandLink value="Next"
+										action="#{newsBean.paginator.next()}" />
+									<h:inputHidden value="#{newsBean.paginator.pageIndex}" />
+								</div>
+							</h:form>
 						</ul>
 					</div>
 				</div>
 			</div>
-<!-- 			<div class="col-md-12 news-page-page"> -->
-<!-- 				<span class="news-page-active">1</span><span>2</span><span>3</span><span -->
-<!-- 					class="page-point">....</span><span>10</span> -->
-<!-- 			</div> -->
+			<!-- 			<div class="col-md-12 news-page-page"> -->
+			<!-- 				<span class="news-page-active">1</span><span>2</span><span>3</span><span -->
+			<!-- 					class="page-point">....</span><span>10</span> -->
+			<!-- 			</div> -->
 		</ui:define>
 
 	</ui:composition>

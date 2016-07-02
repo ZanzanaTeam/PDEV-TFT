@@ -11,6 +11,7 @@ import domain.News;
 import enumeration.ArticleStatus;
 import services.interfaces.NewsServiceLocal;
 import services.interfaces.basic.ServicesBasicLocal;
+import utility.RepeatPaginator;
 
 @ManagedBean
 @ApplicationScoped
@@ -24,6 +25,8 @@ public class NewsBean {
 	private String thumbnail;
 	private String summary;
 	private int idSelected;
+	private RepeatPaginator paginator;
+
 
 	@EJB
 	private NewsServiceLocal newsService;
@@ -32,7 +35,6 @@ public class NewsBean {
 
 	List<News> news;
 	private News singleNews;
-	private News moreSingleNews;
 
 	public NewsBean() {
 	}
@@ -47,8 +49,8 @@ public class NewsBean {
 	public int singleNewsById(int id) {
 		// idSelected = singleNews.getId();
 		setId(id);
-		moreSingleNews = servicesBasicLocal.findById(id, News.class);
-		//return "single_news?faces-redirect=true&id=" + id;
+		singleNews = servicesBasicLocal.findById(id, News.class);
+		// return "single_news?faces-redirect=true&id=" + id;
 		return id;
 	}
 
@@ -61,11 +63,15 @@ public class NewsBean {
 	}
 
 	public List<News> getNews() {
-		return servicesBasicLocal.findAll(News.class);
+		news = servicesBasicLocal.findAll(News.class);
+		paginator = new RepeatPaginator(news);
+		return news;
+		
+
 	}
 
 	public void setNews(List<News> news) {
-		this.news = news;
+				this.news = news;
 	}
 
 	public String getTitle() {
@@ -132,12 +138,8 @@ public class NewsBean {
 		this.singleNews = singleNews;
 	}
 
-	public News getMoreSingleNews() {
-		return moreSingleNews;
-	}
-
-	public void setMoreSingleNews(News moreSingleNews) {
-		this.moreSingleNews = moreSingleNews;
+	public RepeatPaginator getPaginator() {
+		return paginator;
 	}
 
 }
