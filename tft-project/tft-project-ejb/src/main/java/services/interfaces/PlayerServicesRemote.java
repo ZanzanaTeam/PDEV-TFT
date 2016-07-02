@@ -17,4 +17,7 @@ public interface PlayerServicesRemote {
 	List<MatchSingle> findMatchByPlayer(Player player, Integer limit, Integer offset);
 
 	Map<PointType, Object> findSkills(Player player, Integer limit, String order);
+	
+
+	List<MatchSingle> findFaceToFace(Player player1,Player player2, Integer limit, Integer offset);
 }

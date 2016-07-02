@@ -66,6 +66,31 @@ public class PlayerServices implements PlayerServicesLocal, PlayerServicesRemote
 		return matchs;
 	}
 
+	@Override
+	public List<MatchSingle> findFaceToFace(Player player1, Player player2, Integer limit, Integer offset) {
+		List<MatchSingle> matchs = new ArrayList<>();
+		try {
+			String jpql = "select m from " + MatchSingle.class.getSimpleName()
+					+ " m where (m.player = :player and m.player2 = :player2) or (m.player = :player2 and m.player2= :player)  ";
+
+			if (limit == null || limit < 0) {
+				limit = 0;
+			}
+			if (offset == null || offset <= 0) {
+				offset = 1;
+			}
+
+			Query query = entityManager.createQuery(jpql);
+			query.setParameter("player", player1);
+			query.setParameter("player2", player2);
+			matchs = query.getResultList();
+			//
+		} catch (Exception e) {
+			System.out.println("Erreur match by player");
+		}
+		return matchs;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<PointType, Object> findSkills(Player player, Integer limit, String order) {
