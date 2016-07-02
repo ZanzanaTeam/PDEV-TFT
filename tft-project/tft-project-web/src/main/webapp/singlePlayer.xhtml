@@ -72,12 +72,14 @@
 						</div>
 					</div>
 
+					<!-- 
 					<div class="col-md-12 atp-single-player skill-content">
 						<div class="ppl-desc">
 							<p class="exp-title-pp">Statistics</p>
 
 						</div>
 					</div>
+					 -->
 					<div class="col-md-12 atp-single-player skill-content">
 						<div class="ppl-desc">
 							<p class="exp-title-pp">Last
@@ -89,6 +91,7 @@
 											- #{m.tour.title}</td>
 									</tr>
 									<tr class="match-sets">
+										<td></td>
 										<td class="fpt">Sets</td>
 
 										<ui:repeat value="#{m.sets}" var="set">
@@ -103,6 +106,7 @@
 
 										</td>
 
+										<td class="fpt">#{m.getScore(m.player)}</td>
 										<ui:repeat value="#{m.sets}" var="set">
 											<td class="fpt">#{set.getScore(m.player)}</td>
 										</ui:repeat>
@@ -114,6 +118,7 @@
 											</h:panelGroup>
 										</td>
 
+										<td class="fpt">#{m.getScore(m.player2)}</td>
 										<ui:repeat value="#{m.sets}" var="set">
 											<td class="fpt">#{set.getScore(m.player2)}</td>
 										</ui:repeat>
@@ -134,7 +139,7 @@
 										value="images/player/player.jpg" alt="" width="50px" />
 								</p>
 								<p class="news-title-right">#{o.fullName}</p>
-								<h:outputLink value="singlePlayer.jsf" class="ca-more">
+								<h:outputLink value="comparePlayers.jsf" class="ca-more">
 									<i class="fa fa-angle-double-right"></i>Compare with...
 								<f:param value="#{playersBean.player.id}" name="id" />
 									<f:param value="#{o.id}" name="id2" />
