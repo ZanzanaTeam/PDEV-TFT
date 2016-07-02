@@ -51,12 +51,12 @@ public class ServicesBasic<T> implements ServicesBasicRemote<T>, ServicesBasicLo
 	}
 
 	@Override
-	public T findById(Integer id, Class<T> type) {
+	public  T findById(Integer id, Class<T> type) {
 		return entityManager.find(type, id);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> findAll(Class<T> type) {
+	public  List<T> findAll(Class<T> type) {
 		List<T> lists = null;
 		try {
 			String jpql = "select e from " + type.getSimpleName() + " e";
@@ -72,7 +72,7 @@ public class ServicesBasic<T> implements ServicesBasicRemote<T>, ServicesBasicLo
 	}
 
 	@Override
-	public Boolean add(T t) {
+	public  Boolean add(T t) {
 		try {
 
 			entityManager.merge(t);

@@ -71,32 +71,25 @@
 							</div>
 
 							<div class="tabs standard single-pl">
-                                <ul class="tab-links-match tb-set">
-                                    <li class="active"><a class="first-tabs" href="#tab1">Match Summary</a></li>
-                                    
-                                   <ui:repeat var="s" value="#{statistics.match.sets}"
-															class="fpt">
-															 <li><a class="first-tabs" href="#tab2">#{statistics.setNumber}</a></li>
-														</ui:repeat>
-                                </ul>
+                                
                                 <div class="tab-content single-match">
                                     <div id="tab1" class="tab active">
                                        <h3 class="tab-match-title">MATCH STATISTICS</h3>
                                         <div class="tabs standard">
                                    
-                                   
+                                 
                                    			<div class="tabs standard">
                                             <ul class="tab-links-match">
                                                 <li class="active"><a class="first-tabs" href="#tab1a">OVERALL MATCH STATS</a></li>
                                                 <li><a href="#tab2a">SERVE STATS</a></li>
                                             </ul>
 			                                            <div class="tab-content">
+                                               
                                                 <div id="tab1a" class="tab active">
-                                                                                   <p:panel>
-			<p:chart type="bar" model="#{statistics.barModel}"
-				style="height:300px width:600px" />
-				</p:panel>
-                                                </div>
+                                                  <p:panel>
+                                   <p:chart type="bar" model="#{statistics.barModel}" style="height:300px width:600px"/>
+                                   </p:panel>
+                                   </div>
                                                 <div id="tab2a" class="tab">
                                                   <div class="col-md-4 single-match-data">
                                                       <p class="nm-player">#{statistics.match.player}</p>

@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 import org.primefaces.model.chart.Axis;
@@ -25,7 +27,7 @@ import services.interfaces.SetServicesLocal;
 import services.interfaces.basic.ServicesBasicLocal;
 
 @ManagedBean
-
+@ApplicationScoped
 public class Statistics {
 	static String SET = "SET ";
 	private BarChartModel barModel;
@@ -146,6 +148,38 @@ public class Statistics {
 	public MatchSingle getMatch() {
 
 		return match;
+	}
+
+	public void setBarModel(BarChartModel barModel) {
+		this.barModel = barModel;
+	}
+
+	public void setSetsMatch(List<SetMatch> setsMatch) {
+		this.setsMatch = setsMatch;
+	}
+
+	public void setPlayerOne(String playerOne) {
+		this.playerOne = playerOne;
+	}
+
+	public void setPlayerTwo(String playerTwo) {
+		this.playerTwo = playerTwo;
+	}
+
+	public void setMatch(MatchSingle match) {
+		this.match = match;
+	}
+
+	public void setListPointPlayer1(List<Point> listPointPlayer1) {
+		this.listPointPlayer1 = listPointPlayer1;
+	}
+
+	public void setListPointPlayer2(List<Point> listPointPlayer2) {
+		this.listPointPlayer2 = listPointPlayer2;
+	}
+
+	public void setSetNumber(String setNumber) {
+		this.setNumber = setNumber;
 	}
 
 	private Map<PointType, Integer> CountPointByType(List<Point> listPointPlayer1) {
