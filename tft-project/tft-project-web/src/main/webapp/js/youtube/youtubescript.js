@@ -30,7 +30,7 @@ $(document).ready(function(){
 							videoTitle = item.snippet.title;
 							videoId = item.snippet.resourceId.videoId;
 
-							output = '<li>'+videoTitle+'<br><iframe height="'+vidHeight+'" width="'+vidWidth+'" src=\"//www.youtube.com/embed/"'+videoId+'\></iframe></li>';
+							output = '<li>'+videoTitle+'<br><iframe height="'+vidHeight+'" width="'+vidWidth+'" src=\"//www.youtube.com/embed/'+videoId+'\"></iframe></li>';
 							$('#results').append(output);
 						})
 					}
