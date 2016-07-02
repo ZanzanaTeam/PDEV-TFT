@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
@@ -25,12 +24,6 @@ import services.interfaces.PointServicesLocal;
 import services.interfaces.SetServicesLocal;
 import services.interfaces.basic.ServicesBasicLocal;
 
-/**
- * 
- * @author Rihab
- * 
- *
- */
 @ManagedBean
 
 public class Statistics {
@@ -82,7 +75,6 @@ public class Statistics {
 		return listPointPlayer2;
 	}
 
-	@PostConstruct
 	public String init(Integer id) {
 
 		createBarModels(id);
@@ -107,9 +99,11 @@ public class Statistics {
 
 		ChartSeries playerOneChart = new ChartSeries();
 
+		match = servicesBasicMatch.findById(idMatch, MatchSingle.class);
+		System.out.println("matchid    " + match.getPlayer().getId());
+
 		List<Point> points = pointServices.findAllPointsByMatch(idMatch);
 		System.out.println(points.size());
-		match = servicesBasicMatch.findById(idMatch, MatchSingle.class);
 
 		if (match instanceof MatchSingle) {
 			playerOne = ((MatchSingle) match).getPlayer().getFullName();
@@ -150,11 +144,6 @@ public class Statistics {
 	}
 
 	public MatchSingle getMatch() {
-		System.out.println("msets match " + match.getSets().size());
-		match.getSets().forEach(s -> {
-			System.out.println(s.getScore(match.getPlayer()));
-			System.out.println(s.getScore(match.getPlayer2()));
-		});
 
 		return match;
 	}
